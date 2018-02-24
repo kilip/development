@@ -1,5 +1,6 @@
 ###< Paroki global Ignore ###
 docker-compose.yaml
+yarn-error.log
 ###>
 
 ###> symfony/framework-bundle ###

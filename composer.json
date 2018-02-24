@@ -64,11 +64,6 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ],
-        "start-docker": "docker-compose up",
-        "clear-cache": [
-            "@auto-scripts",
-            "docker-compose exec php bin/console cache:clear"
         ]
     },
     "conflict": {
