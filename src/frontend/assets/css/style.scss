@@ -1,0 +1,16 @@
+@import "~font-awesome/scss/font-awesome";
+
+// Override Boostrap variables
+@import "~@coreui/react/React_Full_Project/scss/bootstrap-variables";
+
+// Import Bootstrap source files
+@import "~bootstrap/scss/bootstrap";
+
+// Override core variables
+@import "~@coreui/react/React_Full_Project/scss/core-variables";
+
+// Import core styles
+@import "~@coreui/react/React_Full_Project/scss/core/core";
+
+// Custom styles
+@import "custom";
