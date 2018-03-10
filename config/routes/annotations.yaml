@@ -1,3 +1,0 @@
-controllers:
-    resource: ../../src/backend/Core/Controller/
-    type: annotation
