@@ -1,0 +1,30 @@
+suites:
+    core:
+        namespace: Paroki\Core
+        psr4_prefix: Paroki\Core
+        spec_path: src/Core
+        src_path: src/Core
+        spec_prefix: Spec
+    resource:
+        namespace: Paroki\Resource
+        psr4_prefix: Paroki\Resource
+        spec_path: src/Resource
+        src_path: src/Resource
+        spec_prefix: Spec
+
+
+extensions:
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        format:
+            - php
+        output:
+            php: build/coverage/php/phpspec.cov
+            html: build/coverage/html/phpspec
+        whitelist:
+            - src
+        blacklist:
+            - src/Behat
+            - src/*/Spec
+            - src/*/Test
+            - src/*/Tests
+            - src/*/Resources
