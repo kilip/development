@@ -45,12 +45,12 @@ before_install:
   fi;
 - export CC=gcc-4.9
 - export CXX=g++-4.9
-- npm install -g node-sass
 
 install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
+- npm install
 - yarn install
 - yarn dev
 

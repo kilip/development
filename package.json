@@ -2,9 +2,6 @@
     "name": "paroki-development",
     "license": "MIT",
     "private": true,
-    "engines": {
-        "yarn": "1.5.1"
-    },
     "dependencies": {
         "@coreui/react": "^1.0.10",
         "axios": "^0.18.0",
@@ -36,6 +33,7 @@
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
         "jest": "^22.4.2",
+        "node-sass": "^4.8.1",
         "react-test-renderer": "^16.2.0",
         "redux-mock-store": "^1.5.1",
         "webpack-livereload-plugin": "^1.0.0"
