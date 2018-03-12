@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Behat\Contexts;
 
-
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
