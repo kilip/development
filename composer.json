@@ -68,7 +68,9 @@
         ],
         "coverage": [
             "./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml",
-            "./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov"
+            "./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov",
+            "./vendor/bin/behat -p coverage",
+            "yarn test --coverage"
         ]
     },
     "conflict": {

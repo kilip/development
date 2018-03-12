@@ -1,0 +1,75 @@
+language: php
+
+sudo: false
+
+services:
+- postgresql
+
+cache:
+  yarn: true
+  directories:
+  - "$HOME/.composer/cache"
+  - "$HOME/.npm"
+
+env:
+  global:
+  - TRAVIS_NODE_VERSION=8.9.4
+  - COVERAGE=no
+  - APP_ENV=test
+  - DATABASE_URL=mysql://root@localhost:3306/omed
+
+matrix:
+  include:
+  - php: '7.2'
+    env: DATABASE_URL=pgsql://postgres@localhost:5432/paroki
+
+
+before_install:
+- echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+- export PATH="$PATH:$HOME/.composer/vendor/bin"
+- |
+  if [[ $COVERAGE != yes ]]; then
+    phpenv config-rm xdebug.ini || echo "xdebug not available";
+  fi;
+- cp .env.dist .env
+- |
+  if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
+    echo yes | pecl install apcu;
+  else
+    echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
+  fi;
+
+install:
+- composer update --prefer-dist --no-progress --no-suggest --ansi
+- bin/console doctrine:database:create -n --if-not-exists
+- bin/console doctrine:schema:create -n
+- composer run-script compile
+- |
+  if [[ $COVERAGE = yes ]]; then
+    yarn install;
+  fi
+
+script:
+- mkdir -p build/logs
+- |
+  if [[ $COVERAGE = yes  ]]; then
+    ./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml;
+    ./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov;
+    ./vendor/bin/behat -p coverage;
+    yarn test --coverage
+  fi;
+- if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
+- if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
+- if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
+- if [[ $COVERAGE != yes ]]; then yarn test; fi
+
+after_script:
+- |
+  wget https://phar.phpunit.de/phpcov.phar
+  chmod +x phpcov.phar
+  php phpcov.phar merge build/coverage/php --clover build/logs/backend/clover.xml
+- |
+  if [[ $COVERAGE = yes ]]; then
+      bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
+      bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
+  fi;
