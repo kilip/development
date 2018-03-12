@@ -5,7 +5,7 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             action_level: debug
             channels: ["!event"]
-        excluded_404s:
+            excluded_404s:
                 # regex: exclude all 404 errors from the logs
                 - ^/
         nested:
