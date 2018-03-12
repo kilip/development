@@ -1,11 +1,18 @@
 var Encore = require('@symfony/webpack-encore');
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 var Dotenv = require('dotenv-webpack');
-
+var fs = require('fs');
+var envFile = function(){
+    var file = './.env';
+    if(!fs.existsSync(file)){
+        file = './.env.dist';
+    }
+    return file;
+};
 Encore
     .addPlugin(new LiveReloadPlugin())
     .addPlugin(new Dotenv({
-        path: './.env',
+        path: envFile(),
         systemvars: true,
     }))
 
