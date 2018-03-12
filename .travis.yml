@@ -40,7 +40,7 @@ matrix:
     env: COVERAGE=yes
   - php: 7.2.3
     env: DEPLOY=yes
-    
+
   fast_finish: true
 
 before_install:
