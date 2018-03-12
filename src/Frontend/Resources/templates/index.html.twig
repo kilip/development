@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SIAP - Sistim Informasi dan Administrasi Paroki">
+    <meta name="author" content="Anthonius Munthi">
+    <meta name="keyword" content="SIAP parok church catholic">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/siap.css') }}"/>
+    <title>SIAP - Sistim Informasi dan Administrasi Paroki</title>
+</head>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<noscript>
+    Anda harus mengaktifkan javascript untuk menggunakan aplikasi ini.
+</noscript>
+<div id="root"></div>
+<script type="text/javascript" src="{{ asset('build/js/siap.js') }}"></script>
+{% if app.environment !='prod' %}
+    <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+{% endif %}
+</body>
+</html>

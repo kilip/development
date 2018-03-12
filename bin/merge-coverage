@@ -1,0 +1,6 @@
+#!/usr/bin/env php
+<?php
+
+$dir = realpath(__DIR__.'/../build');
+$cmd = "phpcov.phar merge $dir/coverage --html=$dir/coverage/html --clover $dir/logs/backend/clover.xml";
+passthru($cmd);

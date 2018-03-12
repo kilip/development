@@ -28,6 +28,9 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
+        "behat/symfony2-extension": "^2.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "hautelook/alice-bundle": "~2.0@dev",
         "leanphp/phpspec-code-coverage": "^4.0",
         "phpspec/phpspec": "^4.3",
         "symfony/browser-kit": "^4.0",
@@ -38,19 +41,11 @@
         "symfony/profiler-pack": "^1.0.3"
     },
     "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
         "sort-packages": true
     },
     "autoload": {
         "psr-4": {
             "Paroki\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Paroki\\Tests\\": "tests/"
         }
     },
     "replace": {
@@ -71,7 +66,8 @@
             "@auto-scripts"
         ],
         "coverage": [
-            "vendor/bin/phpspec run -c etc/phpspec-coverage.yml"
+            "./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml",
+            "./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov"
         ]
     },
     "conflict": {

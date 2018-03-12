@@ -1,0 +1,6 @@
+frontend_controllers:
+    resource: '@ParokiFrontendBundle/Controller/'
+    prefix: /
+    type: annotation
+    options:
+        expose: true

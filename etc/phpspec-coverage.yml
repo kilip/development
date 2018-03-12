@@ -1,3 +1,5 @@
+formatter.name: dot
+
 suites:
     core:
         namespace: Paroki\Core
@@ -12,14 +14,12 @@ suites:
         src_path: src/Resource
         spec_prefix: Spec
 
-
 extensions:
     LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
         format:
             - php
         output:
             php: build/coverage/php/phpspec.cov
-            html: build/coverage/html/phpspec
         whitelist:
             - src
         blacklist:

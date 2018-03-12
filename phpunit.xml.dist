@@ -22,7 +22,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Paroki Test Suite">
             <directory>src/*/Tests/</directory>
         </testsuite>
     </testsuites>
@@ -30,11 +30,11 @@
     <filter>
         <whitelist>
             <directory>./src/</directory>
+            <exclude>
+                <directory>./src/*/Tests</directory>
+                <directory>./src/*/Spec</directory>
+            </exclude>
         </whitelist>
-        <blacklist>
-            <directory>./src/*/Tests</directory>
-            <directory>./src/*/Spec</directory>
-        </blacklist>
     </filter>
 
     <listeners>
