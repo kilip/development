@@ -49,6 +49,7 @@ before_install:
 - sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9
 - export CC=gcc-4.9
 - export CXX=g++-4.9
+- mkdir -p build/coverage/php
 
 install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
@@ -73,11 +74,10 @@ script:
 
 after_script:
 - |
-  wget https://phar.phpunit.de/phpcov.phar
-  chmod +x phpcov.phar
-  php phpcov.phar merge build/coverage/php --clover build/logs/backend/clover.xml
-- |
   if [[ $COVERAGE = yes ]]; then
-      bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
-      bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
+    wget https://phar.phpunit.de/phpcov.phar;
+    chmod +x phpcov.phar;
+    php phpcov.phar merge build/coverage/php --clover build/logs/backend/clover.xml
+    bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
+    bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
   fi;
