@@ -43,10 +43,10 @@ before_install:
     echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
   fi;
 
-- apt-get -y install software-properties-common python-software-properties
-- apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
-- apt update -y
-- apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9
+- sudo apt-get -y install software-properties-common python-software-properties
+- sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
+- sudo apt update -y
+- sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9
 - export CC=gcc-4.9
 - export CXX=g++-4.9
 
