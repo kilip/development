@@ -31,6 +31,9 @@
         <whitelist>
             <directory>./src/</directory>
             <exclude>
+                <directory>./src/Behat</directory>
+                <directory>./src/DataFixtures</directory>
+                <directory>./src/*/Test</directory>
                 <directory>./src/*/Tests</directory>
                 <directory>./src/*/Spec</directory>
             </exclude>
