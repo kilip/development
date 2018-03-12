@@ -23,6 +23,10 @@ class HomepageController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@frontend/index.html.twig');
+        $template = '@frontend/index.html.twig';
+        if(getenv('APP_COMING_SOON')){
+            $template = '@frontend/coming-soon.html.twig';
+        }
+        return $this->render($template);
     }
 }

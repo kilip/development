@@ -1084,7 +1084,7 @@ boom@7.x.x:
   dependencies:
     hoek "5.x.x"
 
-bootstrap@^4.0.0:
+bootstrap@4.0.0, bootstrap@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
 
@@ -2602,7 +2602,7 @@ follow-redirects@^1.3.0:
   dependencies:
     debug "^3.1.0"
 
-font-awesome@^4.7.0:
+font-awesome@4.7.0, font-awesome@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 
@@ -3881,6 +3881,10 @@ jest@^22.4.2:
   dependencies:
     import-local "^1.0.0"
     jest-cli "^22.4.2"
+
+jquery@*, jquery@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.3"
@@ -6499,6 +6503,15 @@ stackframe@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.0.4.tgz#357b24a992f9427cba6b545d96a14ed2cbca187b"
 
+startbootstrap-coming-soon@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/startbootstrap-coming-soon/-/startbootstrap-coming-soon-4.0.0.tgz#d854f35f35625ce0d44f973635a7c200f1e6ec78"
+  dependencies:
+    bootstrap "4.0.0"
+    font-awesome "4.7.0"
+    jquery "3.3.1"
+    vide "^0.5.1"
+
 static-extend@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
@@ -6999,6 +7012,12 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vide@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/vide/-/vide-0.5.1.tgz#b2e3ba65c2f6c6a49ef8dc92157f2de8304f384c"
+  dependencies:
+    jquery "*"
 
 vm-browserify@0.0.4:
   version "0.0.4"
