@@ -9,16 +9,25 @@ import thunkMiddleware from 'redux-thunk';
 import security from './components/security/reducers';
 
 import SIAP from './siap';
+import Maintenance from './pages/Maintenance';
+
 const reducers = combineReducers({routing,security});
 const enhancer = compose(
     applyMiddleware(thunkMiddleware)
     //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 const store = createStore(reducers, enhancer);
+if(process.env.APP_MAINTENANCE){
+    ReactDOM.render(
+        <Maintenance/>,
+        document.getElementById('root')
+    );
+}else{
+    ReactDOM.render(
+        <Provider store={store}>
+            <SIAP/>
+        </Provider>,
+        document.getElementById('root')
+    );
+}
 
-ReactDOM.render(
-    <Provider store={store}>
-        <SIAP/>
-    </Provider>,
-    document.getElementById('root')
-);

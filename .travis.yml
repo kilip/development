@@ -24,9 +24,23 @@ matrix:
   - php: '7.2'
   - php: '7.2'
     env: COVERAGE=yes
+  - php: 7.2.3
+    env: DEPLOY=yes
+    deploy:
+      provider: heroku
+      api_key:
+        secure: P2zJm68JQLdqCrongL5YfbtOoXyCQMbx2fwe7f+WweJ29sgrTiXsowcAlqg8xPckDFlkkaQPZhsagpEvo1ufcddUFj+NhRBxhCa+ci4LLzVvm11q0FMPNtHxedpXkvHzk71szs5oYkWPvnoEMUOL6cdoxdbVIjTPChVt1SaSmxQUFb2aqXOiow1e/TmS34clMAVnApvkCpagcPG9MkJQcbyp8GoqHFE097w4FARIuU+z5tWnWJQR81SPRd+lpO2UpdHrQ7tOwMCibvBAHByWWUlqG2/Cq23GaOw6tXPUXE4ExO+pSCgNl1J5Uzo+iuJBFPDTtp1yfcapEbtuUoVWOmQLgM+VupewdsqzHKaEkDnKNqwr51ofr8y7oKmJZS7ETUkf2Dm/4oPmYyMErHxQ33gT22qtCtZpmLoxcSoLnX0OyHG32NKRBcEJ0nOmUekTmqXnZXKYKRSQwlIwByWYKPSnoSXF5+4GRNaYkZbUXCq6Hr7ZkSNMCFBI6yUNczjRPDQgIKthr9AImkQ3AChftXksuzC9RU+oaITqkTT6vY3hnQk2uYcoUxlnCviiE25uNYLNeN0WkzhSjqSSLllnc8iOmMUTSi4zFuf0ycpFoPRtCcAjptHkiWxY6KTmYk9UWRZIb44bt+8nLk8f7Wv1SgagtoR1lZRfgP+YuqMF1TU=
+      app: paroki-dev
+      strategy: git
+      on:
+        branch: master
+
   allow_failures:
   - php: '7.2'
     env: COVERAGE=yes
+  - php: 7.2.3
+    env: DEPLOY=yes
+
   fast_finish: true
 
 before_install:
@@ -42,11 +56,11 @@ before_install:
   else
     echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
   fi;
-
 - sudo apt-get -y install software-properties-common python-software-properties
 - sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
 - sudo apt update -y
-- sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9
+- sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install
+  g++-4.9
 - export CC=gcc-4.9
 - export CXX=g++-4.9
 - mkdir -p build/coverage/php
@@ -81,3 +95,7 @@ after_script:
     bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
     bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
   fi;
+
+deploy:
+  api_key:
+    secure: ArroEdxP1RDQKVmZQcifwMiMjKUo0dwAyWyX8IYr2lXv0aXgs5ylb5kNsCfENFs/wn+f7ZCujfVxAbq8klTrIQgXqpEhux7yPLMg+KRQa+Puvwj7E1pxezTMUOg+DUAZo7NoY8UtsDMjfy4/JOpz0qass+AutuCBsIt970CiYzgd+er9sMLxRexmYzh4L0sqY4uhZ0Wpx26EMKZ9EYfDQWVdrvLdLcgm0uYRH5BCGg0p9Ylusu/9dDR1N1OCudL2ShTTSI78/HkdC1Rp70MKYRFaawCY7Rcd9UiJn5rHzOA1YxCeGRROe0YqyUTCkSNnxoKnJ2U3IDMnCL6jF/SK7jvyO00TYdqwkz3+hwLEhhAAK4gJc4Cv6gHc2XPpXFGcLGzxZtixB1+RMtMDMl1FuCjrFie0Nbhz7qu5bNxawOwIYIJspb7o7DUydB+v28HiN4v+K3cdiszC2MOQnHIcaKhAbPlUt88z3YFTpD0GfAzF/SYNM8pJGYwYuhro+UqnECtNj5y3v6bIMr8ZnWyRYTnYLTY/GXyOg6fxNN7Z2hj/Nfa9J1wKGkk6rxxaWa5gmeD6PElldDMFHoeVp1svDerYaqK9ceNoD7u4FWLbWV8m4DWavQlSPK7k40j3oskFYdxf8d/aWEEXTH9vc0fbcbheBRF4EfmMRP49yDbxHFc=
