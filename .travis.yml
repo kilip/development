@@ -20,7 +20,6 @@ env:
 
 matrix:
   include:
-  - php: '7.0'
   - php: '7.1'
   - php: '7.2'
   - php: '7.2'
@@ -50,7 +49,6 @@ install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
-- npm install
 - yarn install
 - yarn dev
 
