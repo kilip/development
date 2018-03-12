@@ -31,9 +31,8 @@ matrix:
     deploy:
       provider: heroku
       api_key:
-        secure: ezc9w729GyZcOLEBoOEtsfgM5TZGm/vg7E6UK4eZjodFF/PjBpJexym0YnRNTkFvwpdzmyAp5OTlZDJnonFxSimMhu+F8VjXNQOB3HCVb6gZPWmWw6DasaTauc2fSeTKaWoT3Y/a0NwmiUCqUfzMAG+mX9W/XVR1OY8b58rRDNsmULtjXxMusoQC6Jvcqfu+yCodTRFMTbouA/GI+a78waozMzqYFOf6kIcKPbu/4zHANw8MUH+2vTVizHEgpH0+bzjbrdNDLO9bZd4UEFuaK1pGbTNJM3jDPxOfO3yBkqJFI4o/Dvg3WsIfAsS9PMosfWX8mwRcOlU4PYNlP9LFRRFWGDoDMx1qohDpzjdAsOYtfG8mFNFEoraTBN19c3g386nbNDqdsW5URNa1IBQ29vYymkJd/e2Z86QrlEigseec3MCcmV3biYrnm/Pm9e5swqCd0u1f3Z4FgoQ8/2I8z1isn1pH66unAG2ZYrb/bPpWSCywYjT27RWDb8+zvIAFYzcTB3JJfHslFyz1PZ1NHVbvDmGyk7GbCGoBkOyeopM31ZoHRhZegc3KkR8sZ9tevNZ9KfGJ70VVcVMDWi6wYb2sjuKFIcloVCyAi/YVs8FXg1Nfp+uU7EHFkV1Zfrl3abv2D7PrDxTP4wnOwMHL3r3d7f2JGhpcV9sjUPMy/6M=
-      app:
-        master: paroki-dev
+        secure: lYzQaXfvVmfyXH5TbjSipjCZ9OQbjOAX97ulxfCak4mDDMwlJacZmqrd1QEdf31K8n+jlz7qojkCZHKDL/Mp8Gh/HjzOmWg10terp3VuofmP1QJHadtxA/XNra+7Gh+YtJZY8T78OnrrYEgsZboIXUw3avqbnoGhVOctmPHOfnbHpOFQy/DRwALXIGAEa+nZX5MbEIiDVlHhMm1D63WovjsAkLnu3G3jN/H0TI0KSrsBlaNlJ55g1aDCud9BXJ7s2eObFPvwNiytaB9GKumXzjytSV6Svzrw03mUewikGF3P7eDctAz0xvsWPBysPzK2dpUOfaL4jq3kQoD3EX/2FY3PQze+e17CTszV04ABBZ4zRK6LElHEHCp29ppWYACY4d2Zdc2+lnC34WEYGH2aMSWnMT8SeVP+HctTrhCgCgenIcrpOW43owVwDEZEEATGuxSZcjHTQkkfJVK4sIgKyeHpcXSatMLFameMJD7OzmqA6PMsEJHVbOFnaUhHMioptZ8ONZf8v7jF2A+TabbfgMMa60NBgBQnNUUg3ru/lHFuABVPYEo+bjNnEo+yMi9P9d107gm8i1VMFp+/nV4SLVdrScidxBtt7M8TEsQW8wv8zUQDzqaQA7xlRLn48xaYadpSHMwfByefbyp8JJpdEtUhrhRlO4nRgKFbr6/0SsQ=
+      app: paroki-dev
       on:
         all_branches: true
 
