@@ -8,7 +8,7 @@ fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 	if [ "$APP_ENV" != 'prod' ]; then
-		bin/console assets:install --symlink
+		bin/console assets:install
 	fi
 
 	# Permissions hack because setfacl does not work on Mac and Windows
