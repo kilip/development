@@ -35,7 +35,7 @@ Encore.reset();
 Encore
     .addPlugin(new LiveReloadPlugin())
     .addPlugin(new Dotenv({
-        path: './.env',
+        path: envFile(),
         systemvars: true,
     }))
 
