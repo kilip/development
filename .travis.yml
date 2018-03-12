@@ -22,7 +22,7 @@ matrix:
   include:
   - php: '7.2'
   - php: '7.2'
-    env: COVERAGE=yes COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+    env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
   allow_failures:
   - php: '7.2'
     env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
