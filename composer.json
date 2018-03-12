@@ -73,7 +73,7 @@
             "yarn test --coverage",
             "./bin/merge-coverage"
         ],
-        "deploy": [
+        "compile": [
             "bin/console doctrine:schema:update -n --force",
             "yarn build"
         ]
