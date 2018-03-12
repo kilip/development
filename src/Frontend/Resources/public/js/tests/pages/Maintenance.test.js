@@ -32,6 +32,6 @@ describe('<Maintenance/> Component', () => {
     it('should show maintenance text', () => {
         const wrapper = getComponent(props,state);
         expect(wrapper.text()).toContain('503');
-        expect(wrapper.text()).toContain('Aplikasi sedang dalam tahap perawatan');
+        expect(wrapper.text()).toContain('Aplikasi sedang dalam perawatan');
     });
 });
