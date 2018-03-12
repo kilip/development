@@ -16,13 +16,17 @@ env:
   - TRAVIS_NODE_VERSION=8.9.4
   - COVERAGE=no
   - APP_ENV=test
-  - DATABASE_URL=mysql://root@localhost:3306/omed
+  - DATABASE_URL=pgsql://postgres@localhost:5432/paroki
 
 matrix:
   include:
   - php: '7.2'
-    env: DATABASE_URL=pgsql://postgres@localhost:5432/paroki
-
+  - php: '7.2'
+    env: COVERAGE=yes COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+  allow_failures:
+  - php: '7.2'
+    env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+  fast_finish: true
 
 before_install:
 - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -43,7 +47,6 @@ install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
-- composer run-script compile
 - |
   if [[ $COVERAGE = yes ]]; then
     yarn install;
