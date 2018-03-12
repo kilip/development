@@ -75,6 +75,7 @@
         ],
         "compile": [
             "bin/console doctrine:schema:update -n --force",
+            "yarn install --dev",
             "yarn build"
         ]
     },
