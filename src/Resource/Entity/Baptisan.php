@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Baptisan
 {
     const JK_PRIA = 1;
-    
+
     const JK_WANITA = 2;
 
     /**
