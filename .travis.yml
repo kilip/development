@@ -77,7 +77,7 @@ after_script:
   if [[ $COVERAGE = yes ]]; then
     wget https://phar.phpunit.de/phpcov.phar;
     chmod +x phpcov.phar;
-    php phpcov.phar merge build/coverage/php --clover build/logs/backend/clover.xml
+    php phpcov.phar merge build/coverage --clover build/logs/backend/clover.xml
     bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
     bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
   fi;
