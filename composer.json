@@ -74,7 +74,8 @@
             "./bin/merge-coverage"
         ],
         "deploy": [
-            "bin/console doctrine:schema:update -n --force"
+            "bin/console doctrine:schema:update -n --force",
+            "yarn build"
         ]
     },
     "conflict": {
