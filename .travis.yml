@@ -17,8 +17,6 @@ env:
   - COVERAGE=no
   - APP_ENV=test
   - DATABASE_URL=pgsql://postgres@localhost:5432/paroki
-  - CC=gcc-4.9
-  - CXX=g++-4.9
 
 matrix:
   include:
@@ -39,19 +37,22 @@ before_install:
   if [[ $COVERAGE != yes ]]; then
     phpenv config-rm xdebug.ini || echo "xdebug not available";
   fi;
-- cp .env.dist .env
 - |
   if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
     echo yes | pecl install apcu;
   else
     echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
   fi;
+- export CC=gcc-4.9
+- export CXX=g++-4.9
+- npm install -g node-sass
 
 install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
 - yarn install
+- yarn dev
 
 script:
 - mkdir -p build/logs
