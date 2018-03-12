@@ -17,9 +17,8 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class User
+ * Class User.
  *
- * @package Paroki\Resource\Entity
  * @ORM\Entity()
  * @ORM\Table(name="auth_user")
  */
@@ -33,4 +32,36 @@ class User extends BaseUser
      * @var string
      */
     protected $id;
+
+    /**
+     * @ORM\Column(name="fullname" type="string" length=100)
+     * @var string
+     */
+    protected $fullname;
+
+    /**
+     * @return null|string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
+    }
+
+    /**
+     * @param string $fullname
+     * @return User
+     */
+    public function setFullname(string $fullname): User
+    {
+        $this->fullname = $fullname;
+        return $this;
+    }
 }
