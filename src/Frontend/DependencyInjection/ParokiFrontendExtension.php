@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Frontend\DependencyInjection;
 
-
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -24,7 +23,7 @@ class ParokiFrontendExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $locator = new FileLocator(__DIR__.'/../Resources/config');
-        $xmlFileLoader = new XmlFileLoader($container,$locator);
+        $xmlFileLoader = new XmlFileLoader($container, $locator);
         $xmlFileLoader->load('services.xml');
     }
 }

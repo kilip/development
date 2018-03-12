@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Frontend;
 
-
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ParokiFrontendBundle extends Bundle

@@ -9,9 +9,8 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
- * Class Kernel
+ * Class Kernel.
  *
- * @package Paroki\Core
  * @codeCoverageIgnore
  */
 class Kernel extends BaseKernel

@@ -20,7 +20,7 @@ class HomepageControllerTest extends WebTestCase
     public function testHomepage()
     {
         $client = static::createClient();
-        $client->request('GET','/');
-        $this->assertEquals(200,$client->getResponse()->getStatusCode());
+        $client->request('GET', '/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }

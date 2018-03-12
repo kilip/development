@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Frontend\Controller;
 
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -24,6 +23,6 @@ class HomepageController extends Controller
      */
     public function indexAction()
     {
-        return $this->render("@frontend/index.html.twig");
+        return $this->render('@frontend/index.html.twig');
     }
 }

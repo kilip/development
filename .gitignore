@@ -1,5 +1,6 @@
 build
 yarn-error.log
+.php_cs.cache
 
 ###> symfony/framework-bundle ###
 .env
