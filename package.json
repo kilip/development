@@ -1,5 +1,7 @@
 {
     "name": "paroki-development",
+    "license": "MIT",
+    "private": true,
     "dependencies": {
         "@coreui/react": "^1.0.10",
         "axios": "^0.18.0",
@@ -9,7 +11,6 @@
         "font-awesome": "^4.7.0",
         "jsonld": "^0.5.21",
         "jwt-decode": "^2.2.0",
-        "node-sass": "^4.8.0",
         "prop-types": "^15.6.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
@@ -27,15 +28,54 @@
     },
     "devDependencies": {
         "@symfony/webpack-encore": "^0.17.0",
+        "babel-jest": "^22.4.1",
         "babel-preset-react": "^6.24.1",
+        "enzyme": "^3.3.0",
+        "enzyme-adapter-react-16": "^1.1.1",
+        "jest": "^22.4.2",
+        "node-sass": "^4.8.1",
+        "react-test-renderer": "^16.2.0",
+        "redux-mock-store": "^1.5.1",
         "webpack-livereload-plugin": "^1.0.0"
     },
-    "license": "MIT",
-    "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch --config-name frontend",
-        "build": "encore production"
+        "build": "encore production",
+        "test": "node public/bundles/parokifrontend/js/runtest.js --env=jsdom"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/Frontend/Resources/public/js/**/*.{js,jsx,mjs}"
+        ],
+        "coveragePathIgnorePatterns": [
+            "tests",
+            "runtest.js"
+        ],
+        "coverageDirectory": "build/logs/frontend",
+        "modulePathIgnorePatterns": [
+            "<rootDir>/var/",
+            "<rootDir>/public/"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/src/Frontend/Resources/public/js/tests/setupTests.js",
+        "testEnvironment": "node",
+        "testPathIgnorePatterns": [
+            "<rootDir>/node_modules/",
+            "<rootDir>/docker/",
+            "<rootDir>/vendor/",
+            "<rootDir>/config/",
+            "<rootDir>/var"
+        ],
+        "transform": {
+            "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+            "^.+\\.css$": "<rootDir>/src/Frontend/Resources/public/js/config/jest/cssTransform.js",
+            "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/src/Frontend/Resources/public/js/config/jest/fileTransform.js"
+        },
+        "transformIgnorePatterns": [
+            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$",
+            "<rootDir>/docker",
+            "<rootDir>/var"
+        ]
     }
 }

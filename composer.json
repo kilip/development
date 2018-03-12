@@ -4,7 +4,7 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.1 | ^7.2",
         "ext-iconv": "*",
         "ext-apcu": "*",
         "api-platform/api-pack": "^1.1",
@@ -68,7 +68,10 @@
         ],
         "coverage": [
             "./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml",
-            "./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov"
+            "./bin/phpunit --coverage-php=build/coverage/php/phpunit.cov",
+            "./vendor/bin/behat -p coverage",
+            "yarn test --coverage",
+            "./bin/merge-coverage"
         ]
     },
     "conflict": {

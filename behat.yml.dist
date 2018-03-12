@@ -10,3 +10,12 @@ default:
             kernel:
                 bootstrap: features/bootstrap/bootstrap.php
                 class: Paroki\Core\Kernel
+
+coverage:
+    suites:
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    kernel: '@kernel'
+                - Paroki\Behat\Contexts\CoverageContext
