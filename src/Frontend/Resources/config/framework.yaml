@@ -1,7 +1,11 @@
+imports:
+    - "@ParokiFrontendBundle/Resources/config/security.yaml"
+    - "@ParokiFrontendBundle/Resources/config/maintenance.yaml"
 framework:
     assets:
         json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
-
+    templating:
+        engines: ['twig']
 twig:
     paths:
         '%kernel.project_dir%/src/Frontend/Resources/templates': frontend

@@ -25,7 +25,7 @@ Encore
 
     .enableReactPreset()
 
-    .addEntry('js/siap','./public/bundles/parokifrontend/js/index.js')
+    .addEntry('js/siap','./src/Frontend/Resources/public/js/index.js')
 ;
 
 const themeConfig = Encore.getWebpackConfig();

@@ -1,0 +1,15 @@
+lexik_maintenance:
+    authorized:
+        path: /
+        host: localhost
+        ips: ['127.0.0.1', '172.123.10.14']
+    driver:
+        ttl: 3600
+         # File driver
+        class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
+        options: {file_path: '%kernel.project_dir%/var/cache/lock'}
+    #Optional. response code and status of the maintenance page
+    response:
+        code: 503
+        status: "Service Temporarily Unavailable"
+        exception_message: "Service Temporarily Unavailable"
