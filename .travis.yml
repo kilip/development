@@ -17,15 +17,19 @@ env:
   - COVERAGE=no
   - APP_ENV=test
   - DATABASE_URL=pgsql://postgres@localhost:5432/paroki
+  - CC=gcc-4.9
+  - CXX=g++-4.9
 
 matrix:
   include:
+  - php: '7.0'
+  - php: '7.1'
   - php: '7.2'
   - php: '7.2'
-    env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+    env: COVERAGE=yes
   allow_failures:
   - php: '7.2'
-    env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+    env: COVERAGE=yes
   fast_finish: true
 
 before_install:
@@ -47,10 +51,7 @@ install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
-- |
-  if [[ $COVERAGE = yes ]]; then
-    yarn install;
-  fi
+- yarn install
 
 script:
 - mkdir -p build/logs
