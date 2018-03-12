@@ -44,4 +44,11 @@ class BaptisanSpec extends ObjectBehavior
         $this->setIbu('Ibu')->shouldReturn($this);
         $this->getIbu()->shouldReturn('Ibu');
     }
+
+    public function its_jenis_kelamin_should_be_mutable()
+    {
+        $this->getJenisKelamin()->shouldReturn(null);
+        $this->setJenisKelamin(Baptisan::JK_PRIA)->shouldReturn($this);
+        $this->getJenisKelamin()->shouldReturn(Baptisan::JK_PRIA);
+    }
 }
