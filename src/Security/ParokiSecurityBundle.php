@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Security;
 
-
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ParokiSecurityBundle extends Bundle

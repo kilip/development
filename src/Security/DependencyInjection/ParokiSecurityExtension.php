@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Security\DependencyInjection;
 
-
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\Config\FileLocator;

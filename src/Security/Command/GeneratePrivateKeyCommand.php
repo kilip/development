@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Security\Command;
 
-
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,8 +36,8 @@ class GeneratePrivateKeyCommand extends Command
         $privatePath = getenv('JWT_PRIVATE_KEY_PATH');
         $publicPath = getenv('JWT_PUBLIC_KEY_PATH');
 
-        if(!is_dir($dir = dirname($publicPath))){
-            mkdir($dir,0777,true);
+        if (!is_dir($dir = dirname($publicPath))) {
+            mkdir($dir, 0777, true);
         }
 
         passthru("openssl genrsa -passout stdin -out $privatePath -aes256 4096 <<PASS\n$passphrase\nPASS");
