@@ -1,7 +1,8 @@
 const routes = {
     '/': 'Home',
     '/dashboard': 'Dashboard',
-    '/employees': 'Employees',
-    '/products': 'Products'
+    '/baptisans': 'Buku Baptis',
+    '/baptisans/*/edit': 'Edit',
+    '/baptisans/create': 'Data Baru',
 };
 export default routes;

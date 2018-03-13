@@ -10,14 +10,9 @@ export default {
             }
         },
         {
-            name: "Baptisan",
+            name: "Buku Baptis",
             url: '/baptisans',
             icon: 'icon-people',
         }
-        //{
-        //    name: "Products",
-        //    url: '/products',
-        //    icon: 'icon-folder-alt',
-        //},
     ]
 };

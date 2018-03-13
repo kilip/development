@@ -2,8 +2,21 @@ import React from 'react';
 import {Route, Link} from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import routes from '../../config/breadcrumb';
+import _ from 'lodash';
 
-const findRouteName = url => routes[url];
+const findRouteName = function(url){
+    var routeName = routes[url];
+    if(routeName == undefined){
+        _.each(routes,function(name,pattern){
+            pattern = _.escapeRegExp(pattern).replace('\\*','.*');
+            pattern = pattern + "$";
+            if(url.match(pattern)){
+                routeName = name;
+            }
+        });
+    }
+    return routeName;
+};
 
 const getPaths = (pathname) => {
   const paths = ['/'];

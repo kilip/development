@@ -28,6 +28,7 @@ matrix:
     env: DATABASE_URL=mysql://root@localhost:3306/paroki
   - php: 7.2.3
     env: DEPLOY=yes
+    if: branch=master
     deploy:
       provider: heroku
       api_key:

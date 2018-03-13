@@ -8,6 +8,7 @@ import Breadcrumb from './components/Breadcrumb';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Dashboard from '../pages/Dashboard';
+import BaptisanRoutes from '../components/baptisan/routes';
 
 
 class DashboardContainer extends Component {
@@ -23,6 +24,7 @@ class DashboardContainer extends Component {
                         <Container fluid>
                             <Switch>
                                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+                                {BaptisanRoutes}
                                 <Redirect from="/" to="/dashboard"/>
                             </Switch>
                         </Container>

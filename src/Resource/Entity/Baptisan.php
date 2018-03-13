@@ -14,13 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="adm_baptisan")
  * @ApiResource(
- *     attributes={
- *          {"access_control"="is_granted('ROLE_ADMIN_PAROKI')"}
- *     },
- *     collectionOperations={
- *         "get"={"method"="GET","access_control"="is_granted('ROLE_ADMIN_PAROKI')"},
- *         "post"={"method"="POST","access_control"="is_granted('ROLE_ADMIN_PAROKI')"}
- *     }
  * )
  */
 class Baptisan
@@ -36,7 +29,7 @@ class Baptisan
      *
      * @var string
      */
-    private $guid;
+    private $id;
 
     /**
      * @ORM\Column(name="jenis_kelamin",type="smallint",nullable=true)
@@ -76,9 +69,9 @@ class Baptisan
     /**
      * @return null|string
      */
-    public function getGuid()
+    public function getId()
     {
-        return $this->guid;
+        return $this->id;
     }
 
     /**
