@@ -77,6 +77,7 @@
             "./bin/merge-coverage"
         ],
         "compile": [
+            "bin/console siap:generate:key",
             "bin/console doctrine:schema:update -n --force",
             "yarn install --dev",
             "yarn build"

@@ -1,0 +1,10 @@
+Paroki\Resource\Entity\User:
+    admin:
+        fullname: Super Administrator
+        username: admin
+        password: admin
+        email:    admin@example.com
+        enabled:  1
+        roles:
+          - SUPER_ADMIN
+          - ADMIN_PAROKI

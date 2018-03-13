@@ -1,11 +1,25 @@
+lexik_jwt_authentication:
+    private_key_path: '%kernel.project_dir%/%env(resolve:JWT_PRIVATE_KEY_PATH)%'
+    public_key_path:  '%kernel.project_dir%/%env(resolve:JWT_PUBLIC_KEY_PATH)%'
+    pass_phrase:      '%env(resolve:JWT_PASSPHRASE)%'
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Paroki\Resource\Entity\User
+    from_email:
+        address: "%env(MAILER_USER)%"
+        sender_name: "%env(MAILER_USER)%"
+    use_listener: true
+
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN_PAROKI:    ROLE_USER
-        ROLE_ADMIN:       ROLE_ADMIN_PAROKI
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ADMIN_PAROKI:    USER
+        ADMIN:           ADMIN_PAROKI
+        SUPER_ADMIN:     ADMIN
 
     providers:
         in_memory: { memory: ~ }
@@ -25,7 +39,7 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js|bundles)/
             security: false
         main:
             pattern:      ^/api
