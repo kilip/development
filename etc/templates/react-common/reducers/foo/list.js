@@ -2,10 +2,10 @@ import {combineReducers} from 'redux'
 
 export function error(state = null, action) {
   switch (action.type) {
-    case 'BAPTISAN_LIST_ERROR':
+    case '{{{ uc }}}_LIST_ERROR':
       return action.error;
 
-    case 'BAPTISAN_LIST_RESET':
+    case '{{{ uc }}}_LIST_RESET':
       return null;
 
     default:
@@ -15,10 +15,10 @@ export function error(state = null, action) {
 
 export function loading(state = false, action) {
   switch (action.type) {
-    case 'BAPTISAN_LIST_LOADING':
+    case '{{{ uc }}}_LIST_LOADING':
       return action.loading;
 
-    case 'BAPTISAN_LIST_RESET':
+    case '{{{ uc }}}_LIST_RESET':
       return false;
 
     default:
@@ -28,10 +28,10 @@ export function loading(state = false, action) {
 
 export function data(state = {}, action) {
   switch (action.type) {
-    case 'BAPTISAN_LIST_SUCCESS':
+    case '{{{ uc }}}_LIST_SUCCESS':
       return action.data;
 
-    case 'BAPTISAN_LIST_RESET':
+    case '{{{ uc }}}_LIST_RESET':
       return {};
 
     default:

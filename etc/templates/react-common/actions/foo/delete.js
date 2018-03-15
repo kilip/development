@@ -1,15 +1,15 @@
-import fetch from '../../../utils/fetch';
+import fetch from '../../utils/fetch';
 
 export function error(error) {
-  return {type: 'BAPTISAN_DELETE_ERROR', error};
+  return {type: '{{{ uc }}}_DELETE_ERROR', error};
 }
 
 export function loading(loading) {
-  return {type: 'BAPTISAN_DELETE_LOADING', loading};
+  return {type: '{{{ uc }}}_DELETE_LOADING', loading};
 }
 
 export function success(deleted) {
-  return {type: 'BAPTISAN_DELETE_SUCCESS', deleted};
+  return {type: '{{{ uc }}}_DELETE_SUCCESS', deleted};
 }
 
 export function del(item) {

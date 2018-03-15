@@ -2,10 +2,10 @@ import { combineReducers } from 'redux'
 
 export function retrieveError(state = null, action) {
   switch (action.type) {
-    case 'BAPTISAN_UPDATE_RETRIEVE_ERROR':
+    case '{{{ uc }}}_UPDATE_RETRIEVE_ERROR':
       return action.retrieveError;
 
-    case 'BAPTISAN_UPDATE_RESET':
+    case '{{{ uc }}}_UPDATE_RESET':
       return null;
 
     default:
@@ -15,10 +15,10 @@ export function retrieveError(state = null, action) {
 
 export function retrieveLoading(state = false, action) {
   switch (action.type) {
-    case 'BAPTISAN_UPDATE_RETRIEVE_LOADING':
+    case '{{{ uc }}}_UPDATE_RETRIEVE_LOADING':
       return action.retrieveLoading;
 
-    case 'BAPTISAN_UPDATE_RESET':
+    case '{{{ uc }}}_UPDATE_RESET':
       return false;
 
     default:
@@ -28,10 +28,10 @@ export function retrieveLoading(state = false, action) {
 
 export function retrieved(state = null, action) {
   switch (action.type) {
-    case 'BAPTISAN_UPDATE_RETRIEVE_SUCCESS':
+    case '{{{ uc }}}_UPDATE_RETRIEVE_SUCCESS':
       return action.retrieved;
 
-    case 'BAPTISAN_UPDATE_RESET':
+    case '{{{ uc }}}_UPDATE_RESET':
       return null;
 
     default:
@@ -41,10 +41,10 @@ export function retrieved(state = null, action) {
 
 export function updateError(state = null, action) {
   switch (action.type) {
-    case 'BAPTISAN_UPDATE_UPDATE_ERROR':
+    case '{{{ uc }}}_UPDATE_UPDATE_ERROR':
       return action.updateError;
 
-    case 'BAPTISAN_UPDATE_RESET':
+    case '{{{ uc }}}_UPDATE_RESET':
       return null;
 
     default:
@@ -54,10 +54,10 @@ export function updateError(state = null, action) {
 
 export function updateLoading(state = false, action) {
   switch (action.type) {
-    case 'BAPTISAN_UPDATE_UPDATE_LOADING':
+    case '{{{ uc }}}_UPDATE_UPDATE_LOADING':
       return action.updateLoading;
 
-    case 'BAPTISAN_UPDATE_RESET':
+    case '{{{ uc }}}_UPDATE_RESET':
       return false;
 
     default:
@@ -67,10 +67,10 @@ export function updateLoading(state = false, action) {
 
 export function updated(state = null, action) {
   switch (action.type) {
-    case 'BAPTISAN_UPDATE_UPDATE_SUCCESS':
+    case '{{{ uc }}}_UPDATE_UPDATE_SUCCESS':
       return action.updated;
 
-    case 'BAPTISAN_UPDATE_RESET':
+    case '{{{ uc }}}_UPDATE_RESET':
       return null;
 
     default:

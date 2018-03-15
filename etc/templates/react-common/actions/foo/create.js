@@ -1,23 +1,23 @@
 import { SubmissionError } from 'redux-form';
-import fetch from '../../../utils/fetch';
+import fetch from '../../utils/fetch';
 
 export function error(error) {
-  return {type: 'BAPTISAN_CREATE_ERROR', error};
+  return {type: '{{{ uc }}}_CREATE_ERROR', error};
 }
 
 export function loading(loading) {
-  return {type: 'BAPTISAN_CREATE_LOADING', loading};
+  return {type: '{{{ uc }}}_CREATE_LOADING', loading};
 }
 
 export function success(created) {
-  return {type: 'BAPTISAN_CREATE_SUCCESS', created};
+  return {type: '{{{ uc }}}_CREATE_SUCCESS', created};
 }
 
 export function create(values) {
   return (dispatch) => {
     dispatch(loading(true));
 
-    return fetch('/baptisans', {method: 'POST', body: JSON.stringify(values)})
+    return fetch('/{{{ name }}}', {method: 'POST', body: JSON.stringify(values)})
       .then(response => {
         dispatch(loading(false));
 

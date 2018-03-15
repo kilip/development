@@ -1,24 +1,24 @@
 import { SubmissionError } from 'redux-form';
-import fetch from '../../../utils/fetch';
+import fetch from '../../utils/fetch';
 import { success as createSuccess } from './create';
 
 export function retrieveError(retrieveError) {
-  return {type: 'BAPTISAN_UPDATE_RETRIEVE_ERROR', retrieveError};
+  return {type: '{{{ uc }}}_UPDATE_RETRIEVE_ERROR', retrieveError};
 }
 
 export function retrieveLoading(retrieveLoading) {
-  return {type: 'BAPTISAN_UPDATE_RETRIEVE_LOADING', retrieveLoading};
+  return {type: '{{{ uc }}}_UPDATE_RETRIEVE_LOADING', retrieveLoading};
 }
 
 export function retrieveSuccess(retrieved) {
-  return {type: 'BAPTISAN_UPDATE_RETRIEVE_SUCCESS', retrieved};
+  return {type: '{{{ uc }}}_UPDATE_RETRIEVE_SUCCESS', retrieved};
 }
 
 export function retrieve(id) {
   return (dispatch) => {
     dispatch(retrieveLoading(true));
 
-    return fetch(`/baptisans/${id}`)
+    return fetch(id)
       .then(response => response.json())
       .then(data => {
         dispatch(retrieveLoading(false));
@@ -32,15 +32,15 @@ export function retrieve(id) {
 }
 
 export function updateError(updateError) {
-  return {type: 'BAPTISAN_UPDATE_UPDATE_ERROR', updateError};
+  return {type: '{{{ uc }}}_UPDATE_UPDATE_ERROR', updateError};
 }
 
 export function updateLoading(updateLoading) {
-  return {type: 'BAPTISAN_UPDATE_UPDATE_LOADING', updateLoading};
+  return {type: '{{{ uc }}}_UPDATE_UPDATE_LOADING', updateLoading};
 }
 
 export function updateSuccess(updated) {
-  return {type: 'BAPTISAN_UPDATE_UPDATE_SUCCESS', updated};
+  return {type: '{{{ uc }}}_UPDATE_UPDATE_SUCCESS', updated};
 }
 
 export function update(item, values) {
@@ -48,13 +48,10 @@ export function update(item, values) {
     dispatch(updateError(null));
     dispatch(createSuccess(null));
     dispatch(updateLoading(true));
-    delete values['addresses'];
-    delete values['login'];
-    return fetch('/baptisans/'+item['id'], {
+
+    return fetch(item['@id'], {
         method: 'PUT',
-        headers: new Headers({
-            'Content-Type': 'application/ld+json'
-        }),
+        headers: new Headers({'Content-Type': 'application/ld+json'}),
         body: JSON.stringify(values),
       }
     )
@@ -77,5 +74,5 @@ export function update(item, values) {
 }
 
 export function reset() {
-  return {type: 'BAPTISAN_UPDATE_RESET'};
+  return {type: '{{{ uc }}}_UPDATE_RESET'};
 }

@@ -1,18 +1,18 @@
-import fetch from '../../../utils/fetch';
+import fetch from '../../utils/fetch';
 
 export function error(error) {
-  return {type: 'BAPTISAN_LIST_ERROR', error};
+  return {type: '{{{ uc }}}_LIST_ERROR', error};
 }
 
 export function loading(loading) {
-  return {type: 'BAPTISAN_LIST_LOADING', loading};
+  return {type: '{{{ uc }}}_LIST_LOADING', loading};
 }
 
 export function success(data) {
-  return {type: 'BAPTISAN_LIST_SUCCESS', data};
+  return {type: '{{{ uc }}}_LIST_SUCCESS', data};
 }
 
-export function list(page = '/baptisans') {
+export function list(page = '/{{{ name }}}') {
   return (dispatch) => {
     dispatch(loading(true));
     dispatch(error(''));
@@ -31,5 +31,5 @@ export function list(page = '/baptisans') {
 }
 
 export function reset() {
-  return {type: 'BAPTISAN_LIST_RESET'};
+  return {type: '{{{ uc }}}_LIST_RESET'};
 }
