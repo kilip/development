@@ -74,6 +74,8 @@ install:
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
 - composer compile
+- yarn install --dev
+- yarn build
 
 script:
 - mkdir -p build/logs
