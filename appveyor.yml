@@ -10,7 +10,6 @@ services:
 cache:
   - '%LOCALAPPDATA%\Composer\files'
   - '%APPVEYOR_BUILD_FOLDER%\node_modules'
-  - .cache/yarn
 
 init:
   - SET PATH=c:\tools\php72;%PATH%
@@ -42,11 +41,10 @@ install:
   - php vendor\symfony\phpunit-bridge\bin\simple-phpunit install
 
 before_test:
-  - node --version
   - cd %APPVEYOR_BUILD_FOLDER%
   - php bin/console doctrine:database:create -n --if-not-exists
   - php bin/console doctrine:schema:create -n
-  - yarn --cache-folder=.cache/yarn --no-progress
+  - yarn --no-progress
   - yarn build
 
 test_script:
