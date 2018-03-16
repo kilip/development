@@ -23,6 +23,7 @@ install:
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
   - cd c:\tools\php72
+  - pecl install apcu
   - copy php.ini-production php.ini /Y
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
