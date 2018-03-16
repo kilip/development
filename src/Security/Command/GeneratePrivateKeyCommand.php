@@ -42,12 +42,10 @@ class GeneratePrivateKeyCommand extends Command
 
         passthru("openssl genrsa -passout stdin -out $privatePath -aes256 4096 <<PASS\n$passphrase\nPASS");
         $privatePath = realpath($privatePath);
-        chmod($privatePath, 0775);
         $output->writeln("Generated private key to: <comment>$privatePath</comment>");
 
         passthru("openssl rsa -pubout -in $privatePath -out $publicPath -passin stdin <<PASS\n$passphrase\nPASS");
         $publicPath = realpath($publicPath);
-        chmod($publicPath, 0775);
         $output->writeln("Generated public key to: <comment>$publicPath</comment>");
     }
 }
