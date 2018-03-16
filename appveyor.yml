@@ -29,5 +29,6 @@ install:
 
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - php vendor\phpspec\phpspec\bin\phpspec
   - php vendor\behat\behat\bin\behat --format=progress --tags='~@postgres'
   - php vendor\phpunit\phpunit\phpunit

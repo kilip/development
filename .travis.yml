@@ -77,6 +77,8 @@ install:
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
 - bin/console siap:generate:key
+- ls -lh var/
+- ls -lh var/jwt
 - bin/console doctrine:schema:update -n --force
 - yarn install --dev
 - yarn build
