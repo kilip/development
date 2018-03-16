@@ -23,7 +23,10 @@ install:
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
   - cd c:\tools\php72
-  - pecl install apcu
+  - cd ext
+  - appveyor DownloadFile https://windows.php.net/downloads/pecl/releases/apcu/5.1.11/php_apcu-5.1.11-7.2-ts-vc15-x86.zip
+  - 7z x php_apcu-5.1.11-7.2-ts-vc15-x86.zip -y >nul
+  - cd ..
   - copy php.ini-production php.ini /Y
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
