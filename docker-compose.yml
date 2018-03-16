@@ -10,6 +10,7 @@ services:
         volumes:
             - ./:/app:rw
             - /app/var
+            - /app/public/bundles
         environment:
             - APP_DEBUG = ${APP_DEBUG}
 
