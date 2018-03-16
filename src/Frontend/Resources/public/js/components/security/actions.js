@@ -5,7 +5,6 @@ import { decodeToken } from './util';
 import * as globals from '../../config/global';
 
 export function login(data){
-    console.log(globals.API_LOGIN_CHECK);
     return function(dispatch){
         const config = {
             headers: {
@@ -23,8 +22,7 @@ export function login(data){
                 localStorage.setItem('token',response.data.token);
             })
             .catch((e) => {
-
-                console.log(e);
+                // @todo handle login error here
             })
         ;
     }

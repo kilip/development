@@ -36,8 +36,18 @@ class Form extends Component {
             />
         );
 
+        const hasRole = function(roles,type){
+            let found = false;
+            _.each(roles,function(value){
+                if(value === type){
+                    found = true;
+                }
+            });
+            return found;
+        };
+
         if('roles' === data.input.name){
-            console.log(data);
+
             inputField = (
                 <div>
                     <FormGroup check className="radio">
@@ -48,7 +58,7 @@ class Form extends Component {
                             type="radio"
                             name={data.input.name}
                             className="form-check-input"
-                            checked={data.input.value.includes('SUPER_ADMIN') || data.input.value === "SUPER_ADMIN"}
+                            checked={hasRole(data.input.value,'SUPER_ADMIN')}
                         />
                         <Label check className="form-check-label" htmlFor="roles-super-admin">
                             Super Administrator
@@ -62,7 +72,7 @@ class Form extends Component {
                             value="ADMIN"
                             type="radio"
                             name={data.input.name}
-                            checked={data.input.value.includes('ADMIN') || data.input.value === "ADMIN"}
+                            checked={hasRole(data.input.value,'ADMIN')}
                         />
                         <Label check className="form-check-label" htmlFor="roles-admin">
                             Administrator
@@ -76,7 +86,7 @@ class Form extends Component {
                             value="ADMIN_PAROKI"
                             type="radio"
                             name={data.input.name}
-                            checked={data.input.value.includes('ADMIN_PAROKI') || data.input.value === "ADMIN_PAROKI"}
+                            checked={hasRole(data.input.value,'ADMIN_PAROKI')}
                         />
                         <Label check className="form-check-label" htmlFor="roles-admin-paroki">
                             Administrator Paroki
@@ -94,7 +104,7 @@ class Form extends Component {
                             {...data.input}
                             id="enabled-yes"
                             className="form-check-input"
-                            value="1"
+                            value="true"
                             type="radio"
                             name={data.input.name}
                             checked={data.input.value}
@@ -108,7 +118,7 @@ class Form extends Component {
                             {...data.input}
                             id="enabled-no"
                             className="form-check-input"
-                            value="0"
+                            value="false"
                             type="radio"
                             name={data.input.name}
                             checked={!data.input.value}
@@ -143,6 +153,12 @@ class Form extends Component {
         );
     }
 
+    normalizeRoles = (values) => {
+        let roles = [];
+        roles[0] = values;
+        return roles;
+    };
+
     render() {
         const { handleSubmit,cardHeader,updateError } = this.props;
 
@@ -153,19 +169,19 @@ class Form extends Component {
                         <strong>{cardHeader}</strong>
                     </CardHeader>
                     <CardBody>
+                        {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
+                        {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
                         {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading) && <div className="alert alert-info" role="status">Loading...</div>}
-                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
-                        {this.props.created && <div className="alert alert-success" role="status"><strong>{this.props.created['fullName']}</strong> created.</div>}
-                        {this.props.updated && <div className="alert alert-success" role="status">{this.props.updated['fullName']} updated.</div>}
                         {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
+                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
                         {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
 
                         <StrapForm onSubmit={handleSubmit} className="form-horizontal">
                             <Field component={this.renderField} name="username" type="text" placeholder="" />
                             <Field component={this.renderField} name="fullName" type="text" placeholder="" />
-                            <Field component={this.renderField} name="roles" placeholder="" />
+                            <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
                             <Field component={this.renderField} name="email" type="text" placeholder="" />
-                            <Field component={this.renderField} name="enabled" type="checkbox" placeholder="" />
+                            <Field component={this.renderField} name="enabled" placeholder="" />
                             <button type="submit" className="btn btn-success">Submit</button>
                         </StrapForm>
                     </CardBody>
