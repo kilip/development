@@ -35,8 +35,8 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
   - php -r "readfile('http://getcomposer.org/installer');" | php
   - php composer.phar install --no-interaction --no-progress --ignore-platform-reqs
-  - bin/console doctrine:database:create -n --if-not-exists
-  - bin/console doctrine:schema:create -n
+  - php bin/console doctrine:database:create -n --if-not-exists
+  - php bin/console doctrine:schema:create -n
 
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
