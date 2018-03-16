@@ -17,12 +17,13 @@ init:
 
 environment:
     APP_ENV: 'test'
-    nodejs_version: "8.9"
+    nodejs_version: "8"
 
 install:
   - SET PGUSER=postgres
   - SET PGPASSWORD=Password12!
   - SET DATABASE_URL=postgres://postgres:Password12!@localhost/paroki
+  - ps: Install-Product node $env:nodejs_version
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
   - cd c:\tools\php72
@@ -39,12 +40,13 @@ install:
   - php -r "readfile('http://getcomposer.org/installer');" | php
   - php composer.phar install --no-interaction --no-progress --ignore-platform-reqs
   - php vendor\symfony\phpunit-bridge\bin\simple-phpunit install
-  - yarn --cache-folder=.cache/yarn --no-progress
 
 before_test:
+  - node --version
   - cd %APPVEYOR_BUILD_FOLDER%
   - php bin/console doctrine:database:create -n --if-not-exists
   - php bin/console doctrine:schema:create -n
+  - yarn --cache-folder=.cache/yarn --no-progress
   - yarn build
 
 test_script:
