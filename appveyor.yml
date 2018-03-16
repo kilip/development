@@ -44,5 +44,5 @@ before_test:
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - php vendor\phpspec\phpspec\bin\phpspec run
-  - php vendor\behat\behat\bin\behat --format=progress --tags='~@postgres'
+  - php vendor\behat\behat\bin\behat --format=progress
   - php vendor\bin\simple-phpunit
