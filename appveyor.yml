@@ -1,6 +1,6 @@
 build: false
 platform: x86
-clone_folder: D:\projects\siap\core
+clone_folder: c:\projects\paroki\development
 
 cache:
   - '%LOCALAPPDATA%\Composer\files'
@@ -13,7 +13,6 @@ environment:
 
 install:
   - ps: Set-Service wuauserv -StartupType Manual
-  - echo %APPVEYOR_BUILD_FOLDER%
   - cinst -y php
   - cd c:\tools\php72
   - copy php.ini-production php.ini /Y
