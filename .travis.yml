@@ -39,6 +39,7 @@ matrix:
       on:
         branch: master
       run:
+        - bin/console doctrine:query:sql 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
         - bin/console doctrine:schema:drop --force
         - bin/console doctrine:schema:create
         - bin/console hautelook:fixtures:load -n
