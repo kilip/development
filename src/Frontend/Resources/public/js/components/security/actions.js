@@ -4,19 +4,6 @@ import {USER_LOGGED_IN} from "./constants";
 import { decodeToken } from './util';
 import * as globals from '../../config/global';
 
-/*export const login = data => dispatch => {
-  dispatch({
-    type: constants.USER_LOGGING_IN
-  });
-  // Wait 2 seconds before "logging in"
-  setTimeout(() => {
-    dispatch({
-      type: constants.USER_LOGGED_IN,
-      payload: data
-    })
-  }, 2000)
-};*/
-
 export function login(data){
     return function(dispatch){
         const config = {
@@ -34,8 +21,8 @@ export function login(data){
                 dispatch({type: USER_LOGGED_IN,payload: payload});
                 localStorage.setItem('token',response.data.token);
             })
-            .catch(() => {
-
+            .catch((e) => {
+                // @todo handle login error here
             })
         ;
     }

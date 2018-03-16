@@ -12,9 +12,9 @@ class BaptisanSpec extends ObjectBehavior
         $this->shouldHaveType(Baptisan::class);
     }
 
-    public function its_guid_should_be_readonly()
+    public function its_id_should_be_readonly()
     {
-        $this->getGuid()->shouldReturn(null);
+        $this->getId()->shouldReturn(null);
     }
 
     public function its_nama_should_be_mutable()

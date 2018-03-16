@@ -29,7 +29,6 @@ class Sidebar extends Component {
     // }
 
     logout(e){
-        console.log('will click');
         this.props.logout();
         e.preventDefault();
     }

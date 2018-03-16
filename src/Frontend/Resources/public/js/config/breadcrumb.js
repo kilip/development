@@ -1,7 +1,13 @@
+import _ from 'lodash';
+
 const routes = {
     '/': 'Home',
     '/dashboard': 'Dashboard',
-    '/employees': 'Employees',
-    '/products': 'Products'
+    '/baptisans': 'Buku Baptis',
+    '/baptisans/*/edit': 'Edit',
+    '/baptisans/create': 'Data Baru',
 };
-export default routes;
+
+const merged = _.merge(routes,{});
+
+export default merged;

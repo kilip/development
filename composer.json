@@ -5,9 +5,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.1 | ^7.2",
-        "ext-iconv": "*",
         "ext-apcu": "*",
+        "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "friendsofsymfony/user-bundle": "^2.1",
+        "lexik/jwt-authentication-bundle": "^2.4",
+        "lexik/maintenance-bundle": "^2.1",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "^4.0",
         "symfony/console": "^4.0",
@@ -30,7 +34,6 @@
     },
     "require-dev": {
         "behat/symfony2-extension": "^2.1",
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "hautelook/alice-bundle": "~2.0@dev",
         "leanphp/phpspec-code-coverage": "^4.0",
         "phpspec/phpspec": "^4.3",
@@ -74,9 +77,8 @@
             "./bin/merge-coverage"
         ],
         "compile": [
-            "bin/console doctrine:schema:update -n --force",
-            "yarn install --dev",
-            "yarn build"
+            "bin/console siap:generate:key",
+            "bin/console doctrine:schema:update -n --force"
         ]
     },
     "conflict": {

@@ -33,6 +33,7 @@ describe('<SIAP/> Component', () => {
     };
     it('should display login when user not authenticated', () => {
         const wrapper = getComponent(props,state);
-        expect(wrapper.text()).toContain('Under Construction');
+        expect(wrapper.text()).toContain('Login');
+        expect(wrapper.text()).toContain('Forgot password?');
     });
 });

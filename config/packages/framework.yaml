@@ -1,5 +1,7 @@
 imports:
     - "@ParokiFrontendBundle/Resources/config/framework.yaml"
+    - "@ParokiResourceBundle/Resources/config/framework.yaml"
+    - "@ParokiSecurityBundle/Resources/config/framework.yaml"
 framework:
     secret: '%env(APP_SECRET)%'
     #default_locale: en
