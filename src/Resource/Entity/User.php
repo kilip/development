@@ -79,7 +79,7 @@ class User extends BaseUser
     protected $username;
 
     /**
-     * User email to use
+     * User email to use.
      *
      * @Assert\NotBlank()
      * @Assert\Email()
@@ -98,6 +98,7 @@ class User extends BaseUser
 
     /**
      * @Groups({"editable"})
+     *
      * @var bool
      */
     protected $enabled;

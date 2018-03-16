@@ -6,6 +6,12 @@ import Form from './Form';
 import { success } from '../../actions/user/create';
 import { retrieve, update, reset } from '../../actions/user/update';
 import { del, loading, error } from '../../actions/user/delete';
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    CardFooter,
+} from 'reactstrap';
 
 class Update extends Component {
     componentDidMount() {
@@ -28,20 +34,38 @@ class Update extends Component {
         const item = this.props.updated ? this.props.updated : this.props.retrieved;
 
         return (
-            <div>
-                {
-                    item &&
-                    <Form
-                        method="POST"
-                        onSubmit={values => this.props.update(item, values)}
-                        initialValues={item}
-                        cardHeader={item && item['fullName']}
-                        {...this.props}
-                    >
-                    </Form>
-                }
-              <Link to="/users" className="btn btn-primary">Back to list</Link>
-              <button onClick={this.del} className="btn btn-danger">Delete</button>
+            <div className="animated fadeIn">
+                <Card>
+                    <CardHeader>
+                        <strong>{item && item['fullName']}</strong>
+                    </CardHeader>
+                    <CardBody>
+                        {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
+                        {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
+                        {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading) && <div className="alert alert-info" role="status">Loading...</div>}
+                        {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
+                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
+                        {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
+                        {
+                            item &&
+                            <Form
+                                method="POST"
+                                onSubmit={values => this.props.update(item, values)}
+                                initialValues={item}
+                                cardHeader={item && item['fullName']}
+                                {...this.props}
+                                delete={this.del}
+                                id="formUserUpdate"
+                            >
+                            </Form>
+                        }
+                    </CardBody>
+                    <CardFooter>
+                        <button type="submit" onClick={document.getElementById('formUserUpdate') && document.getElementById('formUserUpdate').submit()} className="btn btn-success">Submit</button>
+                        <Link to="/users" className="btn btn-primary">Back to list</Link>
+                        <button onClick={this.del} className="btn btn-danger">Delete</button>
+                    </CardFooter>
+                </Card>
             </div>
         );
     }

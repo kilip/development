@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import {
     Form as StrapForm,
@@ -8,6 +9,7 @@ import {
     Card,
     CardBody,
     CardHeader,
+    CardFooter,
     FormText,
     Col,
     Input
@@ -160,33 +162,16 @@ class Form extends Component {
     };
 
     render() {
-        const { handleSubmit,cardHeader,updateError } = this.props;
+        const { handleSubmit } = this.props;
 
         return (
-            <div className="animated fadeIn">
-                <Card>
-                    <CardHeader>
-                        <strong>{cardHeader}</strong>
-                    </CardHeader>
-                    <CardBody>
-                        {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
-                        {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
-                        {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading) && <div className="alert alert-info" role="status">Loading...</div>}
-                        {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
-                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
-                        {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
-
-                        <StrapForm onSubmit={handleSubmit} className="form-horizontal">
-                            <Field component={this.renderField} name="username" type="text" placeholder="" />
-                            <Field component={this.renderField} name="fullName" type="text" placeholder="" />
-                            <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
-                            <Field component={this.renderField} name="email" type="text" placeholder="" />
-                            <Field component={this.renderField} name="enabled" placeholder="" />
-                            <button type="submit" className="btn btn-success">Submit</button>
-                        </StrapForm>
-                    </CardBody>
-                </Card>
-            </div>
+            <StrapForm onSubmit={handleSubmit} className="form-horizontal">
+                <Field component={this.renderField} name="username" type="text" placeholder="" />
+                <Field component={this.renderField} name="fullName" type="text" placeholder="" />
+                <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
+                <Field component={this.renderField} name="email" type="text" placeholder="" />
+                <Field component={this.renderField} name="enabled" placeholder="" />
+            </StrapForm>
         );
     }
 }

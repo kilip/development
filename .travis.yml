@@ -72,8 +72,7 @@ install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
-- yarn install
-- yarn dev
+- composer compile
 
 script:
 - mkdir -p build/logs

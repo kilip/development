@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Security\Serializer;
 
-
 use Symfony\Component\Serializer\Normalizer\DenormalizableInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
@@ -42,6 +41,4 @@ class UserSerializer implements NormalizableInterface, DenormalizableInterface
     {
         // TODO: Implement denormalize() method.
     }
-
-
 }
