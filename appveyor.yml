@@ -19,7 +19,7 @@ environment:
 install:
   - SET PGUSER=postgres
   - SET PGPASSWORD=Password12!
-  - SET DATABASE_URL=postgres://postgres:Password12@localhost/paroki
+  - SET DATABASE_URL=postgres://postgres:Password12!@localhost/paroki
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
   - cd c:\tools\php72
