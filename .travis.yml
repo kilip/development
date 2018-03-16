@@ -7,7 +7,6 @@ services:
 
 cache:
   yarn: true
-  apt: true
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.npm"
