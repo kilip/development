@@ -13,6 +13,12 @@ export default {
             name: "Buku Baptis",
             url: '/baptisans',
             icon: 'icon-people',
+        },
+        {
+            name: "User",
+            url: '/users',
+            icon: 'icon-people'
         }
     ]
 };
+

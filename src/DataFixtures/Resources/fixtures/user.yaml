@@ -1,9 +1,18 @@
 Paroki\Resource\Entity\User:
-    admin:
+    admin1:
         fullname: Super Administrator
         username: admin
-        password: admin
+        plainPassword: admin
         email:    admin@example.com
-        enabled:  1
-        roles:
-          - SUPER_ADMIN
+        enabled:  true
+        super_admin: true
+        roles: [SUPER_ADMIN]
+
+    admin2:
+        fullname: Administrator Paroki
+        username: admin.paroki
+        plainPassword: admin
+        email:    admin-paroki@example.com
+        enabled:  true
+        super_admin: false
+        roles: [ADMIN_PAROKI]

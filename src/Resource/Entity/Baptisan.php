@@ -14,6 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="adm_baptisan")
  * @ApiResource(
+ *     attributes= {
+ *         {"access_control"="has_role('ADMIN_PAROKI')"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"method"="GET","access_control"="has_role('ADMIN_PAROKI')"},
+ *         "post"={"method"="POST","access_control"="has_role('ADMIN_PAROKI')"}
+ *     }
  * )
  */
 class Baptisan

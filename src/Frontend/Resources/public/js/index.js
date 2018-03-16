@@ -8,11 +8,12 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 
 import security from './components/security/reducers';
-import baptisan from './components/baptisan/reducers';
+import baptisan from './reducers/baptisan';
+import userAdmin from './reducers/user';
 
 import SIAP from './siap';
 
-const reducers = combineReducers({routing,form,security,baptisan});
+const reducers = combineReducers({routing,form,security,baptisan,userAdmin});
 
 var enhancer = compose(
     applyMiddleware(thunkMiddleware)

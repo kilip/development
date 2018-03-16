@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const routes = {
     '/': 'Home',
     '/dashboard': 'Dashboard',
@@ -5,4 +7,7 @@ const routes = {
     '/baptisans/*/edit': 'Edit',
     '/baptisans/create': 'Data Baru',
 };
-export default routes;
+
+const merged = _.merge(routes,{});
+
+export default merged;

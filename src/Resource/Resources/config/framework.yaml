@@ -1,2 +1,5 @@
 imports:
     - "@ParokiResourceBundle/Resources/config/api_platform.yaml"
+
+services:
+    'Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter': ~

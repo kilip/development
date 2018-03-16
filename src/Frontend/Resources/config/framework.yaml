@@ -1,5 +1,4 @@
 imports:
-    - "@ParokiFrontendBundle/Resources/config/security.yaml"
     - "@ParokiFrontendBundle/Resources/config/maintenance.yaml"
 framework:
     assets:

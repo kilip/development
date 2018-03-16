@@ -1,4 +1,5 @@
 api_platform:
+    #name_converter: 'Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter'
     version: 1.0.0
     enable_fos_user: true
     swagger:
@@ -6,3 +7,7 @@ api_platform:
             apiKey:
                 name: 'Authorization'
                 type: 'header'
+    collection:
+        pagination:
+            items_per_page: 5
+

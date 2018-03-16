@@ -1,0 +1,2 @@
+imports:
+    - "@ParokiSecurityBundle/Resources/config/security.yaml"
