@@ -9,12 +9,15 @@ services:
 
 cache:
   - '%LOCALAPPDATA%\Composer\files'
+  - '%APPVEYOR_BUILD_FOLDER%\node_modules'
+  - .cache/yarn
 
 init:
   - SET PATH=c:\tools\php72;%PATH%
 
 environment:
     APP_ENV: 'test'
+    nodejs_version: "8.9"
 
 install:
   - SET PGUSER=postgres
@@ -35,14 +38,17 @@ install:
   - cd %APPVEYOR_BUILD_FOLDER%
   - php -r "readfile('http://getcomposer.org/installer');" | php
   - php composer.phar install --no-interaction --no-progress --ignore-platform-reqs
+  - yarn --cache-folder=.cache/yarn --no-progress
 
 before_test:
   - cd %APPVEYOR_BUILD_FOLDER%
   - php bin/console doctrine:database:create -n --if-not-exists
   - php bin/console doctrine:schema:create -n
+  - yarn build
 
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - php vendor\phpspec\phpspec\bin\phpspec run
   - php vendor\behat\behat\bin\behat --format=progress
   - php vendor\bin\simple-phpunit
+  - yarn test
