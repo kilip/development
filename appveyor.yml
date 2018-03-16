@@ -1,6 +1,11 @@
 build: false
+
 platform: x86
+
 clone_folder: c:\projects\paroki\development
+
+services:
+  - postgresql101
 
 cache:
   - '%LOCALAPPDATA%\Composer\files'
@@ -12,6 +17,9 @@ environment:
     APP_ENV: 'test'
 
 install:
+  - SET PGUSER=postgres
+  - SET PGPASSWORD=Password12!
+  - SET DATABASE_URL=postgres://postgres:Password12@localhost/paroki
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
   - cd c:\tools\php72
@@ -22,10 +30,13 @@ install:
   - echo extension=php_mbstring.dll >> php.ini
   - echo extension=php_intl.dll >> php.ini
   - echo extension=php_pdo_sqlite.dll >> php.ini
+  - echo extension=php_apcu.dll >> php.ini
   - echo memory_limit=1G >> php.ini
   - cd %APPVEYOR_BUILD_FOLDER%
   - php -r "readfile('http://getcomposer.org/installer');" | php
   - php composer.phar install --no-interaction --no-progress
+  - bin/console doctrine:database:create -n --if-not-exists
+  - bin/console doctrine:schema:create -n
 
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
