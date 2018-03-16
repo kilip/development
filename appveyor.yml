@@ -23,10 +23,6 @@ install:
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
   - cd c:\tools\php72
-  - cd ext
-  - appveyor DownloadFile https://windows.php.net/downloads/pecl/releases/apcu/5.1.11/php_apcu-5.1.11-7.2-ts-vc15-x86.zip
-  - 7z x php_apcu-5.1.11-7.2-ts-vc15-x86.zip -y >nul
-  - cd ..
   - copy php.ini-production php.ini /Y
   - echo date.timezone="UTC" >> php.ini
   - echo extension_dir=ext >> php.ini
@@ -38,7 +34,7 @@ install:
   - echo memory_limit=1G >> php.ini
   - cd %APPVEYOR_BUILD_FOLDER%
   - php -r "readfile('http://getcomposer.org/installer');" | php
-  - php composer.phar install --no-interaction --no-progress
+  - php composer.phar install --no-interaction --no-progress --ignore-platform-reqs
   - bin/console doctrine:database:create -n --if-not-exists
   - bin/console doctrine:schema:create -n
 
