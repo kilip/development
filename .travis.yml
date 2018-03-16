@@ -38,6 +38,9 @@ matrix:
         master: paroki-dev
       on:
         all_branches: true
+      run:
+        - bin/console siap:generate:key
+        - bin/console doctrine:schema:update -n --force
 
   allow_failures:
   - php: '7.2'
@@ -73,7 +76,8 @@ install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
 - bin/console doctrine:database:create -n --if-not-exists
 - bin/console doctrine:schema:create -n
-- composer compile
+- bin/console siap:generate:key
+- bin/console doctrine:schema:update -n --force
 - yarn install --dev
 - yarn build
 
