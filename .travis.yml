@@ -38,9 +38,6 @@ matrix:
         master: paroki-dev
       on:
         all_branches: true
-      run:
-        - bin/console siap:generate:key
-        - bin/console doctrine:schema:update -n --force
 
   allow_failures:
   - php: '7.2'
