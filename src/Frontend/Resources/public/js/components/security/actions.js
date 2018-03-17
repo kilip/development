@@ -1,30 +1,34 @@
 import * as constants from './constants';
-import axios from 'axios';
-import {USER_LOGGED_IN} from "./constants";
+import {USER_LOGGED_IN, USER_LOGIN_ERROR} from "./constants";
+import {API_LOGIN_CHECK} from "../../config/global";
 import { decodeToken } from './util';
-import * as globals from '../../config/global';
 
-export function login(data){
+export function login(data, options={}){
     return function(dispatch){
-        const config = {
-            headers: {
-                'Accept': 'application/ld+json',
-                'Content-Type': 'application/json'
-            },
-            json: true
-        };
-        axios.post(globals.API_LOGIN_CHECK,JSON.stringify(data),config)
-            .then(response => {
-                const token = response.data.token;
-                const payload = decodeToken(token);
-                payload.token = token;
-                dispatch({type: USER_LOGGED_IN,payload: payload});
-                localStorage.setItem('token',response.data.token);
-            })
-            .catch((e) => {
-                // @todo handle login error here
-            })
-        ;
+        if ('undefined' === typeof options.headers){
+            options.headers = new Headers();
+        }
+        options.headers.set('Accept','application/ld+json');
+        options.headers.set('Content-Type','application/json');
+        options.body = JSON.stringify(data);
+        options.method = 'POST';
+
+
+        fetch(API_LOGIN_CHECK,options).then(response => {
+            if(response.ok){
+                response.json().then(json => {
+                    const token = json.token;
+                    const payload = decodeToken(token);
+                    payload.token = token;
+                    localStorage.setItem('token',json.token);
+                    dispatch({type: USER_LOGGED_IN,payload: payload});
+                });
+            }else{
+                response.json().then(json => {
+                    dispatch({type: USER_LOGIN_ERROR, payload: json})
+                })
+            }
+        });
     }
 }
 

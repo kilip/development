@@ -22,17 +22,15 @@ class Login extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    handleSubmit(e){
-        console.log('click');
-        e.preventDefault();
+    handleSubmit = () =>{
         this.props.login({
             username: this.state.username,
             password: this.state.password
         });
-    }
+    };
 
     render() {
-
+        const { security } = this.props;
         return (
             <div className="app flex-row align-items-center">
                 <Container>
@@ -43,6 +41,12 @@ class Login extends Component {
                                     <CardBody>
                                         <h1>Login</h1>
                                         <p className="text-muted">Sign In to your account</p>
+                                        {
+                                            security.user.error &&
+                                            <div className="alert alert-danger">
+                                                {security.user.error.message}
+                                            </div>
+                                        }
                                         <InputGroup className="mb-3">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
@@ -61,7 +65,7 @@ class Login extends Component {
                                         </InputGroup>
                                         <Row>
                                             <Col xs="6">
-                                                <Button color="primary" className="px-4" onClick={(e) => this.handleSubmit(e)}>Login</Button>
+                                                <Button color="primary" className="px-4" onClick={this.handleSubmit}>Login</Button>
                                             </Col>
                                             <Col xs="6" className="text-right">
                                                 <Button color="link" className="px-0">Forgot password?</Button>
@@ -89,12 +93,19 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
+    security: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state,login){
+const mapStateToProps = (state) => {
     return {
-        login: login
+        security: state.security
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (data,options) => dispatch(login(data,options))
     }
-}
-export default connect(mapStateToProps,{login})(Login);
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

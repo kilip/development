@@ -4,7 +4,6 @@
     "private": true,
     "dependencies": {
         "@coreui/react": "^1.0.10",
-        "axios": "^0.18.0",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "bootstrap": "^4.0.0",
         "dotenv-webpack": "^1.5.5",
