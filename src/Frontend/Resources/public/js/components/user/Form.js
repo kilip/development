@@ -55,20 +55,6 @@ class Form extends Component {
                     <FormGroup check className="radio">
                         <Input
                             {...data.input}
-                            value="SUPER_ADMIN"
-                            id="roles-super-admin"
-                            type="radio"
-                            name={data.input.name}
-                            className="form-check-input"
-                            checked={hasRole(data.input.value,'SUPER_ADMIN')}
-                        />
-                        <Label check className="form-check-label" htmlFor="roles-super-admin">
-                            Super Administrator
-                        </Label>
-                    </FormGroup>
-                    <FormGroup check className="radio">
-                        <Input
-                            {...data.input}
                             id="roles-admin"
                             className="form-check-input"
                             value="ADMIN"
@@ -106,7 +92,7 @@ class Form extends Component {
                             {...data.input}
                             id="enabled-yes"
                             className="form-check-input"
-                            value="true"
+                            value={true}
                             type="radio"
                             name={data.input.name}
                             checked={data.input.value}
@@ -120,7 +106,7 @@ class Form extends Component {
                             {...data.input}
                             id="enabled-no"
                             className="form-check-input"
-                            value="false"
+                            value={false}
                             type="radio"
                             name={data.input.name}
                             checked={!data.input.value}
@@ -161,16 +147,50 @@ class Form extends Component {
         return roles;
     };
 
+    normalizeEnabled = (value) => {
+        if(value==='true'){
+            return true;
+        }else{
+            return false;
+        }
+    };
+
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit,cardTitle } = this.props;
 
         return (
             <StrapForm onSubmit={handleSubmit} className="form-horizontal">
-                <Field component={this.renderField} name="username" type="text" placeholder="" />
-                <Field component={this.renderField} name="fullName" type="text" placeholder="" />
-                <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
-                <Field component={this.renderField} name="email" type="text" placeholder="" />
-                <Field component={this.renderField} name="enabled" placeholder="" />
+                <Card>
+                    <CardHeader>
+                        <strong>{cardTitle}</strong>
+                    </CardHeader>
+                    <CardBody>
+                        {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
+                        {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
+                        {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading || this.props.loading) && <div className="alert alert-info" role="status">Loading...</div>}
+                        {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
+                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
+                        {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
+                        {this.props.error && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.error}</div>}
+                        <Field component={this.renderField} name="username" type="text" placeholder="" />
+                        <Field component={this.renderField} name="fullName" type="text" placeholder="" />
+                        <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
+                        <Field component={this.renderField} name="email" type="text" placeholder="" />
+                        <Field component={this.renderField} name="enabled" placeholder="" normalize={this.normalizeEnabled} />
+                        {
+                            this.props.isCreateNew &&
+                            <Field component={this.renderField} name="plainPassword" type="password" placeholder=""/>
+                        }
+                    </CardBody>
+                    <CardFooter>
+                        <button type="submit" onClick={document.getElementById('formUserUpdate') && document.getElementById('formUserUpdate').submit()} className="btn btn-success">Submit</button>
+                        <Link to="/users" className="btn btn-primary">Back to list</Link>
+                        {
+                            this.props.delete &&
+                            <button onClick={this.props.delete} className="btn btn-danger">Delete</button>
+                        }
+                    </CardFooter>
+                </Card>
             </StrapForm>
         );
     }

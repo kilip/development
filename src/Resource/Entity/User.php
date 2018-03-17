@@ -36,9 +36,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "access_control"="has_role('ADMIN')",
  *         "normalization_context"={
  *              "groups"={"editable","readonly"},
- *              "callback"="foobar"
  *         },
- *         "denormalization_context"={"groups"={"editable"}}
+ *         "denormalization_context"={"groups"={"editable","password"}}
  *     },
  *     collectionOperations={
  *         "get"={"method"="GET","access_control"="has_role('ADMIN')"},
@@ -98,7 +97,6 @@ class User extends BaseUser
 
     /**
      * @Groups({"editable"})
-     *
      * @var bool
      */
     protected $enabled;
@@ -107,6 +105,13 @@ class User extends BaseUser
      * @var array
      */
     protected $groups;
+
+    /**
+     * Plain password. Used for model validation. Must not be persisted.
+     * @Groups({"password"})
+     * @var string
+     */
+    protected $plainPassword;
 
     /**
      * {@inheritdoc}

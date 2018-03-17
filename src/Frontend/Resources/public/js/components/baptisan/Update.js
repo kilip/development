@@ -6,6 +6,12 @@ import Form from './Form';
 import { success } from '../../actions/baptisan/create';
 import { retrieve, update, reset } from '../../actions/baptisan/update';
 import { del, loading, error } from '../../actions/baptisan/delete';
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter
+} from 'reactstrap';
 
 class Update extends Component {
     componentDidMount() {
@@ -28,8 +34,8 @@ class Update extends Component {
         const item = this.props.updated ? this.props.updated : this.props.retrieved;
 
         return (
-            <div>
-              <h1>Edit {item && item['@id']}</h1>
+            <Card>
+              <CardHeader>Edit {item && item['@id']}</CardHeader>
 
                 {this.props.created && <div className="alert alert-success" role="status">{this.props.created['@id']} created.</div>}
                 {this.props.updated && <div className="alert alert-success" role="status">{this.props.updated['@id']} updated.</div>}
@@ -41,7 +47,7 @@ class Update extends Component {
                 {item && <Form onSubmit={values => this.props.update(item, values)} initialValues={item}/>}
               <Link to="/baptisans" className="btn btn-primary">Back to list</Link>
               <button onClick={this.del} className="btn btn-danger">Delete</button>
-            </div>
+            </Card>
         );
     }
 }

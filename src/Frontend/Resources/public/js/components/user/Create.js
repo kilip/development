@@ -11,17 +11,19 @@ class Create extends Component {
     }
 
     render() {
-        if (this.props.created) return <Redirect to={`edit/${encodeURIComponent(this.props.created['@id'])}`}/>;
+        if (this.props.created){
+            return <Redirect to={`/users/edit/${this.props.created['id']}`}/>;
+        }
 
         return (
-            <div>
-              <h1>New User</h1>
-
-                {this.props.loading && <div className="alert alert-info" role="status">Loading...</div>}
-                {this.props.error && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.error}</div>}
-
-                <Form onSubmit={this.props.create} values={this.props.item}/>
-                <Link to="." className="btn btn-primary">Back to list</Link>
+            <div className="animated fadeIn">
+                <Form
+                    {...this.props}
+                    cardTitle="Pengguna Baru"
+                    onSubmit={this.props.create}
+                    values={this.props.item}
+                    isCreateNew={true}
+                />
             </div>
         );
     }
@@ -40,7 +42,7 @@ const mapStateToProps = (state) => {
         created: state.userAdmin.create.created,
         error: state.userAdmin.create.error,
         loading: state.userAdmin.create.loading,
-};
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
