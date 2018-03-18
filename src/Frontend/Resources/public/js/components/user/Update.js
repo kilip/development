@@ -69,7 +69,7 @@ class Update extends Component {
                     </CardHeader>
                     <CardBody>
                         <Row>
-                            <Col xs="12" md="6" className="mb-4">
+                            <Col xs="12" md="12" className="mb-4">
                                 <Nav tabs>
                                     <NavItem>
                                         <NavLink
@@ -105,6 +105,7 @@ class Update extends Component {
                                                 initialValues={item}
                                                 delete={this.del}
                                                 id="formUserUpdate"
+                                                context="admin"
                                             />
                                         }
                                     </TabPane>

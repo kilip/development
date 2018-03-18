@@ -2,8 +2,13 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Form from './forms/profile';
+import ProfileForm from './forms/profile';
 import { create, loading, error } from '../../actions/user/create';
+import {
+    Card,
+    CardBody,
+    CardHeader
+} from 'reactstrap';
 
 class Create extends Component {
     componentWillUnmount() {
@@ -17,13 +22,22 @@ class Create extends Component {
 
         return (
             <div className="animated fadeIn">
-                <Form
-                    {...this.props}
-                    cardTitle="Pengguna Baru"
-                    onSubmit={this.props.create}
-                    values={this.props.item}
-                    isCreateNew={true}
-                />
+                <Card>
+                    <CardHeader>
+                        <strong>User Baru</strong>
+                    </CardHeader>
+                    <CardBody>
+                        {this.props.error && <div className="alert alert-danger">{this.props.error}</div>}
+                        <ProfileForm
+                            method="POST"
+                            onSubmit={this.props.create}
+                            values={this.props.item}
+                            isCreateNew={true}
+                            id="formUserCreate"
+                            context="admin"
+                        />
+                    </CardBody>
+                </Card>
             </div>
         );
     }

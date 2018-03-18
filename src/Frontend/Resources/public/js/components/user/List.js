@@ -77,7 +77,7 @@ class List extends Component {
                     </table>
                 </CardBody>
                 <CardFooter>
-                    <Link to="/users/create" className="btn btn-primary">Create</Link>
+                    <Link to="/users/create" className="btn btn-primary">User Baru</Link>
                     {this.pagination()}
                 </CardFooter>
             </Card>

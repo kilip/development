@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * Class User.
@@ -27,7 +28,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="auth_user")
  * @UniqueEntity(
  *     fields={"email"},
- *     message="Email ini telah dipergunakan"
+ *     message="Email ini telah dipergunakan",
+ *     groups={"admin"}
+ * )
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="Username telah dipergunakan",
+ *     groups={"admin"}
  * )
  * @ApiResource(
  *     shortName="User",
@@ -37,7 +44,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "normalization_context"={
  *              "groups"={"admin","readonly"},
  *         },
- *         "denormalization_context"={"groups"={"admin","new"}}
+ *         "denormalization_context"={"groups"={"admin","new"}},
+ *         "validation_groups"={"admin"}
  *     },
  *     collectionOperations={
  *         "get"={"method"="GET","access_control"="has_role('ADMIN')"},
@@ -50,21 +58,23 @@ use Symfony\Component\Validator\Constraints as Assert;
  *             "route_name"="security_change_password",
  *             "normalization_context"={"groups"={"changePasswordView"}},
  *             "denormalization_context"={"groups"={"changePassword"}},
- *             "access_control"="has_role('ADMIN')"
+ *             "access_control"="has_role('ADMIN')",
+ *             "validation_groups"={"password"}
  *         },
  *         "profile"={
- *             "route_name"="security_profile",
+ *             "route_name"="security_profiles",
  *             "normalization_context"={"groups"={"profile"}},
  *             "denormalization_context"={"groups"={"profile"}},
  *             "description"="Retrieves user profile",
  *             "access_control"="has_role('USER')"
  *         },
  *         "profilePassword"={
- *             "route_name"="security_profile_password",
+ *             "route_name"="security_profiles_password",
  *             "normalization_context"={"groups"={"profilePassword"}},
- *             "denormalization_context"={"groups"={"profilePassword"}},
+ *             "denormalization_context"={"groups"={"profilePassword","profilePasswordUpdate"}},
  *             "description"="Change profile password",
- *             "access_control"="has_role('USER') and object.id == user.id"
+ *             "access_control"="has_role('USER')",
+ *             "validation_groups"={"profilePassword"}
  *         }
  *     }
  * )
@@ -87,7 +97,10 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(name="full_name", type="string", length=100)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *     groups={"admin"},
+     *     message="Nama lengkap harus di isi"
+     * )
      * @Groups({"admin","profile"})
      *
      * @var string
@@ -96,7 +109,6 @@ class User extends BaseUser
 
     /**
      * @Groups({"admin","profile"})
-     *
      * @var string
      */
     protected $username;
@@ -104,8 +116,11 @@ class User extends BaseUser
     /**
      * User email to use.
      *
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(
+     *     groups={"admin"},
+     *     message="Email harus diisi"
+     * )
+     * @Assert\Email(groups={"admin"})
      * @Groups({"admin","profile"})
      *
      * @var string
@@ -127,15 +142,10 @@ class User extends BaseUser
     protected $enabled;
 
     /**
-     * @var array
-     */
-    protected $groups;
-
-    /**
      * User password.
      *
      * @Groups({"new","changePassword","profilePassword"})
-     *
+     * @Assert\NotBlank(groups={"password","profilePassword"})
      * @var string
      */
     protected $plainPassword;
@@ -144,7 +154,7 @@ class User extends BaseUser
      * User password confirmation.
      *
      * @Groups({"changePassword","profilePassword"})
-     *
+     * @Assert\NotBlank(groups={"password","profilePassword"})
      * @var string
      */
     protected $plainPasswordConfirm;
@@ -152,14 +162,24 @@ class User extends BaseUser
     /**
      * Current user password.
      *
-     * @Groups({"profilePassword"})
+     * @Groups({"profilePasswordUpdate"})
+     * @SecurityAssert\UserPassword(
+     *     message="Password lama anda salah",
+     *     groups={"profilePassword"}
+     * )
+     * @Assert\NotBlank(
+     *     groups={"profilePassword"}
+     * )
      *
      * @var string
      */
     protected $currentPassword;
 
     /**
-     * @Assert\IsTrue(message="Password are not the same.")
+     * @Assert\IsTrue(
+     *     message="Nilai Password dan Konfirmasi tidak sama.",
+     *     groups={"profilePassword","password"}
+     * )
      *
      * @return bool
      */

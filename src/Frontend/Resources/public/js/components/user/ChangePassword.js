@@ -18,6 +18,7 @@ class ChangePassword extends Component {
             this.props.retrieve(this.props.currentUser['id']);
         }
         const item = this.props.retrieved;
+        const context = this.props.context;
         return (
             <div className="animated fadeIn">
                 {
@@ -44,9 +45,9 @@ class ChangePassword extends Component {
                     item &&
                     <ChangePasswordForm
                         method="POST"
-                        onSubmit={values => this.props.changePassword(item, values)}
+                        onSubmit={values => this.props.changePassword(item, values,context)}
                         initialValues={item}
-                        delete={this.del}
+                        context={context}
                         id="formChangePassword"
                     />
                 }
@@ -63,7 +64,8 @@ ChangePassword.propTypes = {
     loading: PropTypes.bool,
     success: PropTypes.object,
     retrieve: PropTypes.func.isRequired,
-    changePassword: PropTypes.func.isRequired
+    changePassword: PropTypes.func.isRequired,
+    context: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
@@ -79,7 +81,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         retrieve: id => dispatch(retrieve(id)),
-        changePassword: (item,values) => dispatch(changePassword(item,values)),
+        changePassword: (item,values,context) => dispatch(changePassword(item,values,context)),
         reset:  () => {
             dispatch(reset());
             dispatch(error(null));

@@ -43,13 +43,16 @@ export function success(updated) {
     return {type: 'USER_CHANGE_PASSWORD_SUCCESS', updated};
 }
 
-export function changePassword(item, values) {
+export function changePassword(item, values,context='admin') {
     return (dispatch) => {
         dispatch(error(null));
         dispatch(loading(true));
         dispatch(success(null));
 
-        let url = '/users/'+item['id']+'/change-password';
+        let url = `/users/${item['id']}/change-password`;
+        if(context==='profil'){
+            url = `/profiles/${item['id']}/password`;
+        }
         return fetch(url, {
                     method: 'PUT',
                     headers: new Headers({'Content-Type': 'application/ld+json'}),

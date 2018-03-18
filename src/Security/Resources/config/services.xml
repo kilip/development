@@ -7,5 +7,10 @@
         <service id="siap.command.generate_key" class="Paroki\Security\Command\GeneratePrivateKeyCommand">
             <tag name="console.command" command="siap:generate:key"/>
         </service>
+        <service id="siap.security.event.jwt_created_listener" class="Paroki\Security\Listener\JWTCreatedListener">
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_jwt_created" method="onJWTCreated"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.token_storage"/>
+        </service>
     </services>
 </container>

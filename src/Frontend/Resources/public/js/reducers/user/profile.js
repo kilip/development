@@ -41,7 +41,7 @@ export function retrieved(state = null, action) {
 
 export function updated(state = null, action){
     switch (action.type) {
-        case 'USER_PROFILE_UPDATE_SUCCESS':
+        case 'USER_PROFILE_UPDATED_SUCCESS':
             return action.updated;
 
         case 'USER_PROFILE_RESET':

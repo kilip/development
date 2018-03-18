@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Paroki\Security\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Paroki\Resource\Entity\User;
@@ -21,7 +20,7 @@ use Paroki\Resource\Entity\User;
 /**
  * Class ChangePasswordController.
  */
-class ChangePasswordController extends Controller
+class ChangePasswordController
 {
     /**
      * @Route(
@@ -41,53 +40,6 @@ class ChangePasswordController extends Controller
      */
     public function changePasswordAction(User $user, Request $request)
     {
-        return $user;
-    }
-
-    /**
-     * @Route(
-     *     name="security_profile",
-     *     path="/api/me",
-     *     methods={"GET","PUT"},
-     *     defaults={
-     *         "_api_resource_class"=User::class,
-     *         "_api_item_operation_name"="profile",
-     *         "_api_receive"=false
-     *     }
-     * )
-     *
-     * @param User    $user
-     * @param Request $request
-     *
-     * @return User
-     */
-    public function profileAction()
-    {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-
-        return $user;
-    }
-
-    /**
-     * @Route(
-     *     name="security_profile_password",
-     *     path="/api/me/password",
-     *     methods={"GET","PUT"},
-     *     defaults={
-     *         "_api_resource_class"=User::class,
-     *         "_api_item_operation_name"="profilePassword",
-     *         "_api_receive"=false
-     *     }
-     * )
-     *
-     * @param User $user
-     *
-     * @return User
-     */
-    public function profilePasswordAction(Request $request)
-    {
-        $user = new User();
-
         return $user;
     }
 }

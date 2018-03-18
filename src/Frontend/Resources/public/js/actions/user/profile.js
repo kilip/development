@@ -13,8 +13,8 @@ export function retrieved(retrieved) {
     return {type: 'USER_PROFILE_RETRIEVED_SUCCESS', retrieved};
 }
 
-export function retrieve() {
-    let url = '/me';
+export function retrieve(currentUser) {
+    let url = `/profiles/${currentUser['id']}`;
     return (dispatch) => {
         dispatch(loading(true));
 
@@ -31,25 +31,17 @@ export function retrieve() {
     };
 }
 
-export function updateError(error) {
-    return {type: 'USER_PROFILE_ERROR', error};
-}
-
-export function updateLoading(updateLoading) {
-    return {type: 'USER_PROFILE_UPDATE_LOADING', updateLoading};
-}
-
 export function updateSuccess(updated) {
     return {type: 'USER_PROFILE_UPDATED_SUCCESS', updated};
 }
 
 export function update(item, values) {
+    let url = `/profiles/${item['id']}`;
     return (dispatch) => {
-        dispatch(updateError(null));
-        dispatch(updateLoading(true));
+        dispatch(error(null));
+        dispatch(loading(true));
         dispatch(updateSuccess(null));
-
-        return fetch(item['@id'], {
+        return fetch(url, {
                 method: 'PUT',
                 headers: new Headers({'Content-Type': 'application/ld+json'}),
                 body: JSON.stringify(values),
@@ -57,18 +49,18 @@ export function update(item, values) {
         )
             .then(response => response.json())
             .then(data => {
-                dispatch(updateLoading(false));
+                dispatch(loading(false));
                 dispatch(updateSuccess(data));
             })
             .catch(e => {
-                dispatch(updateLoading(false));
+                dispatch(loading(false));
 
                 if (e instanceof SubmissionError) {
-                    dispatch(updateError(e.errors._error));
+                    dispatch(error(e.errors._error));
                     throw e;
                 }
 
-                dispatch(updateError(e.message));
+                dispatch(error(e.message));
             });
     };
 }
