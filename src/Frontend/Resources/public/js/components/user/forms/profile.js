@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import {
     Form as StrapForm,
     FormGroup,
     Label,
-    Card,
-    CardBody,
-    CardHeader,
-    CardFooter,
     FormText,
     Col,
     Input
 } from 'reactstrap';
 
-class Form extends Component {
+class ProfileForm extends Component {
     renderField(data){
         const hasError = data.meta.touched && !!data.meta.error;
         data.input.className = 'form-control';
@@ -156,41 +151,22 @@ class Form extends Component {
     };
 
     render() {
-        const { handleSubmit,cardTitle } = this.props;
+        const { handleSubmit} = this.props;
 
         return (
             <StrapForm onSubmit={handleSubmit} className="form-horizontal">
-                <Card>
-                    <CardHeader>
-                        <strong>{cardTitle}</strong>
-                    </CardHeader>
-                    <CardBody>
-                        {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
-                        {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
-                        {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading || this.props.loading) && <div className="alert alert-info" role="status">Loading...</div>}
-                        {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
-                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
-                        {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
-                        {this.props.error && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.error}</div>}
-                        <Field component={this.renderField} name="username" type="text" placeholder="" />
-                        <Field component={this.renderField} name="fullName" type="text" placeholder="" />
-                        <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
-                        <Field component={this.renderField} name="email" type="text" placeholder="" />
-                        <Field component={this.renderField} name="enabled" placeholder="" normalize={this.normalizeEnabled} />
-                        {
-                            this.props.isCreateNew &&
-                            <Field component={this.renderField} name="plainPassword" type="password" placeholder=""/>
-                        }
-                    </CardBody>
-                    <CardFooter>
-                        <button type="submit" onClick={document.getElementById('formUserUpdate') && document.getElementById('formUserUpdate').submit()} className="btn btn-success">Submit</button>
-                        <Link to="/users" className="btn btn-primary">Back to list</Link>
-                        {
-                            this.props.delete &&
-                            <button onClick={this.props.delete} className="btn btn-danger">Delete</button>
-                        }
-                    </CardFooter>
-                </Card>
+                <Field component={this.renderField} name="username" type="text" placeholder="" />
+                <Field component={this.renderField} name="fullName" type="text" placeholder="" />
+                <Field component={this.renderField} name="roles" placeholder="" normalize={this.normalizeRoles} />
+                <Field component={this.renderField} name="email" type="text" placeholder="" />
+                <Field component={this.renderField} name="enabled" placeholder="" normalize={this.normalizeEnabled} />
+                {
+                    this.props.isCreateNew &&
+                    <Field component={this.renderField} name="plainPassword" type="password" placeholder=""/>
+                }
+                <button type="submit" className="btn btn-success">
+                    Update User
+                </button>
             </StrapForm>
         );
     }
@@ -198,4 +174,4 @@ class Form extends Component {
 
 
 
-export default reduxForm({form: 'user', enableReinitialize: true, keepDirtyOnReinitialize: true})(Form);
+export default reduxForm({form: 'user', enableReinitialize: true, keepDirtyOnReinitialize: true})(ProfileForm);

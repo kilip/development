@@ -1,52 +1,51 @@
-import { SubmissionError } from 'redux-form';
 import fetch from '../../utils/fetch';
-import { success as createSuccess } from './create';
+import { SubmissionError } from 'redux-form';
 
-export function retrieveError(retrieveError) {
-    return {type: 'USER_UPDATE_RETRIEVE_ERROR', retrieveError};
+export function error(error) {
+    return {type: 'USER_PROFILE_ERROR', error};
 }
 
-export function retrieveLoading(retrieveLoading) {
-    return {type: 'USER_UPDATE_RETRIEVE_LOADING', retrieveLoading};
+export function loading(loading) {
+    return {type: 'USER_PROFILE_LOADING', loading};
 }
 
-export function retrieveSuccess(retrieved) {
-    return {type: 'USER_UPDATE_RETRIEVE_SUCCESS', retrieved};
+export function retrieved(retrieved) {
+    return {type: 'USER_PROFILE_RETRIEVED_SUCCESS', retrieved};
 }
 
-export function retrieve(id) {
+export function retrieve() {
+    let url = '/me';
     return (dispatch) => {
-        dispatch(retrieveLoading(true));
+        dispatch(loading(true));
 
-        return fetch(id)
+        return fetch(url)
             .then(response => response.json())
             .then(data => {
-                dispatch(retrieveLoading(false));
-                dispatch(retrieveSuccess(data));
+                dispatch(loading(false));
+                dispatch(retrieved(data));
             })
             .catch(e => {
-                dispatch(retrieveLoading(false));
-                dispatch(retrieveError(e.message));
+                dispatch(loading(false));
+                dispatch(error(e.message));
             });
     };
 }
 
-export function updateError(updateError) {
-    return {type: 'USER_UPDATE_UPDATE_ERROR', updateError};
+export function updateError(error) {
+    return {type: 'USER_PROFILE_ERROR', error};
 }
 
 export function updateLoading(updateLoading) {
-    return {type: 'USER_UPDATE_UPDATE_LOADING', updateLoading};
+    return {type: 'USER_PROFILE_UPDATE_LOADING', updateLoading};
 }
 
 export function updateSuccess(updated) {
-    return {type: 'USER_UPDATE_UPDATE_SUCCESS', updated};
+    return {type: 'USER_PROFILE_UPDATED_SUCCESS', updated};
 }
 
 export function update(item, values) {
     return (dispatch) => {
         dispatch(updateError(null));
-        dispatch(createSuccess(null));
         dispatch(updateLoading(true));
         dispatch(updateSuccess(null));
 
@@ -74,12 +73,6 @@ export function update(item, values) {
     };
 }
 
-export function changePassword(item,values){
-    return (dispatch) => {
-
-    };
-}
-
 export function reset() {
-    return {type: 'USER_UPDATE_RESET'};
+    return {type: 'USER_PROFILE_RESET'};
 }

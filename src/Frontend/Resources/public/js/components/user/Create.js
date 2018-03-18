@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Form from './Form';
+import Form from './forms/profile';
 import { create, loading, error } from '../../actions/user/create';
 
 class Create extends Component {
