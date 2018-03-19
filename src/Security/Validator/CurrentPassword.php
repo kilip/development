@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Paroki\Security\Validator;
 
-
 use Symfony\Component\Validator\Constraint;
 
 class CurrentPassword extends Constraint
 {
-    public $message = "Your current password is not valid";
+    public $message = 'Your current password is not valid';
 
     /**
      * @return string

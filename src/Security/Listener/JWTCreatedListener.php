@@ -40,15 +40,13 @@ class JWTCreatedListener
 
     /**
      * @param JWTCreatedEvent $event
-     *
-     * @return void
      */
     public function onJWTCreated(JWTCreatedEvent $event)
     {
         //$request = $this->requestStack->getCurrentRequest();
 
         /* @var \Paroki\Resource\Entity\User $payload */
-        $payload       = $event->getData();
+        $payload = $event->getData();
         $payload['id'] = $this->tokenStorage->getToken()->getUser()->getId();
         $payload['roles'] = $this->normalizeRoles($this->tokenStorage->getToken()->getUser()->getRoles());
         $event->setData($payload);
@@ -56,18 +54,17 @@ class JWTCreatedListener
         //$header        = $event->getHeader();
         //$header['cty'] = 'JWT';
 
-
         //$event->setHeader($header);
     }
 
     private function normalizeRoles($roles)
     {
         $roles[] = 'USER';
-        if(in_array('SUPER_ADMIN',$roles)){
+        if (in_array('SUPER_ADMIN', $roles)) {
             $roles[] = 'ADMIN';
             $roles[] = 'ADMIN_PAROKI';
         }
-        if(in_array('ADMIN',$roles)){
+        if (in_array('ADMIN', $roles)) {
             $roles[] = 'ADMIN_PAROKI';
         }
 

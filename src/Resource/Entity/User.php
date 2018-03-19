@@ -109,6 +109,7 @@ class User extends BaseUser
 
     /**
      * @Groups({"admin","profile"})
+     *
      * @var string
      */
     protected $username;
@@ -149,6 +150,7 @@ class User extends BaseUser
      *     message="Password harus diisi",
      *     groups={"password","profilePassword"}
      * )
+     *
      * @var string
      */
     protected $plainPassword;
@@ -158,6 +160,7 @@ class User extends BaseUser
      *
      * @Groups({"changePassword","profilePassword"})
      * @Assert\NotBlank(groups={"password","profilePassword"})
+     *
      * @var string
      */
     protected $plainPasswordConfirm;
