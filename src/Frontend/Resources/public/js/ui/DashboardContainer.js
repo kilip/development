@@ -6,7 +6,6 @@ import Breadcrumb from './components/Breadcrumb';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Dashboard from '../pages/Dashboard';
-import BaptisanRoutes from '../routes/baptisan';
 import UserRoutes from '../routes/user';
 
 class DashboardContainer extends Component {
@@ -22,7 +21,6 @@ class DashboardContainer extends Component {
                         <Container fluid>
                             <Switch>
                                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                                {BaptisanRoutes}
                                 {UserRoutes}
                                 <Redirect from="/" to="/dashboard"/>
                             </Switch>
@@ -35,12 +33,4 @@ class DashboardContainer extends Component {
     }
 }
 
-/*function mapStateToProps(state,logout){
-    return {
-        user: state.user,
-        logout: state.logout
-    };
-}
-export default connect(mapStateToProps)(DashboardContainer);
-*/
 export default DashboardContainer;

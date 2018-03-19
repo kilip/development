@@ -7,7 +7,7 @@ import {
     userIsAuthenticatedRedir,
     userIsNotAuthenticatedRedir
 } from "./components/security/auth";
-import Login from './pages/Login';
+import Login from './components/security/Login';
 
 class SIAP extends Component {
     render(){

@@ -13,8 +13,8 @@ export function retrieveSuccess(retrieved) {
     return {type: 'USER_CHANGE_PASSWORD_RETRIEVE_SUCCESS', retrieved};
 }
 
-export function retrieve(id) {
-    let url = '/users/'+id+'/change-password';
+export function retrieve(id,context='admin') {
+    const url = getApiUrl(id,context);
     return (dispatch) => {
         dispatch(retrieveLoading(true));
 
@@ -49,10 +49,7 @@ export function changePassword(item, values,context='admin') {
         dispatch(loading(true));
         dispatch(success(null));
 
-        let url = `/users/${item['id']}/change-password`;
-        if(context==='profil'){
-            url = `/profiles/${item['id']}/password`;
-        }
+        const url = getApiUrl(item['id'],context);
         return fetch(url, {
                     method: 'PUT',
                     headers: new Headers({'Content-Type': 'application/ld+json'}),
@@ -76,6 +73,15 @@ export function changePassword(item, values,context='admin') {
                 dispatch(error(e.message));
             });
     };
+}
+
+function getApiUrl(id,context='admin'){
+    let url = `/users/${id}/change-password`;
+    if(context==='profile'){
+        url = `/profiles/${id}/password`;
+    }
+    console.log(context);
+    return url;
 }
 
 export function reset() {

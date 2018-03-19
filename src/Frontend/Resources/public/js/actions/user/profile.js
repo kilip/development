@@ -17,7 +17,8 @@ export function retrieve(currentUser) {
     let url = `/profiles/${currentUser['id']}`;
     return (dispatch) => {
         dispatch(loading(true));
-
+        dispatch(error(null));
+        dispatch(retrieved(null));
         return fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -45,8 +46,8 @@ export function update(item, values) {
                 method: 'PUT',
                 headers: new Headers({'Content-Type': 'application/ld+json'}),
                 body: JSON.stringify(values),
-            }
-        )
+                }
+            )
             .then(response => response.json())
             .then(data => {
                 dispatch(loading(false));
@@ -54,12 +55,10 @@ export function update(item, values) {
             })
             .catch(e => {
                 dispatch(loading(false));
-
                 if (e instanceof SubmissionError) {
                     dispatch(error(e.errors._error));
                     throw e;
                 }
-
                 dispatch(error(e.message));
             });
     };

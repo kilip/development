@@ -2,13 +2,11 @@ import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
 import connectedAuthWrapper from 'redux-auth-wrapper/connectedAuthWrapper';
 
-import Loading from './Loading';
-
 const locationHelper = locationHelperBuilder({});
 
 const userIsAuthenticatedDefaults = {
-    authenticatedSelector: state => state.security.user.data !== null,
-    authenticatingSelector: state => state.security.user.isLoading,
+    authenticatedSelector: state => state.security.auth !== null,
+    authenticatingSelector: state => state.security.fetching,
     wrapperDisplayName: 'UserIsAuthenticated'
 };
 
@@ -16,21 +14,29 @@ export const userIsAuthenticated = connectedAuthWrapper(userIsAuthenticatedDefau
 
 export const userIsAuthenticatedRedir = connectedRouterRedirect({
     ...userIsAuthenticatedDefaults,
-    AuthenticatingComponent: Loading,
     redirectPath: '/login'
 });
 
 export const userIsAdminRedir = connectedRouterRedirect({
     redirectPath: '/',
     allowRedirectBack: false,
-    authenticatedSelector: state => state.security.user.data !== null && state.security.user.data.isAdmin,
-    predicate: user => user.isAdmin,
+    authenticatedSelector: state => state.security.auth !== null && state.security.auth,
+    predicate: user => userIsAdmin(user),
     wrapperDisplayName: 'UserIsAdmin'
 });
 
+export const isGrantedUser = connectedRouterRedirect({
+    redirectPath: '/',
+    allowRedirectBack: false,
+    authenticatedSelector: state => state.security.auth !== null && state.security.auth,
+    predicate: user => userIsGranted(user,'USER'),
+    wrapperDisplayName: 'IsGrantedUser'
+});
+
+
 const userIsNotAuthenticatedDefaults = {
     // Want to redirect the user when they are done loading and authenticated
-    authenticatedSelector: state => state.security.user.data === null && state.security.user.isLoading === false,
+    authenticatedSelector: state => state.security.auth === null && state.security.fetching === false,
     wrapperDisplayName: 'UserIsNotAuthenticated'
 };
 
@@ -38,7 +44,16 @@ export const userIsNotAuthenticated = connectedAuthWrapper(userIsNotAuthenticate
 
 export const userIsNotAuthenticatedRedir = connectedRouterRedirect({
     ...userIsNotAuthenticatedDefaults,
-    //redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/protected',
     redirectPath: (state, ownProps) => '/',
     allowRedirectBack: false
 });
+
+
+export function userIsAdmin(user){
+    return userIsGranted(user,'ADMIN');
+}
+
+export function userIsGranted(user,role){
+    console.log(user);
+    return user.roles.includes(role);
+}

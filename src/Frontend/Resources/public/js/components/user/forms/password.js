@@ -13,7 +13,7 @@ class ChangePasswordForm extends Component {
         return (
             <StrapForm onSubmit={handleSubmit} className="form-horizontal">
                 {
-                    context==='profil' &&
+                    context==='profile' &&
                     <Field
                         component={(data) => renderFormGroup(data)}
                         type="password"

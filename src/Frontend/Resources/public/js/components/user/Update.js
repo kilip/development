@@ -22,6 +22,7 @@ import {
 } from 'reactstrap';
 
 import classNames from 'classnames';
+import {userIsAdmin} from "../security/auth";
 
 class Update extends Component {
 

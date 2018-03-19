@@ -74,12 +74,6 @@ export function update(item, values) {
     };
 }
 
-export function changePassword(item,values){
-    return (dispatch) => {
-
-    };
-}
-
 export function reset() {
     return {type: 'USER_UPDATE_RESET'};
 }

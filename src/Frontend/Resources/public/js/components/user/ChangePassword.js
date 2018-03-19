@@ -6,7 +6,7 @@ import { retrieve, changePassword,reset, success,error,loading } from '../../act
 
 class ChangePassword extends Component {
     componentDidMount() {
-        this.props.retrieve(this.props.currentUser['id']);
+        this.props.retrieve(this.props.currentUser['id'],this.props.context);
     }
 
     componentWillUnmount(){
@@ -18,7 +18,7 @@ class ChangePassword extends Component {
             this.props.retrieve(this.props.currentUser['id']);
         }
         const item = this.props.retrieved;
-        const context = this.props.context;
+        const { context } = this.props;
         return (
             <div className="animated fadeIn">
                 {
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        retrieve: id => dispatch(retrieve(id)),
+        retrieve: (id,context) => dispatch(retrieve(id,context)),
         changePassword: (item,values,context) => dispatch(changePassword(item,values,context)),
         reset:  () => {
             dispatch(reset());

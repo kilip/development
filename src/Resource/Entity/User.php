@@ -66,14 +66,14 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
  *             "normalization_context"={"groups"={"profile"}},
  *             "denormalization_context"={"groups"={"profile"}},
  *             "description"="Retrieves user profile",
- *             "access_control"="has_role('USER')"
+ *             "access_control"="has_role('ADMIN_PAROKI')"
  *         },
  *         "profilePassword"={
  *             "route_name"="security_profiles_password",
  *             "normalization_context"={"groups"={"profilePassword"}},
  *             "denormalization_context"={"groups"={"profilePassword","profilePasswordUpdate"}},
  *             "description"="Change profile password",
- *             "access_control"="has_role('USER')",
+ *             "access_control"="has_role('ADMIN_PAROKI')",
  *             "validation_groups"={"profilePassword"}
  *         }
  *     }
@@ -89,7 +89,7 @@ class User extends BaseUser
      * @ORM\Column(name="id",type="guid",length=32)
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Groups({"readonly","changePassword","changePasswordView","profile"})
+     * @Groups({"readonly","changePassword","changePasswordView","profile","profilePassword"})
      *
      * @var string
      */
@@ -145,7 +145,10 @@ class User extends BaseUser
      * User password.
      *
      * @Groups({"new","changePassword","profilePassword"})
-     * @Assert\NotBlank(groups={"password","profilePassword"})
+     * @Assert\NotBlank(
+     *     message="Password harus diisi",
+     *     groups={"password","profilePassword"}
+     * )
      * @var string
      */
     protected $plainPassword;
@@ -168,7 +171,7 @@ class User extends BaseUser
      *     groups={"profilePassword"}
      * )
      * @Assert\NotBlank(
-     *     groups={"profilePassword"}
+     *     groups={"password","profilePassword"}
      * )
      *
      * @var string

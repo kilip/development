@@ -116,7 +116,7 @@ class Profile extends Component {
                                             item &&
                                             <ChangePassword
                                                 currentUser={item}
-                                                context="profil"
+                                                context="profile"
                                             />
                                         }
                                     </TabPane>
@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
         retrieved: state.userAdmin.profile.retrieved,
         error: state.userAdmin.profile.error,
         loading: state.userAdmin.profile.loading,
-        currentUser: state.security.user.data
+        currentUser: state.security.auth
     };
 };
 

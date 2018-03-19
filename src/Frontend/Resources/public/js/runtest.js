@@ -4,7 +4,6 @@
 process.env.BABEL_ENV = 'test';
 process.env.NODE_ENV = 'test';
 process.env.PUBLIC_URL = '';
-
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
@@ -12,8 +11,20 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+const fs = require('fs');
+let envFile = function(){
+    let file = './.env';
+    if(!fs.existsSync(file)){
+        file = './.env.dist';
+    }
+    return file;
+};
+
 // Ensure environment variables are read.
-//require('.env');
+require('dotenv').config({
+    path: envFile(),
+    systemvars: true
+});
 
 const jest = require('jest');
 const argv = process.argv.slice(2);
