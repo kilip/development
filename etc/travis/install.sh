@@ -12,7 +12,7 @@ if [[ $SIAP_SUITE != "frontend" ]]; then
     run_command "./vendor/bin/simple-phpunit install"
     run_command "bin/console doctrine:database:create -n --if-not-exists"
     run_command "bin/console doctrine:schema:create -n"
-    run_command "bin/console siap:generate:key --secret=$JWT_PASSPHRASE"
+    run_command "bin/console siap:generate:key"
     run_command "bin/console doctrine:schema:update -n --force"
 fi
 

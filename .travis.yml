@@ -18,6 +18,7 @@ env:
   - COVERAGE=no
   - APP_ENV=test
   - DATABASE_URL=pgsql://postgres@localhost:5432/paroki
+  - JWT_PASSPHRASE=s3cr3t
 
 matrix:
   include:
