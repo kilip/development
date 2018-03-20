@@ -48,6 +48,7 @@ class GeneratePrivateKeyCommand extends Command
         $this->privateKeyPath = $input->getOption('private-path');
         $this->publicKeyPath = $input->getOption('public-path');
 
+        $output->writeln('passphrase: <comment>'.$this->passPhrase.'</comment>');
         if (!is_dir($dir = dirname($this->publicKeyPath))) {
             mkdir($dir, 0777, true);
         }
