@@ -97,7 +97,6 @@ class Update extends Component {
                                         {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
                                         {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
                                         {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
-                                        {this.props.error && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.error}</div>}
                                         {
                                             item &&
                                             <ProfileForm
@@ -123,8 +122,8 @@ class Update extends Component {
                     <CardFooter>
                         <Link to="/users" className="btn btn-primary">Back to list</Link>
                         {
-                            this.props.delete &&
-                            <button onClick={this.props.delete} className="btn btn-danger">Delete</button>
+                            this.props.del &&
+                            <button onClick={this.props.del} className="btn btn-danger">Delete</button>
                         }
                     </CardFooter>
                 </Card>

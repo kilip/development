@@ -28,7 +28,7 @@ class LoginForm extends Component {
     render(){
         const { handleSubmit } = this.props;
         return (
-            <StrapForm onSubmit={handleSubmit}>
+            <StrapForm id="login-form" onSubmit={handleSubmit}>
                 <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                         <InputGroupText>
@@ -55,7 +55,7 @@ class LoginForm extends Component {
                 </InputGroup>
                 <Row>
                     <Col xs="6">
-                        <Button color="primary" className="px-4" type="submit">Login</Button>
+                        <Button id="loginSubmitButton" color="primary" className="px-4" type="submit">Login</Button>
                     </Col>
                     <Col xs="6" className="text-right">
                         <Button color="link" className="px-0">Forgot password?</Button>

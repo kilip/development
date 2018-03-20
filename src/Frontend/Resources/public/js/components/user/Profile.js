@@ -13,7 +13,6 @@ import {
     Card,
     CardBody,
     CardHeader,
-    CardFooter
 } from 'reactstrap';
 
 import ChangePassword from './ChangePassword';
@@ -84,7 +83,7 @@ class Profile extends Component {
                                         {
                                             this.props.updated &&
                                             <div className="alert alert-success">
-                                                Perubahan profil berhasil disimpan
+                                                Perubahan profil berhasil disimpan.
                                             </div>
                                         }
                                         {

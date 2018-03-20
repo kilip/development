@@ -14,9 +14,6 @@ class ChangePassword extends Component {
     }
 
     render(){
-        if(this.props.currentUser && !this.props.retrieved){
-            this.props.retrieve(this.props.currentUser['id']);
-        }
         const item = this.props.retrieved;
         const { context } = this.props;
         return (
@@ -36,7 +33,7 @@ class ChangePassword extends Component {
                     </div>
                 }
                 {
-                    this.props.success &&
+                    this.props.updated &&
                     <div className="alert alert-success" role="alert">
                         Password berhasil diubah.
                     </div>
@@ -62,7 +59,7 @@ ChangePassword.propTypes = {
     retrieveError: PropTypes.string,
     error: PropTypes.string,
     loading: PropTypes.bool,
-    success: PropTypes.object,
+    updated: PropTypes.object,
     retrieve: PropTypes.func.isRequired,
     changePassword: PropTypes.func.isRequired,
     context: PropTypes.string
@@ -72,7 +69,7 @@ const mapStateToProps = (state) => {
     return {
         error: state.userAdmin.changePassword.error,
         loading: state.userAdmin.changePassword.loading,
-        success: state.userAdmin.changePassword.success,
+        updated: state.userAdmin.changePassword.updated,
         retrieved: state.userAdmin.changePassword.retrieved,
         retrieveError: state.userAdmin.changePassword.retrieveError
     }
