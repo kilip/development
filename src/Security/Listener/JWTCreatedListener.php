@@ -43,18 +43,10 @@ class JWTCreatedListener
      */
     public function onJWTCreated(JWTCreatedEvent $event)
     {
-        //$request = $this->requestStack->getCurrentRequest();
-
-        /* @var \Paroki\Resource\Entity\User $payload */
         $payload = $event->getData();
         $payload['id'] = $this->tokenStorage->getToken()->getUser()->getId();
         $payload['roles'] = $this->normalizeRoles($this->tokenStorage->getToken()->getUser()->getRoles());
         $event->setData($payload);
-
-        //$header        = $event->getHeader();
-        //$header['cty'] = 'JWT';
-
-        //$event->setHeader($header);
     }
 
     private function normalizeRoles($roles)

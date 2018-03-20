@@ -38,7 +38,7 @@ class ChangePasswordController
      *
      * @return User
      */
-    public function changePasswordAction(User $user, Request $request)
+    public function changePasswordAction(User $user)
     {
         return $user;
     }
