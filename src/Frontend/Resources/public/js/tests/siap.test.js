@@ -4,11 +4,6 @@ import SIAP from '../siap';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
-
 const mockStore = configureStore();
 function getComponent(props ={},state = {}, context = {}){
     return mount(
@@ -25,10 +20,9 @@ describe('<SIAP/> Component', () => {
     };
     const state = {
         security: {
-            user: {
-                data: null,
-                isLoading: false
-            }
+            auth: null,
+            fetching: false,
+            authenticated: false
         }
     };
     it('should display login when user not authenticated', () => {

@@ -6,9 +6,9 @@ coverage:
       default: off
       frontend:
         flags: frontend
-        target: 50%
+        target: 80%
       backend:
-        target: 50%
+        target: 80%
         flags: backend
 
 flags:

@@ -18,6 +18,11 @@ export default {
             name: "User",
             url: '/users',
             icon: 'icon-people'
+        },
+        {
+            name: "Profile",
+            url: '/profile',
+            icon: 'icon-people'
         }
     ]
 };

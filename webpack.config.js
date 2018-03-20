@@ -45,8 +45,8 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableSassLoader()
 
-    .addStyleEntry('css/siap','./public/bundles/parokifrontend/sass/main.scss')
-    .addStyleEntry('css/coming-soon','./public/bundles/parokifrontend/sass/coming-soon.scss')
+    .addStyleEntry('css/siap','./src/Frontend/Resources/public/sass/main.scss')
+    .addStyleEntry('css/coming-soon','./src/Frontend/Resources/public/sass/coming-soon.scss')
 
     .addEntry('js/jquery','./node_modules/jquery/dist/jquery.js')
 
@@ -54,7 +54,7 @@ Encore
         './node_modules/jquery/dist/jquery.js',
         './node_modules/bootstrap/dist/js/bootstrap.bundle.js',
         './node_modules/vide/dist/jquery.vide.js',
-        './public/bundles/parokifrontend/coming-soon/main.js',
+        './src/Frontend/Resources/public/coming-soon/main.js',
     ])
 
     .autoProvidejQuery()

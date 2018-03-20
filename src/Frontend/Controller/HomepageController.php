@@ -24,9 +24,11 @@ class HomepageController extends Controller
     public function indexAction()
     {
         $template = '@frontend/index.html.twig';
+        //@codeCoverageIgnoreStart
         if (getenv('APP_COMING_SOON')) {
             $template = '@frontend/coming-soon.html.twig';
         }
+        //@codeCoverageIgnoreEnd
 
         return $this->render($template);
     }

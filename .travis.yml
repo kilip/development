@@ -1,11 +1,12 @@
 language: php
 
-sudo: false
+sudo: required
 
 services:
 - postgresql
 
 cache:
+  apt: true
   yarn: true
   directories:
   - "$HOME/.composer/cache"
@@ -17,17 +18,22 @@ env:
   - COVERAGE=no
   - APP_ENV=test
   - DATABASE_URL=pgsql://postgres@localhost:5432/paroki
+  - JWT_PASSPHRASE=s3cr3t
 
 matrix:
   include:
   - php: '7.1'
+    env: SIAP_SUITE=backend
   - php: '7.2'
+    env: SIAP_SUITE=backend
   - php: '7.2'
-    env: COVERAGE=yes
+    env: SIAP_SUITE=backend DATABASE_URL=mysql://root@localhost:3306/paroki
   - php: '7.2'
-    env: DATABASE_URL=mysql://root@localhost:3306/paroki
-  - php: 7.2.3
-    env: DEPLOY=yes
+    env: SIAP_SUITE=frontend
+  - php: '7.2'
+    env: SIAP_SUITE=coverage
+  - php: '7.2.3'
+    env: SIAP_SUITE=deploy
     if: $TRAVIS_PULL_REQUEST="false"
     deploy:
       provider: heroku
@@ -45,64 +51,22 @@ matrix:
 
   allow_failures:
   - php: '7.2'
-    env: COVERAGE=yes
-  - php: 7.2.3
-    env: DEPLOY=yes
+    env: SIAP_SUITE=coverage
+  - php: '7.2.3'
+    env: SIAP_SUITE=deploy
 
   fast_finish: true
 
 before_install:
-- echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-- export PATH="$PATH:$HOME/.composer/vendor/bin"
-- |
-  if [[ $COVERAGE != yes ]]; then
-    phpenv config-rm xdebug.ini || echo "xdebug not available";
-  fi;
-- |
-  if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
-    echo yes | pecl install apcu;
-  else
-    echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-  fi;
-- sudo apt-get -y install software-properties-common python-software-properties
-- sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
-- sudo apt update -y
-- sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install
-  g++-4.9
-- export CC=gcc-4.9
-- export CXX=g++-4.9
-- mkdir -p build/coverage/php
+- etc/travis/before-install.sh
 
 install:
-- composer update --prefer-dist --no-progress --no-suggest --ansi
-- ./vendor/bin/simple-phpunit install
-- bin/console doctrine:database:create -n --if-not-exists
-- bin/console doctrine:schema:create -n
-- bin/console siap:generate:key
-- bin/console doctrine:schema:update -n --force
-- yarn install --dev
-- yarn build
+- etc/travis/install.sh
 
 script:
-- mkdir -p build/logs
-- |
-  if [[ $COVERAGE = yes  ]]; then
-    ./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml;
-    ./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov;
-    ./vendor/bin/behat -p coverage;
-    yarn test --coverage
-  fi;
-- if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
-- if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
-- if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
-- if [[ $COVERAGE != yes ]]; then yarn test; fi
+- etc/travis/script.sh
+
 
 after_script:
-- |
-  if [[ $COVERAGE = yes ]]; then
-    wget https://phar.phpunit.de/phpcov.phar;
-    chmod +x phpcov.phar;
-    php phpcov.phar merge build/coverage --clover build/logs/backend/clover.xml
-    bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
-    bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
-  fi;
+- etc/travis/after-script.sh
+

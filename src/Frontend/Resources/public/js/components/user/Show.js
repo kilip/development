@@ -4,7 +4,6 @@ import {Link, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {retrieve, reset} from '../../actions/user/show';
 import { del, loading, error } from '../../actions/user/delete';
-import _ from 'lodash';
 
 class Show extends Component {
     componentDidMount() {
@@ -48,24 +47,12 @@ class Show extends Component {
                             <td>{item['fullName']}</td>
                         </tr>
                         <tr>
-                            <th scope="row">roles</th>
-                            <td>{ item['roles'] ? item['roles'].join(', '):''}</td>
-                        </tr>
-                        <tr>
                             <th scope="row">username</th>
                             <td>{item['username']}</td>
                         </tr>
                         <tr>
                             <th scope="row">email</th>
                             <td>{item['email']}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">enabled</th>
-                            <td>{item['enabled'] ? 'true':'false'}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">superAdmin</th>
-                            <td>{item['superAdmin'] ? 'true':'false'}</td>
                         </tr>
                         </tbody>
                     </table>

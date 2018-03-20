@@ -1,2 +1,7 @@
 imports:
     - "@ParokiSecurityBundle/Resources/config/security.yaml"
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false

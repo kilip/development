@@ -2,12 +2,39 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Form from './Form';
+import ProfileForm from './forms/profile';
+import ChangePassword from './ChangePassword';
 import { success } from '../../actions/user/create';
 import { retrieve, update, reset } from '../../actions/user/update';
 import { del, loading, error } from '../../actions/user/delete';
+import {
+    Col,
+    Row,
+    Nav,
+    NavLink,
+    NavItem,
+    TabPane,
+    TabContent,
+    Card,
+    CardBody,
+    CardHeader,
+    CardFooter
+} from 'reactstrap';
+
+import classNames from 'classnames';
+import {userIsAdmin} from "../security/auth";
 
 class Update extends Component {
+
+    constructor(props){
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            activeTab: '1'
+        };
+
+    }
+
     componentDidMount() {
         this.props.retrieve('/users/'+this.props.match.params.id);
     }
@@ -22,6 +49,14 @@ class Update extends Component {
         }
     };
 
+    toggle(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
+    }
+
     render() {
         if (this.props.deleted) return <Redirect to="/users"/>;
 
@@ -29,18 +64,69 @@ class Update extends Component {
 
         return (
             <div className="animated fadeIn">
-                {
-                    item &&
-                    <Form
-                        method="POST"
-                        onSubmit={values => this.props.update(item, values)}
-                        initialValues={item}
-                        cardTitle={item && item['fullName']}
-                        {...this.props}
-                        delete={this.del}
-                        id="formUserUpdate"
-                    />
-                }
+                <Card>
+                    <CardHeader>
+                        <strong>{item && item['fullName']}</strong>
+                    </CardHeader>
+                    <CardBody>
+                        <Row>
+                            <Col xs="12" md="12" className="mb-4">
+                                <Nav tabs>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classNames({active: this.state.activeTab==='1'})}
+                                            onClick={()  => this.toggle('1')}
+                                        >
+                                            Profil
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={classNames({active: this.state.activeTab==='2'})}
+                                            onClick={() => this.toggle('2')}
+                                        >
+                                            Password
+                                        </NavLink>
+                                    </NavItem>
+                                </Nav>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    <TabPane tabId="1">
+                                        {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
+                                        {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
+                                        {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading || this.props.loading) && <div className="alert alert-info" role="status">Loading...</div>}
+                                        {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
+                                        {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
+                                        {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
+                                        {
+                                            item &&
+                                            <ProfileForm
+                                                method="POST"
+                                                onSubmit={values => this.props.update(item, values)}
+                                                initialValues={item}
+                                                delete={this.del}
+                                                id="formUserUpdate"
+                                                context="admin"
+                                            />
+                                        }
+                                    </TabPane>
+                                    <TabPane tabId="2">
+                                        {
+                                            item &&
+                                            <ChangePassword currentUser={item}/>
+                                        }
+                                    </TabPane>
+                                </TabContent>
+                            </Col>
+                        </Row>
+                    </CardBody>
+                    <CardFooter>
+                        <Link to="/users" className="btn btn-primary">Back to list</Link>
+                        {
+                            this.props.del &&
+                            <button onClick={this.props.del} className="btn btn-danger">Delete</button>
+                        }
+                    </CardFooter>
+                </Card>
             </div>
         );
     }
@@ -60,6 +146,7 @@ Update.propTypes = {
     update: PropTypes.func.isRequired,
     del: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
+    activeTab: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
@@ -73,7 +160,8 @@ const mapStateToProps = (state) => {
         created: state.userAdmin.create.created,
         deleted: state.userAdmin.del.deleted,
         retrieved: state.userAdmin.update.retrieved,
-        updated: state.userAdmin.update.updated
+        updated: state.userAdmin.update.updated,
+        activeTab: state.userAdmin.update.activeTab
     };
 };
 
@@ -87,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(error(null));
             dispatch(loading(false));
             dispatch(success(null));
-        },
+        }
     };
 };
 

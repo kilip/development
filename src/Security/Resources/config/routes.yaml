@@ -1,0 +1,3 @@
+security_controllers:
+    resource: "@ParokiSecurityBundle/Controller/"
+    type: annotation

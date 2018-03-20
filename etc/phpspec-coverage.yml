@@ -13,6 +13,12 @@ suites:
         spec_path: src/Resource
         src_path: src/Resource
         spec_prefix: Spec
+    security:
+        namespace: Paroki\Security
+        psr4_prefix: Paroki\Security
+        spec_path: src/Security
+        src_path: src/Security
+        spec_prefix: Spec
 
 extensions:
     LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:

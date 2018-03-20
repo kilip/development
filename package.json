@@ -4,7 +4,6 @@
     "private": true,
     "dependencies": {
         "@coreui/react": "^1.0.10",
-        "axios": "^0.18.0",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "bootstrap": "^4.0.0",
         "dotenv-webpack": "^1.5.5",
@@ -31,12 +30,17 @@
     },
     "devDependencies": {
         "@symfony/webpack-encore": "^0.17.0",
-        "babel-jest": "^22.4.1",
+        "babel-jest": "^23.0.0-alpha.0",
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-preset-react": "^6.24.1",
+        "bluebird": "^3.5.1",
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
+        "expect": "^23.0.0-alpha.0",
         "jest": "^22.4.2",
+        "jest-fetch-mock": "^1.4.2",
+        "jest-localstorage-mock": "^2.2.0",
+        "jsonwebtoken": "^8.2.0",
         "node-sass": "^4.8.1",
         "react-test-renderer": "^16.2.0",
         "redux-mock-store": "^1.5.1",
@@ -47,7 +51,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch --config-name frontend",
         "build": "encore production",
-        "test": "node public/bundles/parokifrontend/js/runtest.js --env=jsdom"
+        "test": "node src/Frontend/Resources/public/js/runtest.js --env=jsdom",
+        "test:watch": "node src/Frontend/Resources/public/js/runtest.js --env=jsdom -- --watch"
     },
     "jest": {
         "collectCoverageFrom": [
@@ -55,7 +60,10 @@
         ],
         "coveragePathIgnorePatterns": [
             "tests",
-            "runtest.js"
+            "runtest.js",
+            "index.js",
+            "config/jest",
+            "ui/components"
         ],
         "coverageDirectory": "build/logs/frontend",
         "modulePathIgnorePatterns": [
@@ -80,6 +88,9 @@
             "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$",
             "<rootDir>/docker",
             "<rootDir>/var"
+        ],
+        "coverageReporters": [
+            "lcov"
         ]
     }
 }

@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * Class User.
@@ -27,7 +28,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="auth_user")
  * @UniqueEntity(
  *     fields={"email"},
- *     message="Email ini telah dipergunakan"
+ *     message="Email ini telah dipergunakan",
+ *     groups={"admin"}
+ * )
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="Username telah dipergunakan",
+ *     groups={"admin"}
  * )
  * @ApiResource(
  *     shortName="User",
@@ -35,13 +42,40 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     attributes= {
  *         "access_control"="has_role('ADMIN')",
  *         "normalization_context"={
- *              "groups"={"editable","readonly"},
+ *              "groups"={"admin","readonly"},
  *         },
- *         "denormalization_context"={"groups"={"editable","password"}}
+ *         "denormalization_context"={"groups"={"admin","new"}},
+ *         "validation_groups"={"admin"}
  *     },
  *     collectionOperations={
  *         "get"={"method"="GET","access_control"="has_role('ADMIN')"},
  *         "post"={"method"="POST","access_control"="has_role('ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET","access_control"="has_role('ADMIN')"},
+ *         "put"={"method"="PUT","access_control"="has_role('ADMIN')"},
+ *         "changePassword"={
+ *             "route_name"="security_change_password",
+ *             "normalization_context"={"groups"={"changePasswordView"}},
+ *             "denormalization_context"={"groups"={"changePassword"}},
+ *             "access_control"="has_role('ADMIN')",
+ *             "validation_groups"={"password"}
+ *         },
+ *         "profile"={
+ *             "route_name"="security_profiles",
+ *             "normalization_context"={"groups"={"profile"}},
+ *             "denormalization_context"={"groups"={"profile"}},
+ *             "description"="Retrieves user profile",
+ *             "access_control"="has_role('ADMIN_PAROKI')"
+ *         },
+ *         "profilePassword"={
+ *             "route_name"="security_profiles_password",
+ *             "normalization_context"={"groups"={"profilePassword"}},
+ *             "denormalization_context"={"groups"={"profilePassword","profilePasswordUpdate"}},
+ *             "description"="Change profile password",
+ *             "access_control"="has_role('ADMIN_PAROKI')",
+ *             "validation_groups"={"profilePassword"}
+ *         }
  *     }
  * )
  */
@@ -55,7 +89,7 @@ class User extends BaseUser
      * @ORM\Column(name="id",type="guid",length=32)
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
-     * @Groups({"readonly"})
+     * @Groups({"readonly","changePassword","changePasswordView","profile","profilePassword"})
      *
      * @var string
      */
@@ -63,15 +97,18 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(name="full_name", type="string", length=100)
-     * @Assert\NotBlank()
-     * @Groups({"editable"})
+     * @Assert\NotBlank(
+     *     groups={"admin"},
+     *     message="Nama lengkap harus di isi"
+     * )
+     * @Groups({"admin","profile"})
      *
      * @var string
      */
     protected $fullName;
 
     /**
-     * @Groups({"editable"})
+     * @Groups({"admin","profile"})
      *
      * @var string
      */
@@ -80,38 +117,103 @@ class User extends BaseUser
     /**
      * User email to use.
      *
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     * @Groups({"editable"})
+     * @Assert\NotBlank(
+     *     groups={"admin"},
+     *     message="Email harus diisi"
+     * )
+     * @Assert\Email(groups={"admin"})
+     * @Groups({"admin","profile"})
      *
      * @var string
      */
     protected $email;
 
     /**
-     * @Groups({"editable"})
+     * @Groups({"admin"})
      *
      * @var array
      */
     protected $roles;
 
     /**
-     * @Groups({"editable"})
+     * @Groups({"admin"})
+     *
      * @var bool
      */
     protected $enabled;
 
     /**
-     * @var array
-     */
-    protected $groups;
-
-    /**
-     * Plain password. Used for model validation. Must not be persisted.
-     * @Groups({"password"})
+     * User password.
+     *
+     * @Groups({"new","changePassword","profilePassword"})
+     * @Assert\NotBlank(
+     *     message="Password harus diisi",
+     *     groups={"password","profilePassword"}
+     * )
+     *
      * @var string
      */
     protected $plainPassword;
+
+    /**
+     * User password confirmation.
+     *
+     * @Groups({"changePassword","profilePassword"})
+     * @Assert\NotBlank(groups={"password","profilePassword"})
+     *
+     * @var string
+     */
+    protected $plainPasswordConfirm;
+
+    /**
+     * Current user password.
+     *
+     * @Groups({"profilePasswordUpdate"})
+     * @SecurityAssert\UserPassword(
+     *     message="Password lama anda salah",
+     *     groups={"profilePassword"}
+     * )
+     * @Assert\NotBlank(
+     *     groups={"password","profilePassword"}
+     * )
+     *
+     * @var string
+     */
+    protected $currentPassword;
+
+    /**
+     * @Assert\IsTrue(
+     *     message="Nilai Password dan Konfirmasi tidak sama.",
+     *     groups={"profilePassword","password"}
+     * )
+     *
+     * @return bool
+     */
+    public function isPlainPasswordConfirm()
+    {
+        if (null === $this->plainPassword) {
+            return true;
+        }
+
+        return $this->plainPassword === $this->plainPasswordConfirm;
+    }
+
+    public function getCurrentPassword()
+    {
+        return $this->currentPassword;
+    }
+
+    /**
+     * @param string $currentPassword
+     *
+     * @return User
+     */
+    public function setCurrentPassword(string $currentPassword)
+    {
+        $this->currentPassword = $currentPassword;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
@@ -168,6 +270,26 @@ class User extends BaseUser
     public function setFullName($fullName): self
     {
         $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPlainPasswordConfirm()
+    {
+        return $this->plainPasswordConfirm;
+    }
+
+    /**
+     * @param string $plainPasswordConfirm
+     *
+     * @return User
+     */
+    public function setPlainPasswordConfirm(string $plainPasswordConfirm)
+    {
+        $this->plainPasswordConfirm = $plainPasswordConfirm;
 
         return $this;
     }

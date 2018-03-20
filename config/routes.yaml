@@ -2,4 +2,7 @@ frontend:
     resource: "@ParokiFrontendBundle/Resources/config/routes.yml"
 
 resource:
-    resource: "@ParokiResourceBundle/Resources/config/routing.yaml"
+    resource: "@ParokiResourceBundle/Resources/config/routes.yaml"
+
+security:
+    resource: "@ParokiSecurityBundle/Resources/config/routes.yaml"

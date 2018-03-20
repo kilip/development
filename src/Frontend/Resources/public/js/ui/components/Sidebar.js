@@ -8,7 +8,7 @@ import SidebarForm from './SidebarForm';
 import SidebarHeader from './SidebarHeader';
 import SidebarMinimizer from './SidebarMinimizer';
 import { connect } from 'react-redux';
-import { logout } from "../../components/security/actions";
+import { logout } from "../../actions/security/authentication";
 
 class Sidebar extends Component {
 
