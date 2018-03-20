@@ -15,7 +15,7 @@ run_command "bin/console doctrine:schema:create -n"
 run_command "bin/console siap:generate:key"
 run_command "bin/console doctrine:schema:update -n --force"
 
-if [ $SIAP_SUITE == "deploy" ] || [ $SIAP_SUITE == "frontend" ] || [ $SIAP_SUITE == "coverage" ]; then
+if [[ $SIAP_SUITE == "deploy" ]] || [[ $SIAP_SUITE == "frontend" ]] || [[ $SIAP_SUITE == "coverage" ]]; then
     print_header "install frontend dependencies"
     export CC=gcc-4.9
     export CXX=g++-4.9
