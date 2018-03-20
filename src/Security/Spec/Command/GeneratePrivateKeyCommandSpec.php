@@ -4,18 +4,17 @@ namespace Spec\Paroki\Security\Command;
 
 use Paroki\Security\Command\GeneratePrivateKeyCommand;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class GeneratePrivateKeyCommandSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(GeneratePrivateKeyCommand::class);
     }
 
-    function it_should_check_process(Process $process)
+    public function it_should_check_process(Process $process)
     {
         $process->isSuccessful()
             ->shouldBeCalled()
@@ -37,6 +36,5 @@ class GeneratePrivateKeyCommandSpec extends ObjectBehavior
         $this->shouldThrow(ProcessFailedException::class)
             ->duringCheckProcess($process)
         ;
-
     }
 }

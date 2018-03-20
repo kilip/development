@@ -6,37 +6,34 @@ use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Paroki\Resource\Entity\User;
 use Paroki\Security\Listener\JWTCreatedListener;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class JWTCreatedListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         RequestStack $requestStack,
         TokenStorage $tokenStorage,
         TokenInterface $token,
         User $user
-    ){
+    ) {
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn($user);
-        $this->beConstructedWith($requestStack,$tokenStorage);
+        $this->beConstructedWith($requestStack, $tokenStorage);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(JWTCreatedListener::class);
     }
 
-    function it_should_handle_on_jwt_created_event(
+    public function it_should_handle_on_jwt_created_event(
         JWTCreatedEvent $createdEvent,
         User $user
-    )
-    {
+    ) {
         $user->getId()->willReturn('some-id');
-        $user->getRoles()->willReturn(['ADMIN']);
+        $user->getRoles()->willReturn(array('ADMIN'));
 
         $createdEvent
             ->getData()
@@ -46,11 +43,11 @@ class JWTCreatedListenerSpec extends ObjectBehavior
 
         $expectedPayload = array(
             'id' => 'some-id',
-            'roles' => [
+            'roles' => array(
                 'ADMIN',
                 'USER',
-                'ADMIN_PAROKI'
-            ]
+                'ADMIN_PAROKI',
+            ),
         );
         $createdEvent
             ->setData($expectedPayload)
@@ -59,15 +56,15 @@ class JWTCreatedListenerSpec extends ObjectBehavior
 
         $this->onJWTCreated($createdEvent);
 
-        $user->getRoles()->willReturn(['SUPER_ADMIN']);
+        $user->getRoles()->willReturn(array('SUPER_ADMIN'));
         $expectedPayload = array(
             'id' => 'some-id',
-            'roles' => [
+            'roles' => array(
                 'SUPER_ADMIN',
                 'USER',
                 'ADMIN',
-                'ADMIN_PAROKI'
-            ]
+                'ADMIN_PAROKI',
+            ),
         );
         $createdEvent
             ->setData($expectedPayload)

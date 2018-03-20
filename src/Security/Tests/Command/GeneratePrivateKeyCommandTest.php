@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Process\Process;
 
 class GeneratePrivateKeyCommandTest extends KernelTestCase
 {
@@ -29,14 +28,14 @@ class GeneratePrivateKeyCommandTest extends KernelTestCase
     {
         $command = new GeneratePrivateKeyCommand();
         $commandTester = $this->getCommandTester($command);
-        $commandTester->execute([
+        $commandTester->execute(array(
             'command' => $command->getName(),
             '--private-path' => sys_get_temp_dir().'/jwt/private/private.pem',
-            '--public-path' => sys_get_temp_dir().'/jwt/public/public.pem'
-        ]);
+            '--public-path' => sys_get_temp_dir().'/jwt/public/public.pem',
+        ));
 
         $output = $commandTester->getDisplay();
-        $this->assertContains('Generated public key to',$output);
-        $this->assertContains('Generated private key to',$output);
+        $this->assertContains('Generated public key to', $output);
+        $this->assertContains('Generated private key to', $output);
     }
 }

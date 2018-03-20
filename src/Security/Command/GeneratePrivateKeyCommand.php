@@ -33,9 +33,9 @@ class GeneratePrivateKeyCommand extends Command
         $this
             ->setName('siap:generate:key')
             ->setDescription('Generate a new private key')
-            ->addOption('secret','s',InputArgument::OPTIONAL,'Key secret',getenv('JWT_PASSPHRASE'))
-            ->addOption('private-path','p',InputArgument::OPTIONAL,'Private key path',getenv('JWT_PRIVATE_KEY_PATH'))
-            ->addOption('public-path','b',InputArgument::OPTIONAL,'Public key path',getenv('JWT_PUBLIC_KEY_PATH'))
+            ->addOption('secret', 's', InputArgument::OPTIONAL, 'Key secret', getenv('JWT_PASSPHRASE'))
+            ->addOption('private-path', 'p', InputArgument::OPTIONAL, 'Private key path', getenv('JWT_PRIVATE_KEY_PATH'))
+            ->addOption('public-path', 'b', InputArgument::OPTIONAL, 'Public key path', getenv('JWT_PUBLIC_KEY_PATH'))
         ;
     }
 
@@ -85,9 +85,10 @@ class GeneratePrivateKeyCommand extends Command
 
     public function checkProcess(Process $process)
     {
-        if(!$process->isSuccessful()){
+        if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
+
         return true;
     }
 }
