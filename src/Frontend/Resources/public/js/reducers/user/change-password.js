@@ -65,7 +65,7 @@ export function loading(state = false, action) {
   }
 }
 
-export function success(state = null, action) {
+export function updated(state = null, action) {
   switch (action.type) {
     case 'USER_CHANGE_PASSWORD_SUCCESS':
       return action.updated;
@@ -84,5 +84,5 @@ export default combineReducers({
     retrieved,
     error,
     loading,
-    success
+    updated
 });

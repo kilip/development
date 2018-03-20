@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
 import {SubmissionError} from 'redux-form';
-import {list} from "../../../actions/user/list";
 
 
 const middlewares = [thunk];

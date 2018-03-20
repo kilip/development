@@ -59,6 +59,9 @@ export function auth(state = null,action){
 }
 
 export function token(state=null,action){
+    if(action.type === actions.LOGIN_RESET){
+        localStorage.clear();
+    }
     return localStorage.getItem('token');
 }
 

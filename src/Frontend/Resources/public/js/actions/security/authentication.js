@@ -1,6 +1,6 @@
 import {API_LOGIN_CHECK} from "../../config/global";
 import jwt from 'jsonwebtoken';
-
+import { SubmissionError } from 'redux-form';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -13,10 +13,10 @@ export function requestLogin(fetching){
     };
 }
 
-export function receiveLogin(data){
+export function receiveLogin(user){
     return {
         type: LOGIN_SUCCESS,
-        user: data.user
+        user
     }
 }
 
@@ -34,7 +34,6 @@ export function reset(){
 }
 
 export function login(credentials,options={}){
-    console.log(credentials);
     options.headers = new Headers();
     options.headers.set('Accept','application/ld+json');
     options.headers.set('Content-Type','application/json');
@@ -50,22 +49,29 @@ export function login(credentials,options={}){
                 if (!response.ok) {
                     // If there was a problem, we want to
                     // dispatch the error condition
-                    console.log(data);
                     let message = "Gagal login";
                     if(data.code === 401){
                         message = 'Username atau password anda salah';
                     }
-                    dispatch(loginError(message));
+                    let errors = {
+                        _error: message,
+                    };
+                    throw new SubmissionError(errors);
                 } else {
                     // If login was successful, set the token in local storage
-                    data.user = jwt.decode(data.token);
+                    const user = jwt.decode(data.token);
                     localStorage.setItem('token', data.token);
 
                     // Dispatch the success action
-                    dispatch(receiveLogin(data))
+                    dispatch(receiveLogin(user))
                 }
             }))
             .catch(err => {
+                dispatch(requestLogin(false));
+                if(err instanceof SubmissionError){
+                    dispatch(loginError(err.errors._error));
+                    throw err;
+                }
                 dispatch(loginError(err.message));
             })
         ;
@@ -75,6 +81,5 @@ export function login(credentials,options={}){
 export function logout(){
     return (dispatch) => {
         dispatch(reset());
-        localStorage.clear();
-    }
+    };
 }

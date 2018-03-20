@@ -29,7 +29,7 @@ export const isGrantedUser = connectedRouterRedirect({
     redirectPath: '/',
     allowRedirectBack: false,
     authenticatedSelector: state => state.security.auth !== null && state.security.auth,
-    predicate: user => userIsGranted(user,'USER'),
+    predicate: user => userHasRole(user,'USER'),
     wrapperDisplayName: 'IsGrantedUser'
 });
 
@@ -50,10 +50,9 @@ export const userIsNotAuthenticatedRedir = connectedRouterRedirect({
 
 
 export function userIsAdmin(user){
-    return userIsGranted(user,'ADMIN');
+    return userHasRole(user,'ADMIN');
 }
 
-export function userIsGranted(user,role){
-    console.log(user);
+export function userHasRole(user,role){
     return user.roles.includes(role);
 }

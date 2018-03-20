@@ -46,8 +46,7 @@ export function update(item, values) {
                 method: 'PUT',
                 headers: new Headers({'Content-Type': 'application/ld+json'}),
                 body: JSON.stringify(values),
-                }
-            )
+            })
             .then(response => response.json())
             .then(data => {
                 dispatch(loading(false));

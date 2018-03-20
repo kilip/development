@@ -19,14 +19,14 @@ class LoginForm extends Component {
                 step={data.step}
                 required={data.required}
                 placeholder={data.placeholder}
-                id={`user_${data.input.name}`}
+                id={`login_${data.input.name}`}
                 className="form-control"
             />
         );
     }
 
     render(){
-        const { handleSubmit} = this.props;
+        const { handleSubmit } = this.props;
         return (
             <StrapForm onSubmit={handleSubmit}>
                 <InputGroup className="mb-3">
