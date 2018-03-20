@@ -48,7 +48,6 @@ class GeneratePrivateKeyCommand extends Command
         $this->privateKeyPath = $input->getOption('private-path');
         $this->publicKeyPath = $input->getOption('public-path');
 
-        $output->writeln('passphrase: <comment>'.$this->passPhrase.'</comment>');
         if (!is_dir($dir = dirname($this->publicKeyPath))) {
             mkdir($dir, 0777, true);
         }
@@ -65,7 +64,7 @@ class GeneratePrivateKeyCommand extends Command
     {
         $privateKeyPath = $this->privateKeyPath;
         $passPhrase = $this->passPhrase;
-        $command = "openssl genrsa -passout stdin -out $privateKeyPath -aes256 4096 <<PASS\n$passPhrase\nPASS";
+        $command = "openssl genrsa -passout pass:$passPhrase -out $privateKeyPath -aes256 4096";
         $process = new Process($command);
         $process->run();
         $this->checkProcess($process);
@@ -77,7 +76,7 @@ class GeneratePrivateKeyCommand extends Command
         $privatePath = $this->privateKeyPath;
         $publicPath = $this->publicKeyPath;
         $passPhrase = $this->passPhrase;
-        $command = "openssl rsa -pubout -in $privatePath -out $publicPath -passin stdin <<PASS\n$passPhrase\nPASS";
+        $command = "openssl rsa -pubout -in $privatePath -out $publicPath -passin pass:$passPhrase";
         $process = new Process($command);
         $process->run();
         $this->checkProcess($process);
