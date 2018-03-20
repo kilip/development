@@ -28,8 +28,6 @@ if [[ $SIAP_SUITE == "deploy" ]] || [[ $SIAP_SUITE == "coverage" ]] || [[ $SIAP_
     run_command "sudo -E apt-add-repository -y \"ppa:ubuntu-toolchain-r/test\""
     run_command "sudo apt-get update -y"
     run_command "sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9"
-    export CC=gcc-4.9
-    export CXX=g++-4.9
     run_command "mkdir -p build/coverage/php"
 fi
 
