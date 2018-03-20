@@ -43,10 +43,10 @@ install:
 
 before_test:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - openssl --version
+  - openssl version
   - php bin/console doctrine:database:create -n --if-not-exists
   - php bin/console doctrine:schema:create -n
-  - php bin/console siap:generate:key
+  - php bin/console siap:generate:key -p var\jwt\private.pem -b var\jwt\public.pem
   - yarn --no-progress
   - yarn build
 
