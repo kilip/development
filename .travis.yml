@@ -69,7 +69,7 @@ before_install:
     echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
   fi;
 - |
-  if [[ $SIAP_SUITE=deploy || $SIAP_SUITE=frontend ]]; then
+  if [ [ $SIAP_SUITE=deploy ] || [$SIAP_SUITE=coverage] || [$SIAP_SUITE=frontend ] ]; then
     sudo apt-get -y install software-properties-common python-software-properties;
     sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test";
     sudo apt update -y;
@@ -87,7 +87,7 @@ install:
 - bin/console siap:generate:key
 - bin/console doctrine:schema:update -n --force
 - |
-  if [[ $SIAP_SUITE=frontend || $SIAP_SUITE=coverage ]]; then
+  if [ [ $SIAP_SUITE=deploy ] || [ $SIAP_SUITE=frontend ] || [$SIAP_SUITE=coverage ]]; then
     yarn install --dev;
     yarn build
   fi;
