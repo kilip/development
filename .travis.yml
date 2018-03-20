@@ -59,44 +59,12 @@ before_install:
 - etc/travis/before-install.sh
 
 install:
-- composer update --prefer-dist --no-progress --no-suggest --ansi
-- ./vendor/bin/simple-phpunit install
-- bin/console doctrine:database:create -n --if-not-exists
-- bin/console doctrine:schema:create -n
-- bin/console siap:generate:key
-- bin/console doctrine:schema:update -n --force
-- |
-  if [ [ $SIAP_SUITE=deploy ] || [ $SIAP_SUITE=frontend ] || [$SIAP_SUITE=coverage ]]; then
-    yarn install --dev;
-    yarn build
-  fi;
+- etc/travis/install.sh
 
 script:
-- mkdir -p build/logs
-- |
-  if [[ $SIAP_SUITE = coverage  ]]; then
-    ./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml;
-    ./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov;
-    ./vendor/bin/behat -p coverage;
-    yarn test --coverage
-  fi;
-- |
-  if [[ $SIAP_SUITE=backend ]]; then
-    ./vendor/bin/simple-phpunit;
-    ./vendor/bin/phpspec run;
-    ./vendor/bin/behat -fprogress;
-  fi;
-- |
-  if [[ $SIAP_SUITE=frontend ]]; then
-    yarn test
-  fi;
+- etc/travis/script.sh
+
 
 after_script:
-- |
-  if [[ $COVERAGE = yes ]]; then
-    wget https://phar.phpunit.de/phpcov.phar;
-    chmod +x phpcov.phar;
-    php phpcov.phar merge build/coverage --clover build/logs/backend/clover.xml
-    bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
-    bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
-  fi;
+- etc/travis/after-script.sh
+
