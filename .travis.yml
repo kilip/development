@@ -25,11 +25,11 @@ matrix:
   - php: '7.2'
     env: SIAP_SUITE=backend
   - php: '7.2'
+    env: SIAP_SUITE=backend DATABASE_URL=mysql://root@localhost:3306/paroki
+  - php: '7.2'
     env: SIAP_SUITE=frontend
   - php: '7.2'
     env: SIAP_SUITE=coverage
-  - php: '7.2'
-    env: SIAP_SUITE=backend DATABASE_URL=mysql://root@localhost:3306/paroki
   - php: '7.2.3'
     env: SIAP_SUITE=deploy
     if: $TRAVIS_PULL_REQUEST="false"
