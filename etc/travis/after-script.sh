@@ -2,6 +2,8 @@
 
 set e
 
+code=0
+
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 if [[ $SIAP_SUITE == "coverage" ]]; then
@@ -15,3 +17,5 @@ if [[ $SIAP_SUITE == "coverage" ]]; then
     run_command "./codecov.sh -F backend -s build/logs/backend -f \"*.xml\""
     run_command "./codecov.sh -F frontend -s build/logs/frontend -f \"*.xml\""
 fi
+
+exit ${code}

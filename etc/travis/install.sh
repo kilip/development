@@ -2,6 +2,8 @@
 
 set e
 
+code=0
+
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 print_header "install backend dependencies"
@@ -20,3 +22,5 @@ if [ $SIAP_SUITE == "deploy" ] || [ $SIAP_SUITE == "frontend" ] || [ $SIAP_SUITE
 fi
 
 run_command "mkdir -p build/logs"
+
+exit ${code}
