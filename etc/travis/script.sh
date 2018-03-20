@@ -14,7 +14,6 @@ if [ $SIAP_SUITE == "coverage"  ]; then
 fi
 
 if [ $SIAP_SUITE == "backend" ]; then
-    run_command "touch public/build/manifest.json" || code=$?
     run_command "./vendor/bin/simple-phpunit" || code=$?
     run_command "./vendor/bin/phpspec run" || code=$?
     run_command "./vendor/bin/behat -fprogress" || code=$?
