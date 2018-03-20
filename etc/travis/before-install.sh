@@ -23,13 +23,13 @@ else
 fi
 
 if [ $SIAP_SUITE == "deploy" ] || [ $SIAP_SUITE == "coverage" ] || [ $SIAP_SUITE == "frontend" ]; then
-    run_command "sudo apt-get -y install software-properties-common python-software-properties"
-    run_command "sudo -E apt-add-repository -y \"ppa:ubuntu-toolchain-r/test\""
-    run_command "sudo apt update -y"
-    run_command "sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9"
-    run_command "export CC=gcc-4.9"
-    run_command "export CXX=g++-4.9"
-    run_command "mkdir -p build/coverage/php"
+    sudo apt-get -y install software-properties-common python-software-properties
+    sudo -E apt-add-repository -y ppa:ubuntu-toolchain-r/test
+    sudo apt update -y
+    sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9
+    export CC=gcc-4.9
+    export CXX=g++-4.9
+    mkdir -p build/coverage/php
 fi
 
 exit ${code};
