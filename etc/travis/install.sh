@@ -2,7 +2,7 @@
 
 set e
 
-source "common-lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 print_header "install backend dependencies"
 

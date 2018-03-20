@@ -2,7 +2,7 @@
 
 set e
 
-source "common-lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 if [[ $SIAP_SUITE == "coverage" ]]; then
     run_command "wget https://phar.phpunit.de/phpcov.phar"

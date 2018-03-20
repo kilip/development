@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+
 set -e
 
-source "common-lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 
 print_header "disabled php memory limit"
 run_command "echo \"memory_limit=-1\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini"
