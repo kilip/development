@@ -2,6 +2,8 @@
 
 set e
 
+source "common-lib.sh"
+
 if [ $SIAP_SUITE == "coverage"  ]; then
     run_command "./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml"
     run_command "./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov"

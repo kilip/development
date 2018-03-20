@@ -2,6 +2,8 @@
 
 set e
 
+source "common-lib.sh"
+
 print_header "install backend dependencies"
 
 run_command "composer update --prefer-dist --no-progress --no-suggest --ansi"

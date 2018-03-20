@@ -2,6 +2,8 @@
 
 set e
 
+source "common-lib.sh"
+
 if [[ $SIAP_SUITE == "coverage" ]]; then
     run_command "wget https://phar.phpunit.de/phpcov.phar"
     run_command "chmod +x phpcov.phar"
