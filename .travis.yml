@@ -21,13 +21,17 @@ env:
 matrix:
   include:
   - php: '7.1'
+    env: SIAP_SUITE=backend
   - php: '7.2'
+    env: SIAP_SUITE=backend
   - php: '7.2'
-    env: COVERAGE=yes
+    env: SIAP_SUITE=frontend
   - php: '7.2'
-    env: DATABASE_URL=mysql://root@localhost:3306/paroki
-  - php: 7.2.3
-    env: DEPLOY=yes
+    env: SIAP_SUITE=coverage
+  - php: '7.2'
+    env: SIAP_SUITE=backend DATABASE_URL=mysql://root@localhost:3306/paroki
+  - php: '7.2.3'
+    env: SIAP_SUITE=deploy
     if: $TRAVIS_PULL_REQUEST="false"
     deploy:
       provider: heroku
@@ -45,9 +49,9 @@ matrix:
 
   allow_failures:
   - php: '7.2'
-    env: COVERAGE=yes
-  - php: 7.2.3
-    env: DEPLOY=yes
+    env: SIAP_SUITE=coverage
+  - php: '7.2.3'
+    env: SIAP_SUITE=deploy
 
   fast_finish: true
 
@@ -55,7 +59,7 @@ before_install:
 - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 - export PATH="$PATH:$HOME/.composer/vendor/bin"
 - |
-  if [[ $COVERAGE != yes ]]; then
+  if [[ $SIAP_SUITE != coverage ]]; then
     phpenv config-rm xdebug.ini || echo "xdebug not available";
   fi;
 - |
@@ -64,14 +68,16 @@ before_install:
   else
     echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
   fi;
-- sudo apt-get -y install software-properties-common python-software-properties
-- sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
-- sudo apt update -y
-- sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install
-  g++-4.9
-- export CC=gcc-4.9
-- export CXX=g++-4.9
-- mkdir -p build/coverage/php
+- |
+  if [[ $SIAP_SUITE=deploy || $SIAP_SUITE=frontend ]]; then
+    sudo apt-get -y install software-properties-common python-software-properties;
+    sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test";
+    sudo apt update -y;
+    sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9;
+    export CC=gcc-4.9;
+    export CXX=g++-4.9;
+    mkdir -p build/coverage/php;
+  fi;
 
 install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
@@ -80,22 +86,31 @@ install:
 - bin/console doctrine:schema:create -n
 - bin/console siap:generate:key
 - bin/console doctrine:schema:update -n --force
-- yarn install --dev
-- yarn build
+- |
+  if [[ $SIAP_SUITE=frontend || $SIAP_SUITE=coverage ]]; then
+    yarn install --dev;
+    yarn build
+  fi;
 
 script:
 - mkdir -p build/logs
 - |
-  if [[ $COVERAGE = yes  ]]; then
+  if [[ $SIAP_SUITE = coverage  ]]; then
     ./vendor/bin/phpspec run --ansi -c etc/phpspec-coverage.yml;
     ./vendor/bin/simple-phpunit --coverage-php=build/coverage/php/phpunit.cov;
     ./vendor/bin/behat -p coverage;
     yarn test --coverage
   fi;
-- if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
-- if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
-- if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
-- if [[ $COVERAGE != yes ]]; then yarn test; fi
+- |
+  if [[ $SIAP_SUITE=backend ]]; then
+    ./vendor/bin/simple-phpunit;
+    ./vendor/bin/phpspec run;
+    ./vendor/bin/behat -fprogress;
+  fi;
+- |
+  if [[ $SIAP_SUITE=frontend ]]; then
+    yarn test
+  fi;
 
 after_script:
 - |
