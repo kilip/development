@@ -12,10 +12,10 @@ if [[ $SIAP_SUITE == "coverage" ]]; then
     ./phpcov.phar merge build/coverage --clover build/logs/backend/clover.xml
 
     print_header "uploading code coverage"
-    wget https://codecov.io/bash > codecov.sh
-    chmod +x codecov.sh
-    ./codecov.sh -F backend -s build/logs/backend -f "*.xml"
-    ./codecov.sh -F frontend -s build/logs/frontend -f "*.xml"
+    wget https://codecov.io/bash
+    chmod +x bash
+    ./bash -F backend -s build/logs/backend -f "*.xml"
+    ./bash -F frontend -s build/logs/frontend -f "*.xml"
 fi
 
 exit ${code}
