@@ -29,4 +29,3 @@ if [ $SIAP_SUITE == "deploy" ] || [ $SIAP_SUITE == "coverage" ] || [ $SIAP_SUITE
     run_command "export CXX=g++-4.9"
     run_command "mkdir -p build/coverage/php"
 fi
-
