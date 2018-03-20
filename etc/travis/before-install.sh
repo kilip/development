@@ -32,4 +32,4 @@ if [[ $SIAP_SUITE == "deploy" ]] || [[ $SIAP_SUITE == "coverage" ]] || [[ $SIAP_
     mkdir -p build/coverage/php
 fi
 
-exit ${code};
+exit ${code}
