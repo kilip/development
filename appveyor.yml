@@ -46,7 +46,7 @@ before_test:
   - openssl version
   - php bin/console doctrine:database:create -n --if-not-exists
   - php bin/console doctrine:schema:create -n
-  - php bin/console siap:generate:key -p '%APPVEYOR_BUILD_FOLDER%\var\jwt\private.pem' -b '%APPVEYOR_BUILD_FOLDER%\var\jwt\public.pem'
+  - php bin/console siap:generate:key
   - yarn --no-progress
   - yarn build
 
