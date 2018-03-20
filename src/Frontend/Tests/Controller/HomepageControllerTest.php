@@ -19,6 +19,11 @@ class HomepageControllerTest extends WebTestCase
 {
     public function testHomepage()
     {
+        $manifest = getcwd().'/public/build/manifest.json';
+        if(!is_file($manifest)){
+            $this->markTestSkipped('no manifest.json file');
+            return;
+        }
         $client = static::createClient();
         $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());

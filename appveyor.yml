@@ -25,6 +25,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - ps: Set-Service wuauserv -StartupType Manual
   - cinst -y php
+  - cinst -y openssl.light
   - cd c:\tools\php72
   - copy php.ini-production php.ini /Y
   - echo date.timezone="UTC" >> php.ini
@@ -42,8 +43,10 @@ install:
 
 before_test:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - openssl --version
   - php bin/console doctrine:database:create -n --if-not-exists
   - php bin/console doctrine:schema:create -n
+  - php bin/console siap:generate:key
   - yarn --no-progress
   - yarn build
 
