@@ -16,10 +16,12 @@ if [[ $SIAP_SUITE != "coverage" ]]; then
     run_command "phpenv config-rm xdebug.ini || echo \"xdebug not available\""
 fi
 
-if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
-    run_command "echo yes | pecl install apcu"
-else
-    run_command "echo \"extension = apcu.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini"
+if [[ $SIAP_SUITE != "frontend" ]]; then
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
+        run_command "echo yes | pecl install apcu"
+    else
+        run_command "echo \"extension = apcu.so\" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini"
+    fi
 fi
 
 if [[ $SIAP_SUITE == "deploy" ]] || [[ $SIAP_SUITE == "coverage" ]] || [[ $SIAP_SUITE == "frontend" ]]; then
