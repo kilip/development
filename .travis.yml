@@ -56,28 +56,7 @@ matrix:
   fast_finish: true
 
 before_install:
-- echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-- export PATH="$PATH:$HOME/.composer/vendor/bin"
-- |
-  if [[ $SIAP_SUITE != coverage ]]; then
-    phpenv config-rm xdebug.ini || echo "xdebug not available";
-  fi;
-- |
-  if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
-    echo yes | pecl install apcu;
-  else
-    echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-  fi;
-- |
-  if [ [ $SIAP_SUITE=deploy ] || [$SIAP_SUITE=coverage] || [$SIAP_SUITE=frontend ] ]; then
-    sudo apt-get -y install software-properties-common python-software-properties;
-    sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test";
-    sudo apt update -y;
-    sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install g++-4.9;
-    export CC=gcc-4.9;
-    export CXX=g++-4.9;
-    mkdir -p build/coverage/php;
-  fi;
+- etc/travis/before-install.sh
 
 install:
 - composer update --prefer-dist --no-progress --no-suggest --ansi
