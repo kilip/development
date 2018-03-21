@@ -1,12 +1,7 @@
 import * as actions from "../../../actions/security/authentication";
-import thunk from 'redux-thunk';
-import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
 import jwt from 'jsonwebtoken';
-
-
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+import { mockStore } from "../../util";
 
 describe('login actions', () => {
     const iat = Math.floor(Date.now() / 1000);

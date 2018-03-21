@@ -142,10 +142,10 @@ Profile.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        updated: state.userAdmin.profile.updated,
-        retrieved: state.userAdmin.profile.retrieved,
-        error: state.userAdmin.profile.error,
-        loading: state.userAdmin.profile.loading,
+        updated: state.users.profile.updated,
+        retrieved: state.users.profile.retrieved,
+        error: state.users.profile.error,
+        loading: state.users.profile.loading,
         currentUser: state.security.auth
     };
 };

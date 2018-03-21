@@ -1,5 +1,5 @@
 import reducers from '../../../reducers/user/change-password';
-import _ from 'lodash';
+import {reducerTest} from "../../util";
 const initialState = {
     retrieveError: null,
     retrieveLoading: false,
@@ -53,14 +53,6 @@ describe('user change password reducers', () => {
         }
     ];
 
-    _.each(actions,function(value){
-        it(`should handle ${value.type}`, () => {
-            const { type, expectedState, action } = value;
-            action.type = type;
-
-            expect(reducers(undefined,action)).toEqual(expectedState);
-        });
-
-    });
+    reducerTest(reducers,initialState,actions);
 
 });

@@ -23,7 +23,7 @@ describe('<ChangePassword/> Component', () => {
         context: 'profile'
     };
     const state = {
-        userAdmin: {
+        users: {
             changePassword: {
                 retrieved: mockCurrentUser,
             }
@@ -36,15 +36,15 @@ describe('<ChangePassword/> Component', () => {
         expect(wrapper.text()).toContain('Password lama anda');
         expect(wrapper.text()).toContain('Password baru');
 
-        state.userAdmin.changePassword.loading = true;
+        state.users.changePassword.loading = true;
         wrapper = getComponent(props,state);
         expect(wrapper.text()).toContain('Memproses data');
 
-        state.userAdmin.changePassword.error = 'some error';
+        state.users.changePassword.error = 'some error';
         wrapper = getComponent(props,state);
         expect(wrapper.text()).toContain('some error');
 
-        state.userAdmin.changePassword.updated = mockCurrentUser;
+        state.users.changePassword.updated = mockCurrentUser;
         wrapper = getComponent(props,state);
         expect(wrapper.text()).toContain('Password berhasil diubah');
     });

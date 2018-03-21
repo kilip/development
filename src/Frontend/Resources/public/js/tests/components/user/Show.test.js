@@ -34,7 +34,7 @@ describe('<Show/> Component', () => {
     };
 
     const state = {
-        userAdmin: {
+        users: {
             show: {
                 error: 'Show Error',
                 loading: true,

@@ -151,17 +151,17 @@ Update.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        retrieveError: state.userAdmin.update.retrieveError,
-        retrieveLoading: state.userAdmin.update.retrieveLoading,
-        updateError: state.userAdmin.update.updateError,
-        updateLoading: state.userAdmin.update.updateLoading,
-        deleteError: state.userAdmin.del.error,
-        deleteLoading: state.userAdmin.del.loading,
-        created: state.userAdmin.create.created,
-        deleted: state.userAdmin.del.deleted,
-        retrieved: state.userAdmin.update.retrieved,
-        updated: state.userAdmin.update.updated,
-        activeTab: state.userAdmin.update.activeTab
+        retrieveError: state.users.update.retrieveError,
+        retrieveLoading: state.users.update.retrieveLoading,
+        updateError: state.users.update.updateError,
+        updateLoading: state.users.update.updateLoading,
+        deleteError: state.users.del.error,
+        deleteLoading: state.users.del.loading,
+        created: state.users.create.created,
+        deleted: state.users.del.deleted,
+        retrieved: state.users.update.retrieved,
+        updated: state.users.update.updated,
+        activeTab: state.users.update.activeTab
     };
 };
 

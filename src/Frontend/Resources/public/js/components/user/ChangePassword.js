@@ -67,11 +67,11 @@ ChangePassword.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        error: state.userAdmin.changePassword.error,
-        loading: state.userAdmin.changePassword.loading,
-        updated: state.userAdmin.changePassword.updated,
-        retrieved: state.userAdmin.changePassword.retrieved,
-        retrieveError: state.userAdmin.changePassword.retrieveError
+        error: state.users.changePassword.error,
+        loading: state.users.changePassword.loading,
+        updated: state.users.changePassword.updated,
+        retrieved: state.users.changePassword.retrieved,
+        retrieveError: state.users.changePassword.retrieveError
     }
 };
 

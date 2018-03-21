@@ -82,12 +82,12 @@ Show.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        error: state.userAdmin.show.error,
-        loading: state.userAdmin.show.loading,
-        retrieved:state.userAdmin.show.retrieved,
-        deleteError: state.userAdmin.del.error,
-        deleteLoading: state.userAdmin.del.loading,
-        deleted: state.userAdmin.del.deleted,
+        error: state.users.show.error,
+        loading: state.users.show.loading,
+        retrieved:state.users.show.retrieved,
+        deleteError: state.users.del.error,
+        deleteLoading: state.users.del.loading,
+        deleted: state.users.del.deleted,
 };
 };
 

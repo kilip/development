@@ -39,7 +39,7 @@ describe('<Create/> Component', () => {
     };
 
     const state = {
-        userAdmin: {
+        users: {
             list: {
                 data: mockData,
                 loading: false,

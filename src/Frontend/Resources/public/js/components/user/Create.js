@@ -53,9 +53,9 @@ Create.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        created: state.userAdmin.create.created,
-        error: state.userAdmin.create.error,
-        loading: state.userAdmin.create.loading,
+        created: state.users.create.created,
+        error: state.users.create.error,
+        loading: state.users.create.loading,
     };
 };
 

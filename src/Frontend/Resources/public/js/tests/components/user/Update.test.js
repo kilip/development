@@ -31,7 +31,7 @@ describe('<Update/> Component', () => {
     };
 
     const state = {
-        userAdmin: {
+        users: {
             update: {
                 retrieveLoading: true,
                 retrieveError: 'Retrieve Error',

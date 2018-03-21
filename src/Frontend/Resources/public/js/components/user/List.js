@@ -117,11 +117,11 @@ List.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.userAdmin.list.data,
-        error: state.userAdmin.list.error,
-        loading: state.userAdmin.list.loading,
-        deletedItem: state.userAdmin.del.deleted,
-        user: state.security.user
+        data: state.users.list.data,
+        error: state.users.list.error,
+        loading: state.users.list.loading,
+        deletedItem: state.users.del.deleted,
+        authenticated: state.security.user
     };
 };
 

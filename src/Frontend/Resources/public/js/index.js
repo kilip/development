@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { reducer as form } from 'redux-form';
-import { routerReducer as routing } from 'react-router-redux';
 import { createStore, combineReducers, applyMiddleware,compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-
-import security from './reducers/security';
-import userAdmin from './reducers/user';
-
+import reducers from './reducers';
 import SIAP from './siap';
-
-const reducers = combineReducers({routing,form,security,userAdmin});
 
 var enhancer = compose(
     applyMiddleware(thunkMiddleware)

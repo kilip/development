@@ -1,5 +1,6 @@
 import reducers from '../../../reducers/user/create';
 import _ from 'lodash';
+import {reducerTest} from "../../util";
 const initialState = {
     error: null,
     loading: false,
@@ -35,18 +36,5 @@ describe('user create reducers', () => {
         }
     ];
 
-    _.each(actions,function(value){
-        it(`should handle ${value.type}`, () => {
-            const { type, expectedState, action } = value;
-            action.type = type;
-
-            expect(reducers(undefined,action)).toEqual(expectedState);
-        });
-
-    });
-
-
-    it('should handle initial state', () => {
-        expect(reducers(undefined,{})).toEqual(initialState);
-    });
+    reducerTest(reducers,initialState,actions);
 });
