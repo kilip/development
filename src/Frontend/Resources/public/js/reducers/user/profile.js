@@ -13,19 +13,6 @@ export function error(state = null, action) {
     }
 }
 
-export function loading(state = false, action) {
-    switch (action.type) {
-        case 'USER_PROFILE_LOADING':
-            return action.loading;
-
-        case 'USER_PROFILE_RESET':
-            return false;
-
-        default:
-            return state;
-    }
-}
-
 export function retrieved(state = null, action) {
     switch (action.type) {
         case 'USER_PROFILE_RETRIEVED_SUCCESS':
@@ -52,4 +39,4 @@ export function updated(state = null, action){
     }
 }
 
-export default combineReducers({error, loading, retrieved,updated});
+export default combineReducers({error, retrieved,updated});

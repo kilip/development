@@ -49,8 +49,6 @@ describe('<Show/> Component', () => {
 
     it('should rendered properly', () => {
         const wrapper = getComponent(props,state);
-
-        expect(wrapper.text()).toContain('Loading...');
         expect(wrapper.text()).toContain('Show Error');
         expect(wrapper.text()).toContain('Delete Error');
         expect(wrapper.text()).toContain('Full Name');

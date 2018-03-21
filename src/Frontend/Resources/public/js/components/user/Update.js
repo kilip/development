@@ -6,7 +6,8 @@ import ProfileForm from './forms/profile';
 import ChangePassword from './ChangePassword';
 import { success } from '../../actions/user/create';
 import { retrieve, update, reset } from '../../actions/user/update';
-import { del, loading, error } from '../../actions/user/delete';
+import { del, error } from '../../actions/user/delete';
+import { loading } from "../../actions/global";
 import {
     Col,
     Row,
@@ -22,7 +23,6 @@ import {
 } from 'reactstrap';
 
 import classNames from 'classnames';
-import {userIsAdmin} from "../security/auth";
 
 class Update extends Component {
 
@@ -70,7 +70,7 @@ class Update extends Component {
                     </CardHeader>
                     <CardBody>
                         <Row>
-                            <Col xs="12" md="12" className="mb-4">
+                            <Col xs="12" md="12" className="mb-4 mh-300">
                                 <Nav tabs>
                                     <NavItem>
                                         <NavLink
@@ -93,7 +93,6 @@ class Update extends Component {
                                     <TabPane tabId="1">
                                         {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
                                         {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
-                                        {(this.props.retrieveLoading || this.props.updateLoading || this.props.deleteLoading || this.props.loading) && <div className="alert alert-info" role="status">Loading...</div>}
                                         {this.props.retrieveError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.retrieveError}</div>}
                                         {this.props.updateError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.updateError}</div>}
                                         {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
@@ -133,12 +132,10 @@ class Update extends Component {
 }
 
 Update.propTypes = {
+    loading: PropTypes.bool,
     retrieveError: PropTypes.string,
-    retrieveLoading: PropTypes.bool.isRequired,
     updateError: PropTypes.string,
-    updateLoading: PropTypes.bool.isRequired,
     deleteError: PropTypes.string,
-    deleteLoading: PropTypes.bool.isRequired,
     retrieved: PropTypes.object,
     updated: PropTypes.object,
     deleted: PropTypes.object,
@@ -152,16 +149,14 @@ Update.propTypes = {
 const mapStateToProps = (state) => {
     return {
         retrieveError: state.users.update.retrieveError,
-        retrieveLoading: state.users.update.retrieveLoading,
         updateError: state.users.update.updateError,
-        updateLoading: state.users.update.updateLoading,
         deleteError: state.users.del.error,
-        deleteLoading: state.users.del.loading,
         created: state.users.create.created,
         deleted: state.users.del.deleted,
         retrieved: state.users.update.retrieved,
         updated: state.users.update.updated,
-        activeTab: state.users.update.activeTab
+        activeTab: state.users.update.activeTab,
+        loading: state.app.loading
     };
 };
 

@@ -2,6 +2,7 @@ import expect from 'expect';
 import { mockStore } from "../../util";
 import { changePassword, generateApiUrl, reset, retrieve } from "../../../actions/user/changePassword";
 import { SubmissionError } from 'redux-form';
+import * as siap from '../../../actions/global';
 
 describe('user changePassword actions', () => {
 
@@ -34,8 +35,8 @@ describe('user changePassword actions', () => {
         const expected = [
             {type: 'USER_CHANGE_PASSWORD_RETRIEVE_ERROR', retrieveError: null},
             {type: 'USER_CHANGE_PASSWORD_RETRIEVE_SUCCESS', retrieved: null},
-            {type: 'USER_CHANGE_PASSWORD_RETRIEVE_LOADING', retrieveLoading: true},
-            {type: 'USER_CHANGE_PASSWORD_RETRIEVE_LOADING', retrieveLoading: false},
+            {type: siap.SIAP_LOADING, loading: true},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_CHANGE_PASSWORD_RETRIEVE_SUCCESS', retrieved: mockUserData},
         ];
 
@@ -52,8 +53,8 @@ describe('user changePassword actions', () => {
         const expected = [
             {type: 'USER_CHANGE_PASSWORD_RETRIEVE_ERROR', retrieveError: null},
             {type: 'USER_CHANGE_PASSWORD_RETRIEVE_SUCCESS', retrieved: null},
-            {type: 'USER_CHANGE_PASSWORD_RETRIEVE_LOADING', retrieveLoading: true},
-            {type: 'USER_CHANGE_PASSWORD_RETRIEVE_LOADING', retrieveLoading: false},
+            {type: siap.SIAP_LOADING, loading: true},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_CHANGE_PASSWORD_RETRIEVE_ERROR', retrieveError: 'some error'},
         ];
 
@@ -70,9 +71,9 @@ describe('user changePassword actions', () => {
         fetch.mockResponse(JSON.stringify(mockUserData));
         const expected = [
             {type: 'USER_CHANGE_PASSWORD_ERROR', error: null},
-            {type: 'USER_CHANGE_PASSWORD_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_CHANGE_PASSWORD_SUCCESS', updated: null},
-            {type: 'USER_CHANGE_PASSWORD_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_CHANGE_PASSWORD_SUCCESS', updated: mockUserData},
         ];
 
@@ -88,9 +89,9 @@ describe('user changePassword actions', () => {
         fetch.mockReject(new Error('some error'))
         const expected = [
             {type: 'USER_CHANGE_PASSWORD_ERROR', error: null},
-            {type: 'USER_CHANGE_PASSWORD_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_CHANGE_PASSWORD_SUCCESS', updated: null},
-            {type: 'USER_CHANGE_PASSWORD_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_CHANGE_PASSWORD_ERROR', error: 'some error'},
         ];
 
@@ -107,9 +108,9 @@ describe('user changePassword actions', () => {
         fetch.mockReject(new SubmissionError(errors));
         const expected = [
             {type: 'USER_CHANGE_PASSWORD_ERROR', error: null},
-            {type: 'USER_CHANGE_PASSWORD_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_CHANGE_PASSWORD_SUCCESS', updated: null},
-            {type: 'USER_CHANGE_PASSWORD_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_CHANGE_PASSWORD_ERROR', error: 'some error'},
         ];
 

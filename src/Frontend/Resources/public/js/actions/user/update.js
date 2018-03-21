@@ -1,13 +1,10 @@
 import { SubmissionError } from 'redux-form';
 import fetch from '../../utils/fetch';
 import { success as createSuccess } from './create';
+import { loading } from "../global";
 
 export function retrieveError(retrieveError) {
     return {type: 'USER_UPDATE_RETRIEVE_ERROR', retrieveError};
-}
-
-export function retrieveLoading(retrieveLoading) {
-    return {type: 'USER_UPDATE_RETRIEVE_LOADING', retrieveLoading};
 }
 
 export function retrieveSuccess(retrieved) {
@@ -16,16 +13,16 @@ export function retrieveSuccess(retrieved) {
 
 export function retrieve(id) {
     return (dispatch) => {
-        dispatch(retrieveLoading(true));
+        dispatch(loading(true));
 
         return fetch(id)
             .then(response => response.json())
             .then(data => {
-                dispatch(retrieveLoading(false));
+                dispatch(loading(false));
                 dispatch(retrieveSuccess(data));
             })
             .catch(e => {
-                dispatch(retrieveLoading(false));
+                dispatch(loading(false));
                 dispatch(retrieveError(e.message));
             });
     };
@@ -33,10 +30,6 @@ export function retrieve(id) {
 
 export function updateError(updateError) {
     return {type: 'USER_UPDATE_UPDATE_ERROR', updateError};
-}
-
-export function updateLoading(updateLoading) {
-    return {type: 'USER_UPDATE_UPDATE_LOADING', updateLoading};
 }
 
 export function updateSuccess(updated) {
@@ -47,7 +40,7 @@ export function update(item, values) {
     return (dispatch) => {
         dispatch(updateError(null));
         dispatch(createSuccess(null));
-        dispatch(updateLoading(true));
+        dispatch(loading(true));
         dispatch(updateSuccess(null));
 
         return fetch(item['@id'], {
@@ -58,11 +51,11 @@ export function update(item, values) {
         )
             .then(response => response.json())
             .then(data => {
-                dispatch(updateLoading(false));
+                dispatch(loading(false));
                 dispatch(updateSuccess(data));
             })
             .catch(e => {
-                dispatch(updateLoading(false));
+                dispatch(loading(false));
 
                 if (e instanceof SubmissionError) {
                     dispatch(updateError(e.errors._error));

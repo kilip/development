@@ -12,6 +12,7 @@ import {
     CardBody,
     CardFooter
 } from 'reactstrap';
+import Loader from '../Loader';
 
 class List extends Component {
     componentDidMount() {
@@ -41,17 +42,16 @@ class List extends Component {
                     <strong>Daftar User</strong>
                 </CardHeader>
                 <CardBody>
-                    {this.props.loading && <div className="alert alert-info">Loading...</div>}
                     {this.props.deletedItem && <div className="alert alert-success">{this.props.deletedItem['fullName']} deleted.</div>}
                     {this.props.error && <div className="alert alert-danger">{this.props.error}</div>}
-                    <table className="table table-responsive table-striped table-hover">
+                    <table className="table table-responsive table-striped table-hover mh-300">
                         <thead>
-                            <tr>
-                                <th>Full Name</th>
-                                <th>username</th>
-                                <th>email</th>
-                                <th colSpan={2}></th>
-                            </tr>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>username</th>
+                            <th>email</th>
+                            <th colSpan={2}></th>
+                        </tr>
                         </thead>
                         <tbody>
                         {this.props.data['hydra:member'] && this.props.data['hydra:member'].map(item =>
@@ -96,12 +96,12 @@ class List extends Component {
         const {'hydra:first': first, 'hydra:previous': previous,'hydra:next': next, 'hydra:last': last} = view;
 
         return (
-            <nav aria-label="Page navigation">
+            <div>
               <Link to='.' className={`btn btn-primary${previous ? '' : ' disabled'}`}><span aria-hidden="true">&lArr;</span> First</Link>
               <Link to={!previous || previous === first ? '.' : previous} className={`btn btn-primary${previous ? '' : ' disabled'}`}><span aria-hidden="true">&larr;</span> Previous</Link>
               <Link to={next ? next : '#'} className={`btn btn-primary${next ? '' : ' disabled'}`}>Next <span aria-hidden="true">&rarr;</span></Link>
               <Link to={last ? last : '#'} className={`btn btn-primary${next ? '' : ' disabled'}`}>Last <span aria-hidden="true">&rArr;</span></Link>
-            </nav>
+            </div>
         );
     }
 }
@@ -119,7 +119,7 @@ const mapStateToProps = (state) => {
     return {
         data: state.users.list.data,
         error: state.users.list.error,
-        loading: state.users.list.loading,
+        loading: state.app.loading,
         deletedItem: state.users.del.deleted,
         authenticated: state.security.user
     };

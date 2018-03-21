@@ -1,15 +1,12 @@
 import { SubmissionError } from 'redux-form';
 import fetch from '../../utils/fetch';
+import { loading } from "../global";
 
 const USER_ADMIN_CONTEXT = 'admin';
 const USER_PROFILE_CONTEXT = 'profile';
 
 export function retrieveError(retrieveError) {
     return {type: 'USER_CHANGE_PASSWORD_RETRIEVE_ERROR', retrieveError};
-}
-
-export function retrieveLoading(retrieveLoading) {
-    return {type: 'USER_CHANGE_PASSWORD_RETRIEVE_LOADING', retrieveLoading};
 }
 
 export function retrieveSuccess(retrieved) {
@@ -21,16 +18,16 @@ export function retrieve(id,context=USER_ADMIN_CONTEXT) {
     return (dispatch) => {
         dispatch(retrieveError(null));
         dispatch(retrieveSuccess(null));
-        dispatch(retrieveLoading(true));
+        dispatch(loading(true));
 
         return fetch(url)
             .then(response => response.json())
             .then(data => {
-                dispatch(retrieveLoading(false));
+                dispatch(loading(false));
                 dispatch(retrieveSuccess(data));
             })
             .catch(e => {
-                dispatch(retrieveLoading(false));
+                dispatch(loading(false));
                 dispatch(retrieveError(e.message));
             });
     };
@@ -38,10 +35,6 @@ export function retrieve(id,context=USER_ADMIN_CONTEXT) {
 
 export function error(error) {
     return {type: 'USER_CHANGE_PASSWORD_ERROR', error};
-}
-
-export function loading(loading) {
-    return {type: 'USER_CHANGE_PASSWORD_LOADING', loading};
 }
 
 export function success(updated) {

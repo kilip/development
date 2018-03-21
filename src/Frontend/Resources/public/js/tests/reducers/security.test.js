@@ -1,6 +1,5 @@
 import reducers from '../../reducers/security';
 import * as actions from '../../actions/security/authentication';
-import _ from 'lodash';
 import {reducerTest} from "../util";
 
 describe('security reducers', () => {

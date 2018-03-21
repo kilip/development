@@ -1,11 +1,8 @@
 import fetch from '../../utils/fetch';
+import {loading } from "../global";
 
 export function error(error) {
   return {type: 'USER_DELETE_ERROR', error};
-}
-
-export function loading(loading) {
-  return {type: 'USER_DELETE_LOADING', loading};
 }
 
 export function success(deleted) {

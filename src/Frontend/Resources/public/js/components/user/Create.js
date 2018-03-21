@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileForm from './forms/profile';
-import { create, loading, error } from '../../actions/user/create';
+import { create, error } from '../../actions/user/create';
+import { loading } from "../../actions/global";
 import {
     Card,
     CardBody,
@@ -55,7 +56,7 @@ const mapStateToProps = (state) => {
     return {
         created: state.users.create.created,
         error: state.users.create.error,
-        loading: state.users.create.loading,
+        loading: state.app.loading,
     };
 };
 

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { error, loading, updateSuccess, retrieve, update, reset } from '../../actions/user/profile';
+import { error, updateSuccess, retrieve, update, reset } from '../../actions/user/profile';
+import { loading } from "../../actions/global";
 import {
     Col,
     Row,
@@ -58,7 +59,7 @@ class Profile extends Component {
                         <strong>Profil Saya</strong>
                     </CardHeader>
                     <CardBody>
-                        <Row>
+                        <Row className="mh-300">
                             <Col xs="12" md="12" className="mb-4">
                                 <Nav tabs>
                                     <NavItem>

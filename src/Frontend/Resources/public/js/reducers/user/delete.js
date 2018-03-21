@@ -10,16 +10,6 @@ export function error(state = null, action) {
   }
 }
 
-export function loading(state = false, action) {
-  switch (action.type) {
-    case 'USER_DELETE_LOADING':
-      return action.loading;
-
-    default:
-      return state;
-  }
-}
-
 export function deleted(state = null, action) {
   switch (action.type) {
     case 'USER_DELETE_SUCCESS':
@@ -30,4 +20,4 @@ export function deleted(state = null, action) {
   }
 }
 
-export default combineReducers({error, loading, deleted});
+export default combineReducers({error, deleted});

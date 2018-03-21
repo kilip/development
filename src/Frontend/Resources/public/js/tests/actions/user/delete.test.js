@@ -1,7 +1,7 @@
 import expect from 'expect';
-
 import { mockStore } from "../../util";
 import { del } from '../../../actions/user/delete';
+import * as siap from "../../../actions/global";
 
 describe('user delete actions', () => {
     const mockUserData = {
@@ -14,8 +14,8 @@ describe('user delete actions', () => {
         fetch.mockResponse({message: 'some response'});
         const store = mockStore({});
         const expected = [
-            { type: 'USER_DELETE_LOADING', loading: true },
-            { type: 'USER_DELETE_LOADING', loading: false },
+            { type: siap.SIAP_LOADING, loading: true },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_DELETE_SUCCESS', deleted: mockUserData }
         ];
         return store.dispatch(del(mockUserData))
@@ -29,8 +29,8 @@ describe('user delete actions', () => {
         fetch.mockReject(new Error('some error'));
         const store = mockStore({});
         const expected = [
-            { type: 'USER_DELETE_LOADING', loading: true },
-            { type: 'USER_DELETE_LOADING', loading: false },
+            { type: siap.SIAP_LOADING, loading: true },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_DELETE_ERROR', error: 'some error' }
         ];
         return store.dispatch(del(mockUserData))

@@ -24,7 +24,7 @@ class SIAP extends Component {
 
 function mapStateToProps(state){
     return {
-        user: state.user
+        loading: state.app.ready
     };
 }
 export default connect(mapStateToProps)(SIAP);

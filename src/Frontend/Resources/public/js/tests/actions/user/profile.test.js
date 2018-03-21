@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
 import {SubmissionError} from 'redux-form';
-
+import * as siap from "../../../actions/global";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -18,9 +18,9 @@ describe('user profile actions', () => {
         };
         const expectedActions = [
             {type: 'USER_PROFILE_ERROR', error: null},
-            {type: 'USER_PROFILE_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_PROFILE_UPDATED_SUCCESS', updated: null},
-            {type: 'USER_PROFILE_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_PROFILE_UPDATED_SUCCESS', updated: returns},
         ];
 
@@ -39,9 +39,9 @@ describe('user profile actions', () => {
         fetch.mockReject(new SubmissionError({_error: 'hello'}));
         const expectedActions = [
             {type: 'USER_PROFILE_ERROR', error: null},
-            {type: 'USER_PROFILE_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_PROFILE_UPDATED_SUCCESS', updated: null},
-            {type: 'USER_PROFILE_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_PROFILE_ERROR', error: 'hello'},
         ];
 
@@ -60,9 +60,9 @@ describe('user profile actions', () => {
         fetch.mockReject(new Error('some error'));
         const expectedActions = [
             {type: 'USER_PROFILE_ERROR', error: null},
-            {type: 'USER_PROFILE_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_PROFILE_UPDATED_SUCCESS', updated: null},
-            {type: 'USER_PROFILE_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_PROFILE_ERROR', error: 'some error'}
         ];
 
@@ -82,10 +82,10 @@ describe('user profile actions', () => {
             id: 'some-id'
         };
         const expectedActions = [
-            {type: 'USER_PROFILE_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_PROFILE_ERROR', error: null},
             {type: 'USER_PROFILE_RETRIEVED_SUCCESS', retrieved: null},
-            {type: 'USER_PROFILE_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_PROFILE_RETRIEVED_SUCCESS', retrieved: returns},
         ];
 
@@ -103,10 +103,10 @@ describe('user profile actions', () => {
         };
         fetch.mockReject(new SubmissionError());
         const expectedActions = [
-            {type: 'USER_PROFILE_LOADING', loading: true},
+            {type: siap.SIAP_LOADING, loading: true},
             {type: 'USER_PROFILE_ERROR', error: null},
             {type: 'USER_PROFILE_RETRIEVED_SUCCESS', retrieved: null},
-            {type: 'USER_PROFILE_LOADING', loading: false},
+            {type: siap.SIAP_LOADING, loading: false},
             {type: 'USER_PROFILE_ERROR', error: 'Submit Validation Failed'},
         ];
 

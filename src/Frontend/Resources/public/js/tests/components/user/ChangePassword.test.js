@@ -27,7 +27,8 @@ describe('<ChangePassword/> Component', () => {
             changePassword: {
                 retrieved: mockCurrentUser,
             }
-        }
+        },
+        app: { loading:false }
     };
 
     it('should rendered properly', () => {
@@ -35,10 +36,6 @@ describe('<ChangePassword/> Component', () => {
         let wrapper = getComponent(props,state);
         expect(wrapper.text()).toContain('Password lama anda');
         expect(wrapper.text()).toContain('Password baru');
-
-        state.users.changePassword.loading = true;
-        wrapper = getComponent(props,state);
-        expect(wrapper.text()).toContain('Memproses data');
 
         state.users.changePassword.error = 'some error';
         wrapper = getComponent(props,state);

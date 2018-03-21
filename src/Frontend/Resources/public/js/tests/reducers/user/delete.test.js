@@ -1,22 +1,12 @@
 import reducers from '../../../reducers/user/delete';
-import _ from 'lodash';
 import {reducerTest} from "../../util";
 const initialState = {
     error: null,
-    loading: false,
     deleted: null
 };
 
 describe('user delete reducers', () => {
     const actions = [
-        {
-            type: 'USER_DELETE_LOADING',
-            expectedState: {
-                ...initialState,
-                loading: true
-            },
-            action: { loading: true }
-        },
         {
             type: 'USER_DELETE_ERROR',
             expectedState: {

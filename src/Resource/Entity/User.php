@@ -174,7 +174,7 @@ class User extends BaseUser
      *     groups={"profilePassword"}
      * )
      * @Assert\NotBlank(
-     *     groups={"password","profilePassword"}
+     *     groups={"profilePassword"}
      * )
      *
      * @var string

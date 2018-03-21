@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 export function error(state = null, action) {
   switch (action.type) {
@@ -7,19 +7,6 @@ export function error(state = null, action) {
 
     case 'USER_SHOW_RESET':
       return null;
-
-    default:
-      return state;
-  }
-}
-
-export function loading(state = false, action) {
-  switch (action.type) {
-    case 'USER_SHOW_LOADING':
-      return action.loading;
-
-    case 'USER_SHOW_RESET':
-      return false;
 
     default:
       return state;
@@ -39,4 +26,4 @@ export function retrieved(state = null, action) {
   }
 }
 
-export default combineReducers({error, loading, retrieved});
+export default combineReducers({error, retrieved});

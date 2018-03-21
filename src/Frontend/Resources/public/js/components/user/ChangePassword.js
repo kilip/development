@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ChangePasswordForm from './forms/password';
-import { retrieve, changePassword,reset, success,error,loading } from '../../actions/user/changePassword';
+import { retrieve, changePassword,reset, success,error } from '../../actions/user/changePassword';
+import { loading } from "../../actions/global";
 
 class ChangePassword extends Component {
     componentDidMount() {
@@ -18,13 +19,6 @@ class ChangePassword extends Component {
         const { context } = this.props;
         return (
             <div className="animated fadeIn">
-                {
-                    this.props.loading &&
-                    <div className="alert alert-info" role="alert">
-                        <span className="fa fa-exclamation-triangle" aria-hidden="true"/>
-                        &nbsp;Memproses data
-                    </div>
-                }
                 {
                     this.props.error &&
                     <div className="alert alert-danger" role="alert">
@@ -68,7 +62,7 @@ ChangePassword.propTypes = {
 const mapStateToProps = (state) => {
     return {
         error: state.users.changePassword.error,
-        loading: state.users.changePassword.loading,
+        loading: state.app.loading,
         updated: state.users.changePassword.updated,
         retrieved: state.users.changePassword.retrieved,
         retrieveError: state.users.changePassword.retrieveError

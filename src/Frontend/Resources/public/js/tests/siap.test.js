@@ -23,6 +23,9 @@ describe('<SIAP/> Component', () => {
             auth: null,
             fetching: false,
             authenticated: false
+        },
+        app: {
+            loading: false
         }
     };
     it('should display login when user not authenticated', () => {

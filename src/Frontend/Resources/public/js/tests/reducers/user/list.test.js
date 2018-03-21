@@ -1,9 +1,7 @@
 import reducers from '../../../reducers/user/list';
-import _ from 'lodash';
 import {reducerTest} from "../../util";
 const initialState = {
     error: null,
-    loading: false,
     data: {}
 };
 
@@ -16,14 +14,6 @@ describe('user list reducers', () => {
                 ...initialState
             },
             action: {}
-        },
-        {
-            type: 'USER_LIST_LOADING',
-            expectedState: {
-                ...initialState,
-                loading: true
-            },
-            action: { loading: true }
         },
         {
             type: 'USER_LIST_ERROR',
