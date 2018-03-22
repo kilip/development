@@ -98,6 +98,7 @@ class Form extends Component {
                     <i className="fa fa-save"/>
                     Simpan
                 </button>
+
                 <Link to="/baptisans" className="btn btn-primary">
                     <i className="fa fa-table"/>
                     Daftar Baptisan

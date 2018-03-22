@@ -33,6 +33,17 @@ export function retrieved(state=null, action){
     }
 }
 
+export function created(state=null, action){
+    switch(action.type){
+        case constants.BAPTISAN_CREATED:
+            return action.created;
+        case constants.BAPTISAN_RESET:
+            return null;
+        default:
+            return state;
+    }
+}
+
 export function updated(state=null, action){
     switch(action.type){
         case constants.BAPTISAN_UPDATED:
@@ -55,4 +66,4 @@ export function removed(state=null,action){
     }
 }
 
-export default combineReducers({list,error,retrieved,updated,removed});
+export default combineReducers({list,error,retrieved,updated,removed,created});

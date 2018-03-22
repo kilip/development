@@ -5,9 +5,10 @@ import {
     Card,
     CardHeader,
     CardBody,
+    CardFooter
 } from 'reactstrap';
-import { retrieve, update } from "../../actions/baptisan";
-import { Redirect } from 'react-router-redux';
+import { retrieve, update, remove } from "../../actions/baptisan";
+import { Redirect } from 'react-router-dom';
 import Form from './Form';
 
 class Update extends Component{
@@ -15,8 +16,14 @@ class Update extends Component{
         this.props.retrieve(this.props.match.params.id);
     }
 
+    remove = () =>{
+        if (window.confirm('Apakah anda yakin ingin menghapus data ini?')){
+            this.props.remove(this.props.retrieved);
+        }
+    };
+
     render(){
-        if (this.props.deleted){
+        if (this.props.removed){
             return <Redirect to="/baptisans"/>;
         }
         const item = this.props.updated ? this.props.updated : this.props.retrieved;
@@ -32,9 +39,16 @@ class Update extends Component{
                     <Form
                         onSubmit={values => this.props.update(item,values)}
                         initialValues={item}
+                        context="update"
                         id="formBaptisanUpdate"
                     />
                 </CardBody>
+                <CardFooter>
+                    {
+                        (this.props.context!=='create' && this.props.remove) &&
+                        <button onClick={this.remove} className="btn btn-danger">Hapus</button>
+                    }
+                </CardFooter>
             </Card>
         );
 
@@ -44,23 +58,25 @@ class Update extends Component{
 Update.propTypes = {
     retrieved: PropTypes.object,
     updated: PropTypes.object,
-    deleted: PropTypes.object,
+    removed: PropTypes.object,
     retrieve: PropTypes.func.isRequired,
-    update: PropTypes.func.isRequired
+    update: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
     return {
         retrieved: state.baptisan.retrieved,
         updated: state.baptisan.updated,
-        deleted: state.baptisan.deleted
+        removed: state.baptisan.removed,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         retrieve: (id) => dispatch(retrieve(id)),
-        update: (item,values) => dispatch(update(item,values))
+        update: (item,values) => dispatch(update(item,values)),
+        remove: (item) => dispatch(remove(item))
     };
 };
 

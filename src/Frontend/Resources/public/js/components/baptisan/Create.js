@@ -10,7 +10,7 @@ import {
 import { create } from "../../actions/baptisan";
 
 import Form from './Form';
-import { Redirect } from 'react-router-redux';
+import { Redirect } from 'react-router-dom';
 
 export class Create extends Component {
     render(){

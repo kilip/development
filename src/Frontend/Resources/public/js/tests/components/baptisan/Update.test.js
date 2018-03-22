@@ -69,7 +69,7 @@ describe('<Update/> Component', () => {
     });
 
     it('should redirect when baptisan deleted', () => {
-        state.baptisan.deleted = {id: 'some-id'};
+        state.baptisan.removed = {id: 'some-id'};
         const wrapper = getComponent(props,state);
         expect(wrapper.text()).toContain('Redirected');
     });

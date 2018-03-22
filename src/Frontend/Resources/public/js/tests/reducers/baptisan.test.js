@@ -8,7 +8,8 @@ describe('security reducers', () => {
         error: null,
         retrieved: null,
         updated: null,
-        removed: null
+        removed: null,
+        created: null,
     };
 
     const testActions = [

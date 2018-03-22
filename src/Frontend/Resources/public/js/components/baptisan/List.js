@@ -11,7 +11,6 @@ import { listRetrieve } from "../../actions/baptisan";
 import Paginator from '../Paginator';
 import { Link } from 'react-router-dom';
 
-
 export class List extends Component {
     componentDidMount() {
         this.props.listRetrieve(
@@ -49,13 +48,18 @@ export class List extends Component {
     };
 
     render() {
-
         return (
             <Card>
                 <CardHeader>
                     <strong>Buku Baptis</strong>
                 </CardHeader>
                 <CardBody>
+                    {
+                        this.props.removed &&
+                        <div className="alert alert-success">
+                            Data baptisan {this.props.removed['nama']} berhasil dihapus.
+                        </div>
+                    }
                     <table className="table table-responsive table-striped table-hover mh-300">
                         <thead>
                             <tr>
@@ -83,7 +87,7 @@ export class List extends Component {
 }
 
 List.propTypes = {
-    match: PropTypes.object,
+    removed: PropTypes.object,
     listRetrieve: PropTypes.func.isRequired,
     list: PropTypes.object,
     error: PropTypes.string,
@@ -93,6 +97,7 @@ const mapStateToProps = (state) => {
     return {
         list: state.baptisan.list,
         error: state.baptisan.error,
+        removed: state.baptisan.removed
     };
 };
 
