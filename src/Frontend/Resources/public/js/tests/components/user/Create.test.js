@@ -22,10 +22,12 @@ describe('<Create/> Component', () => {
     const state = {
         users: {
             create: {
-                loading: false,
                 created: null,
                 error: null,
             }
+        },
+        app: {
+            loading: false,
         }
     };
 

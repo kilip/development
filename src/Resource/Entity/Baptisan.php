@@ -6,7 +6,7 @@ namespace Paroki\Resource\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Baptisan.
  *
@@ -47,28 +47,26 @@ class Baptisan
 
     /**
      * @ORM\Column(name="nama",type="string",length=100)
-     *
+     * @Assert\NotBlank
      * @var string
      */
     private $nama;
 
     /**
      * @ORM\Column(name="nama_baptis",type="string", length=50)
-     *
+     * @Assert\NotBlank
      * @var string
      */
     private $namaBaptis;
 
     /**
      * @ORM\Column(name="ayah", type="string", length=100)
-     *
      * @var string
      */
     private $ayah;
 
     /**
      * @ORM\Column(name="ibu", type="string",length=100)
-     *
      * @var string
      */
     private $ibu;

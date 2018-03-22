@@ -1,6 +1,5 @@
 import * as actions from '../actions/global';
 import { combineReducers } from 'redux';
-import {} from "./security";
 
 export function loading(state=false, action){
     switch(action.type){
