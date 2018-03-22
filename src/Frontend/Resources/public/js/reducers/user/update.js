@@ -13,19 +13,6 @@ export function retrieveError(state = null, action) {
   }
 }
 
-export function retrieveLoading(state = false, action) {
-  switch (action.type) {
-    case 'USER_UPDATE_RETRIEVE_LOADING':
-      return action.retrieveLoading;
-
-    case 'USER_UPDATE_RESET':
-      return false;
-
-    default:
-      return state;
-  }
-}
-
 export function retrieved(state = null, action) {
   switch (action.type) {
     case 'USER_UPDATE_RETRIEVE_SUCCESS':
@@ -52,19 +39,6 @@ export function updateError(state = null, action) {
   }
 }
 
-export function updateLoading(state = false, action) {
-  switch (action.type) {
-    case 'USER_UPDATE_UPDATE_LOADING':
-      return action.updateLoading;
-
-    case 'USER_UPDATE_RESET':
-      return false;
-
-    default:
-      return state;
-  }
-}
-
 export function updated(state = null, action) {
   switch (action.type) {
     case 'USER_UPDATE_UPDATE_SUCCESS':
@@ -78,4 +52,4 @@ export function updated(state = null, action) {
   }
 }
 
-export default combineReducers({retrieveError, retrieveLoading, retrieved, updateError, updateLoading, updated});
+export default combineReducers({retrieveError, retrieved, updateError,  updated});

@@ -585,6 +585,10 @@ babel-plugin-jest-hoist@^23.0.0-alpha.0:
   version "23.0.0-alpha.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.0.0-alpha.0.tgz#9d3e334679db15795de6b7df46b04bdb2d191869"
 
+babel-plugin-rewire@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-rewire/-/babel-plugin-rewire-1.1.0.tgz#a6b966d9d8c06c03d95dcda2eec4e2521519549b"
+
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"
@@ -3039,6 +3043,10 @@ hawk@~7.0.7:
     cryptiles "4.x.x"
     hoek "5.x.x"
     sntp "3.x.x"
+
+headjs@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/headjs/-/headjs-1.0.3.tgz#b368ebbfa8b6c3961c1a33105ec811d54dd8783f"
 
 history@^4.7.2:
   version "4.7.2"
@@ -5707,6 +5715,12 @@ react-input-autosize@^2.1.2:
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.1.tgz#ec428fa15b1592994fb5f9aa15bb1eb6baf420f8"
   dependencies:
     prop-types "^15.5.8"
+
+react-placeholder@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-placeholder/-/react-placeholder-2.0.0.tgz#5117b4758927dc5ae5fcbf62552ab98209f6666c"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-popper@^0.7.2:
   version "0.7.5"

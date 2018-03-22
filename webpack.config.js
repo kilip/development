@@ -22,14 +22,19 @@ Encore
     // the public path used by the web server to access the previous directory
     .setPublicPath('/build')
     .enableSourceMaps(!Encore.isProduction())
+    .enableSassLoader()
 
     .enableReactPreset()
-
+    .addStyleEntry('css/siap','./src/Frontend/Resources/public/sass/siap.scss')
     .addEntry('js/siap','./src/Frontend/Resources/public/js/index.js')
+
+    .addStyleEntry('css/loader','./src/Frontend/Resources/public/loader/head.scss')
+    .addEntry('js/head','./node_modules/headjs/dist/1.0.0/head.js')
+    .addEntry('js/loader','./src/Frontend/Resources/public/loader/head.js')
 ;
 
-const themeConfig = Encore.getWebpackConfig();
-themeConfig.name = "frontend";
+const siapConfig = Encore.getWebpackConfig();
+siapConfig.name = "siap";
 Encore.reset();
 
 Encore
@@ -45,7 +50,7 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableSassLoader()
 
-    .addStyleEntry('css/siap','./src/Frontend/Resources/public/sass/main.scss')
+    .addStyleEntry('css/theme','./src/Frontend/Resources/public/sass/theme.scss')
     .addStyleEntry('css/coming-soon','./src/Frontend/Resources/public/sass/coming-soon.scss')
 
     .addEntry('js/jquery','./node_modules/jquery/dist/jquery.js')
@@ -59,7 +64,7 @@ Encore
 
     .autoProvidejQuery()
 ;
-const styleConfig = Encore.getWebpackConfig();
-styleConfig.name = 'style';
+const themeConfig = Encore.getWebpackConfig();
+themeConfig.name = 'theme';
 
-module.exports = [themeConfig,styleConfig];
+module.exports = [siapConfig,themeConfig];

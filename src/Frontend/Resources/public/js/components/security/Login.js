@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
-
+import {Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import Container from '../Loader';
 import { connect } from 'react-redux';
 import { login } from '../../actions/security/authentication';
 import PropTypes from 'prop-types';

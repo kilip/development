@@ -13,19 +13,6 @@ export function error(state = null, action) {
   }
 }
 
-export function loading(state = false, action) {
-  switch (action.type) {
-    case 'USER_LIST_LOADING':
-      return action.loading;
-
-    case 'USER_LIST_RESET':
-      return false;
-
-    default:
-      return state;
-  }
-}
-
 export function data(state = {}, action) {
   switch (action.type) {
     case 'USER_LIST_SUCCESS':
@@ -39,4 +26,4 @@ export function data(state = {}, action) {
   }
 }
 
-export default combineReducers({error, loading, data});
+export default combineReducers({error, data});

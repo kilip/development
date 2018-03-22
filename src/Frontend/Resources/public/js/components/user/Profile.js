@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { error, loading, updateSuccess, retrieve, update, reset } from '../../actions/user/profile';
+import { error, updateSuccess, retrieve, update, reset } from '../../actions/user/profile';
+import { loading } from "../../actions/global";
 import {
     Col,
     Row,
@@ -58,7 +59,7 @@ class Profile extends Component {
                         <strong>Profil Saya</strong>
                     </CardHeader>
                     <CardBody>
-                        <Row>
+                        <Row className="mh-300">
                             <Col xs="12" md="12" className="mb-4">
                                 <Nav tabs>
                                     <NavItem>
@@ -142,10 +143,10 @@ Profile.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        updated: state.userAdmin.profile.updated,
-        retrieved: state.userAdmin.profile.retrieved,
-        error: state.userAdmin.profile.error,
-        loading: state.userAdmin.profile.loading,
+        updated: state.users.profile.updated,
+        retrieved: state.users.profile.retrieved,
+        error: state.users.profile.error,
+        loading: state.users.profile.loading,
         currentUser: state.security.auth
     };
 };

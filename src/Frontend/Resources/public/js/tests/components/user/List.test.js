@@ -16,7 +16,7 @@ function getComponent(props ={},state = {}, context = {}){
     );
 }
 
-describe('<Create/> Component', () => {
+describe('<List/> Component', () => {
 
     const mockData = {
         'hydra:member': [
@@ -39,15 +39,17 @@ describe('<Create/> Component', () => {
     };
 
     const state = {
-        userAdmin: {
+        users: {
             list: {
-                data: mockData,
-                loading: false,
+                data: mockData
             },
             del: {},
         },
         security: {
             user: {}
+        },
+        app: {
+            loading: false,
         }
     };
 

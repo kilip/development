@@ -1,12 +1,9 @@
 import { SubmissionError } from 'redux-form';
 import fetch from '../../utils/fetch';
+import { loading } from '../global';
 
 export function error(error) {
   return {type: 'USER_CREATE_ERROR', error};
-}
-
-export function loading(loading) {
-  return {type: 'USER_CREATE_LOADING', loading};
 }
 
 export function success(created) {

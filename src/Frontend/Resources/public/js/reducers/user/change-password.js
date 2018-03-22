@@ -13,19 +13,6 @@ export function retrieveError(state = null, action) {
   }
 }
 
-export function retrieveLoading(state = false, action) {
-  switch (action.type) {
-    case 'USER_CHANGE_PASSWORD_RETRIEVE_LOADING':
-      return action.retrieveLoading;
-
-    case 'USER_CHANGE_PASSWORD_RESET':
-      return false;
-
-    default:
-      return state;
-  }
-}
-
 export function retrieved(state = null, action) {
   switch (action.type) {
     case 'USER_CHANGE_PASSWORD_RETRIEVE_SUCCESS':
@@ -52,19 +39,6 @@ export function error(state = null, action) {
   }
 }
 
-export function loading(state = false, action) {
-  switch (action.type) {
-    case 'USER_CHANGE_PASSWORD_LOADING':
-      return action.loading;
-
-    case 'USER_CHANGE_PASSWORD_RESET':
-      return false;
-
-    default:
-      return state;
-  }
-}
-
 export function updated(state = null, action) {
   switch (action.type) {
     case 'USER_CHANGE_PASSWORD_SUCCESS':
@@ -80,9 +54,7 @@ export function updated(state = null, action) {
 
 export default combineReducers({
     retrieveError,
-    retrieveLoading,
     retrieved,
     error,
-    loading,
     updated
 });

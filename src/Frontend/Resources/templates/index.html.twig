@@ -9,7 +9,8 @@
     <meta name="keyword" content="SIAP parok church catholic">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/siap.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/loader.css') }}"/>
+    <script type="text/javascript" src="{{ asset('build/js/head.js') }}" data-headjs-load="{{ asset('build/js/loader.js') }}"></script>
     <title>SIAP - Sistim Informasi dan Administrasi Paroki</title>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -17,9 +18,18 @@
     Anda harus mengaktifkan javascript untuk menggunakan aplikasi ini.
 </noscript>
 <div id="root"></div>
-<script type="text/javascript" src="{{ asset('build/js/siap.js') }}"></script>
 {% if app.environment !='prod' %}
     <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 {% endif %}
+
+<script type="text/javascript">
+    var siapResources = [
+        "{{ asset('build/css/theme.css') }}",
+        "{{ asset('build/css/siap.css') }}",
+        "{{ asset('build/js/siap.js') }}"
+    ];
+</script>
+
+<div id="app-load" class="loading"></div>
 </body>
 </html>

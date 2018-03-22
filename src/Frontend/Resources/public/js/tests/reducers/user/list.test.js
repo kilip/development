@@ -1,8 +1,7 @@
 import reducers from '../../../reducers/user/list';
-import _ from 'lodash';
+import {reducerTest} from "../../util";
 const initialState = {
     error: null,
-    loading: false,
     data: {}
 };
 
@@ -15,14 +14,6 @@ describe('user list reducers', () => {
                 ...initialState
             },
             action: {}
-        },
-        {
-            type: 'USER_LIST_LOADING',
-            expectedState: {
-                ...initialState,
-                loading: true
-            },
-            action: { loading: true }
         },
         {
             type: 'USER_LIST_ERROR',
@@ -42,18 +33,5 @@ describe('user list reducers', () => {
         }
     ];
 
-    _.each(actions,function(value){
-        it(`should handle ${value.type}`, () => {
-            const { type, expectedState, action } = value;
-            action.type = type;
-
-            expect(reducers(undefined,action)).toEqual(expectedState);
-        });
-
-    });
-
-
-    it('should handle initial state', () => {
-        expect(reducers(undefined,{})).toEqual(initialState);
-    });
+    reducerTest(reducers,initialState,actions);
 });

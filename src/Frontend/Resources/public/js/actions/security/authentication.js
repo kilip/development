@@ -1,6 +1,8 @@
 import {API_LOGIN_CHECK} from "../../config/global";
 import jwt from 'jsonwebtoken';
 import { SubmissionError } from 'redux-form';
+import { loading } from "../../actions/global";
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -43,6 +45,7 @@ export function login(credentials,options={}){
     return (dispatch) => {
         dispatch(reset());
         dispatch(requestLogin(true));
+        dispatch(loading(true));
 
         return fetch(API_LOGIN_CHECK,options)
             .then(response => response.json().then(data => {
@@ -63,10 +66,12 @@ export function login(credentials,options={}){
                     localStorage.setItem('token', data.token);
 
                     // Dispatch the success action
+                    dispatch(loading(false));
                     dispatch(receiveLogin(user))
                 }
             }))
             .catch(err => {
+                dispatch(loading(false));
                 dispatch(requestLogin(false));
                 if(err instanceof SubmissionError){
                     dispatch(loginError(err.errors._error));

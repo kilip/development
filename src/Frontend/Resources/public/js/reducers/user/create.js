@@ -10,15 +10,6 @@ export function error(state = null, action) {
   }
 }
 
-export function loading(state = false, action) {
-  switch (action.type) {
-    case 'USER_CREATE_LOADING':
-      return action.loading;
-
-    default:
-      return state;
-  }
-}
 
 export function created(state = null, action) {
   switch (action.type) {
@@ -30,4 +21,4 @@ export function created(state = null, action) {
   }
 }
 
-export default combineReducers({error, loading, created});
+export default combineReducers({error, created});

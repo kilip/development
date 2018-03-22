@@ -7,9 +7,11 @@ import {BrowserRouter} from 'react-router-dom';
 const mockStore = configureStore();
 function getComponent(props ={},state = {}, context = {}){
     return mount(
-        <BrowserRouter>
-            <DashboardContainer {...props} store={mockStore(state)}/>
-        </BrowserRouter>
+        <Provider store={mockStore(state)}>
+            <BrowserRouter>
+                <DashboardContainer {...props}/>
+            </BrowserRouter>
+        </Provider>
         , {context}
     );
 }
@@ -27,6 +29,9 @@ describe('<DashboardContainer/>', () => {
                 },
                 isLoading: false
             }
+        },
+        app: {
+            loading: false
         }
     };
 

@@ -1,11 +1,8 @@
 import fetch from '../../utils/fetch';
+import { loading } from "../global";
 
 export function error(error) {
   return {type: 'USER_SHOW_ERROR', error};
-}
-
-export function loading(loading) {
-  return {type: 'USER_SHOW_LOADING', loading};
 }
 
 export function retrieved(retrieved) {

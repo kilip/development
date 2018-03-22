@@ -1,12 +1,8 @@
 import * as actions from "../../../actions/security/authentication";
-import thunk from 'redux-thunk';
-import configureMockStore from 'redux-mock-store';
+import * as siapActions from '../../../actions/global';
 import expect from 'expect';
 import jwt from 'jsonwebtoken';
-
-
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+import { mockStore } from "../../util";
 
 describe('login actions', () => {
     const iat = Math.floor(Date.now() / 1000);
@@ -34,6 +30,8 @@ describe('login actions', () => {
         const expectedActions = [
             { type: actions.LOGIN_RESET},
             { type: actions.LOGIN_REQUEST, fetching: true },
+            { type: siapActions.SIAP_LOADING, loading: true},
+            { type: siapActions.SIAP_LOADING, loading: false},
             { type: actions.LOGIN_SUCCESS, user: user}
         ];
 
@@ -52,6 +50,8 @@ describe('login actions', () => {
         const expectedActions = [
             { type: actions.LOGIN_RESET},
             { type: actions.LOGIN_REQUEST, fetching: true },
+            { type: siapActions.SIAP_LOADING, loading: true },
+            { type: siapActions.SIAP_LOADING, loading: false },
             { type: actions.LOGIN_REQUEST, fetching: false},
             { type: actions.LOGIN_FAILURE, error: 'some message'}
         ];
@@ -75,6 +75,8 @@ describe('login actions', () => {
         const expectedActions = [
             { type: actions.LOGIN_RESET},
             { type: actions.LOGIN_REQUEST, fetching: true },
+            { type: siapActions.SIAP_LOADING, loading: true },
+            { type: siapActions.SIAP_LOADING, loading: false },
             { type: actions.LOGIN_REQUEST, fetching: false},
             { type: actions.LOGIN_FAILURE, error: 'Username atau password anda salah'}
         ];

@@ -6,7 +6,11 @@ import Breadcrumb from './components/Breadcrumb';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Dashboard from '../pages/Dashboard';
+import Loader from '../components/Loader';
+
+
 import UserRoutes from '../routes/user';
+import BaptisanRoutes from '../routes/baptisan';
 
 class DashboardContainer extends Component {
 
@@ -19,11 +23,14 @@ class DashboardContainer extends Component {
                     <main className="main">
                         <Breadcrumb />
                         <Container fluid>
-                            <Switch>
-                                <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                                {UserRoutes}
-                                <Redirect from="/" to="/dashboard"/>
-                            </Switch>
+                            <Loader>
+                                <Switch>
+                                    <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+                                    {UserRoutes}
+                                    {BaptisanRoutes}
+                                    <Redirect from="/" to="/dashboard"/>
+                                </Switch>
+                            </Loader>
                         </Container>
                     </main>
                 </div>

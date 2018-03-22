@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
 import { SubmissionError } from 'redux-form';
+import * as siap from "../../../actions/global";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -28,8 +29,8 @@ describe('user update actions', () => {
         fetch.mockResponse(JSON.stringify(mockUserData));
         const store = mockStore({});
         const expected = [
-            {type: 'USER_UPDATE_RETRIEVE_LOADING', retrieveLoading: true },
-            {type: 'USER_UPDATE_RETRIEVE_LOADING', retrieveLoading: false },
+            {type: siap.SIAP_LOADING, loading: true },
+            {type: siap.SIAP_LOADING, loading: false },
             {type: 'USER_UPDATE_RETRIEVE_SUCCESS', retrieved: mockUserData },
         ];
 
@@ -44,8 +45,8 @@ describe('user update actions', () => {
         fetch.mockReject(new Error('some error'));
         const store = mockStore({});
         const expected = [
-            {type: 'USER_UPDATE_RETRIEVE_LOADING', retrieveLoading: true },
-            {type: 'USER_UPDATE_RETRIEVE_LOADING', retrieveLoading: false },
+            {type: siap.SIAP_LOADING, loading: true },
+            {type: siap.SIAP_LOADING, loading: false },
             {type: 'USER_UPDATE_RETRIEVE_ERROR', retrieveError: 'some error' },
         ];
 
@@ -62,9 +63,9 @@ describe('user update actions', () => {
         const expected = [
             { type: 'USER_UPDATE_UPDATE_ERROR', updateError: null },
             { type: 'USER_CREATE_SUCCESS', created: null },
-            { type: 'USER_UPDATE_UPDATE_LOADING', updateLoading: true },
+            { type: siap.SIAP_LOADING, loading: true },
             { type: 'USER_UPDATE_UPDATE_SUCCESS', updated: null },
-            { type: 'USER_UPDATE_UPDATE_LOADING', updateLoading: false },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_UPDATE_UPDATE_SUCCESS', updated: mockUserData },
         ];
 
@@ -81,9 +82,9 @@ describe('user update actions', () => {
         const expected = [
             { type: 'USER_UPDATE_UPDATE_ERROR', updateError: null },
             { type: 'USER_CREATE_SUCCESS', created: null },
-            { type: 'USER_UPDATE_UPDATE_LOADING', updateLoading: true },
+            { type: siap.SIAP_LOADING, loading: true },
             { type: 'USER_UPDATE_UPDATE_SUCCESS', updated: null },
-            { type: 'USER_UPDATE_UPDATE_LOADING', updateLoading: false },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_UPDATE_UPDATE_ERROR', updateError: 'some error' },
         ];
 
@@ -101,9 +102,9 @@ describe('user update actions', () => {
         const expected = [
             { type: 'USER_UPDATE_UPDATE_ERROR', updateError: null },
             { type: 'USER_CREATE_SUCCESS', created: null },
-            { type: 'USER_UPDATE_UPDATE_LOADING', updateLoading: true },
+            { type: siap.SIAP_LOADING, loading: true },
             { type: 'USER_UPDATE_UPDATE_SUCCESS', updated: null },
-            { type: 'USER_UPDATE_UPDATE_LOADING', updateLoading: false },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_UPDATE_UPDATE_ERROR', updateError: 'some error' },
         ];
 

@@ -22,6 +22,9 @@ describe('<LoginForm/> Component', () => {
             auth: null,
             fetching: false,
             authenticated: false
+        },
+        app: {
+            loading: false
         }
     };
     it('should rendered properly', () => {

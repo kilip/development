@@ -1,14 +1,14 @@
 Paroki\Resource\Entity\Baptisan:
-    baptisan_{1..10}:
-        nama: <firstName('male')> <lastName('male')>
-        namaBaptis: <name('male')>
+    baptisan_{1..100}:
+        namaBaptis: <id_ID:namaBaptis('male')>
+        nama: '@self->namaBaptis <id_ID:lastNameMale()>'
         jenisKelamin: 1
-        ayah: <name('male')>
-        ibu: <name('female')>
+        ayah: <id_ID:namaBaptis('male')> <id_ID:lastName('male')>
+        ibu: <id_ID:namaBaptis('female')> <id_ID:lastName('female)>
 
-    baptisan_{11..20}:
-        nama: <firstName('female')> <lastName('female')>
-        namaBaptis: <name('female')>
+    baptisan_{101..200}:
+        namaBaptis: <id_ID:namaBaptis('female')>
+        nama: '@self->namaBaptis <id_ID:lastNameFemale()>'
         jenisKelamin: 2
-        ayah: <name('male')>
-        ibu: <name('female')>
+        ayah: <id_ID:namaBaptis('male')> <id_ID:lastName('male')>
+        ibu: <id_ID:namaBaptis('female')> <id_ID:lastName('female)>

@@ -1,25 +1,18 @@
 import reducers from '../../../reducers/user/update';
 const initialState = {
-    retrieveLoading: false,
     retrieveError: null,
     retrieved: null,
     updateError: null,
-    updateLoading: false,
     updated: null
 };
 import {reducerTest} from "../../util";
 
-describe('user show reducers', () => {
+describe('user update reducers', () => {
     const actions = [
         {
             type: 'USER_UPDATE_RESET',
             expectedState: initialState,
             action: {}
-        },
-        {
-            type: 'USER_UPDATE_RETRIEVE_LOADING',
-            expectedState: { retrieveLoading: true},
-            action: { retrieveLoading: true }
         },
         {
             type: 'USER_UPDATE_RETRIEVE_ERROR',
@@ -30,11 +23,6 @@ describe('user show reducers', () => {
             type: 'USER_UPDATE_RETRIEVE_SUCCESS',
             expectedState: { retrieved: 'some data'},
             action: { retrieved: 'some data' }
-        },
-        {
-            type: 'USER_UPDATE_UPDATE_LOADING',
-            expectedState: { updateLoading: true },
-            action: { updateLoading: true }
         },
         {
             type: 'USER_UPDATE_UPDATE_ERROR',

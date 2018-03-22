@@ -2,7 +2,7 @@ import { retrieve, reset} from '../../../actions/user/show';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
-
+import * as siap from "../../../actions/global";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -26,8 +26,8 @@ describe('user show actions',() => {
         fetch.mockResponse(JSON.stringify(userData));
 
         const expectedActions = [
-            { type: 'USER_SHOW_LOADING', loading: true },
-            { type: 'USER_SHOW_LOADING', loading: false },
+            { type: siap.SIAP_LOADING, loading: true },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_SHOW_RETRIEVED_SUCCESS', retrieved: userData },
         ];
 
@@ -44,8 +44,8 @@ describe('user show actions',() => {
         fetch.mockReject(new Error('some error'));
 
         const expectedActions = [
-            { type: 'USER_SHOW_LOADING', loading: true },
-            { type: 'USER_SHOW_LOADING', loading: false },
+            { type: siap.SIAP_LOADING, loading: true },
+            { type: siap.SIAP_LOADING, loading: false },
             { type: 'USER_SHOW_ERROR', error: 'some error' },
         ];
 

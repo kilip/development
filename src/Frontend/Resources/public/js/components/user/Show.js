@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {retrieve, reset} from '../../actions/user/show';
-import { del, loading, error } from '../../actions/user/delete';
+import { del, error } from '../../actions/user/delete';
+import { loading } from "../../actions/global";
 
 class Show extends Component {
     componentDidMount() {
@@ -26,8 +27,6 @@ class Show extends Component {
         return (
             <div>
               <h1>Show {item && item['@id']}</h1>
-
-                {this.props.loading && <div className="alert alert-info" role="status">Loading...</div>}
                 {this.props.error && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.error}</div>}
                 {this.props.deleteError && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.deleteError}</div>}
 
@@ -75,19 +74,17 @@ Show.propTypes = {
     retrieve: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
     deleteError: PropTypes.string,
-    deleteLoading: PropTypes.bool.isRequired,
     deleted: PropTypes.object,
     del: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
     return {
-        error: state.userAdmin.show.error,
-        loading: state.userAdmin.show.loading,
-        retrieved:state.userAdmin.show.retrieved,
-        deleteError: state.userAdmin.del.error,
-        deleteLoading: state.userAdmin.del.loading,
-        deleted: state.userAdmin.del.deleted,
+        error: state.users.show.error,
+        loading: state.users.show.loading,
+        retrieved:state.users.show.retrieved,
+        deleteError: state.users.del.error,
+        deleted: state.users.del.deleted,
 };
 };
 

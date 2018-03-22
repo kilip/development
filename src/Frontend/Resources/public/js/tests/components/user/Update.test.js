@@ -31,24 +31,22 @@ describe('<Update/> Component', () => {
     };
 
     const state = {
-        userAdmin: {
+        users: {
             update: {
-                retrieveLoading: true,
                 retrieveError: 'Retrieve Error',
                 retrieved: mockUser,
-                updateLoading: true,
                 updateError: 'Update Error',
                 updated: mockUser,
             },
             del: {
-                loading: true,
                 error: 'Delete Error',
             },
             create: {
                 created: mockUser
             },
-            changePassword: {}
-        }
+            changePassword: {},
+        },
+        app: { loading: false }
     };
 
     it('should rendered properly', () => {

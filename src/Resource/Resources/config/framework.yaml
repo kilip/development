@@ -3,3 +3,7 @@ imports:
 
 services:
     'Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter': ~
+
+    data_fixtures.provider.nama_baptis:
+        class: Paroki\DataFixtures\Faker\NamaBaptisProvider
+        tags: [nelmio_alice.faker.provider]

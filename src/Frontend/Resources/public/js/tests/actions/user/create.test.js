@@ -2,7 +2,7 @@ import expect from 'expect';
 import { mockStore } from "../../util";
 import { create } from "../../../actions/user/create";
 import { SubmissionError } from 'redux-form';
-
+import * as siap from "../../../actions/global";
 
 describe('user create actions', () => {
     const mockUserData = {
@@ -15,8 +15,8 @@ describe('user create actions', () => {
         fetch.mockResponse(JSON.stringify(mockUserData));
         const store = mockStore({});
         const expected = [
-            { type: 'USER_CREATE_LOADING', loading: true},
-            { type: 'USER_CREATE_LOADING', loading: false},
+            { type: siap.SIAP_LOADING, loading: true},
+            { type: siap.SIAP_LOADING, loading: false},
             { type: 'USER_CREATE_SUCCESS', created: mockUserData }
         ];
 
@@ -31,8 +31,8 @@ describe('user create actions', () => {
         fetch.mockReject(new Error('some error'));
         const store = mockStore();
         const expected = [
-            { type: 'USER_CREATE_LOADING', loading: true},
-            { type: 'USER_CREATE_LOADING', loading: false},
+            { type: siap.SIAP_LOADING, loading: true},
+            { type: siap.SIAP_LOADING, loading: false},
             { type: 'USER_CREATE_ERROR', error: 'some error' }
         ];
         return store.dispatch(create(mockUserData))
@@ -47,8 +47,8 @@ describe('user create actions', () => {
         fetch.mockReject(new SubmissionError(errors));
         const store = mockStore();
         const expected = [
-            { type: 'USER_CREATE_LOADING', loading: true},
-            { type: 'USER_CREATE_LOADING', loading: false},
+            { type: siap.SIAP_LOADING, loading: true},
+            { type: siap.SIAP_LOADING, loading: false},
             { type: 'USER_CREATE_ERROR', error: 'some error' }
         ];
         return store.dispatch(create(mockUserData))

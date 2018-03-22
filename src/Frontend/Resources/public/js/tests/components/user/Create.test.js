@@ -20,12 +20,14 @@ describe('<Create/> Component', () => {
 
     };
     const state = {
-        userAdmin: {
+        users: {
             create: {
-                loading: false,
                 created: null,
                 error: null,
             }
+        },
+        app: {
+            loading: false,
         }
     };
 

@@ -1,8 +1,7 @@
 import reducers from '../../../reducers/user/profile';
-import _ from 'lodash';
+import {reducerTest} from "../../util";
 const initialState = {
     error: null,
-    loading: false,
     retrieved: null,
     updated: null
 };
@@ -21,11 +20,6 @@ describe('user profile reducers', () => {
             action: {error: 'some error'}
         },
         {
-            type: 'USER_PROFILE_LOADING',
-            expectedState: { ...initialState, loading: true},
-            action: { loading: true }
-        },
-        {
             type: 'USER_PROFILE_RETRIEVED_SUCCESS',
             expectedState: { ...initialState, retrieved: 'some data'},
             action: { retrieved: 'some data' }
@@ -37,18 +31,5 @@ describe('user profile reducers', () => {
         }
     ];
 
-    _.each(actions,function(value){
-        it(`should handle ${value.type}`, () => {
-            const { type, expectedState, action } = value;
-            action.type = type;
-
-            expect(reducers(undefined,action)).toEqual(expectedState);
-        });
-
-    });
-
-
-    it('should handle initial state', () => {
-        expect(reducers(undefined,{})).toEqual(initialState);
-    });
+    reducerTest(reducers,initialState,actions);
 });
