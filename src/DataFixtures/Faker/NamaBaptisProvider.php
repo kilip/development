@@ -31,7 +31,7 @@ class NamaBaptisProvider
     protected static $santo = array(
         'Agustinus', 'Aidan', 'Akhilleus', 'Albertus', 'Alfonsus', 'Aloysius', 'Ambrosius',
         'Andreas', 'Anselmus', 'Antonius', 'Arnoldus', 'Atanasius', 'Barnabas', 'Bartolomeus',
-        'Basilius','Bathildis', 'Benediktus', 'Berardus', 'Bernardinus', 'Bernardus', 'Bertrand',
+        'Basilius', 'Bathildis', 'Benediktus', 'Berardus', 'Bernardinus', 'Bernardus', 'Bertrand',
         'Blasius', 'Bonaventura', 'Bonifasius', 'Boris', 'Bruno', 'Caesarius', 'Caius', 'Canute',
         'Charles', 'Damasus', 'Damianus', 'David', 'Didakus', 'Dionisius', 'Dominikus', 'Edmund',
         'Edward', 'Efrem', 'Eucherius', 'Eugene', 'Eugenius', 'Eusebius', 'Evaristus', 'Fabianus',
@@ -73,12 +73,14 @@ class NamaBaptisProvider
 
     /**
      * @param Baptisan $baptisan
+     *
      * @return \DateTime
      */
     public static function tanggalBaptis(Baptisan $baptisan)
     {
         $tanggalLahir = clone $baptisan->getTanggalLahir();
-        date_add($tanggalLahir,date_interval_create_from_date_string('+1 month'));
-        return DateTimeProvider::dateTimeBetween($tanggalLahir,'now');
+        date_add($tanggalLahir, date_interval_create_from_date_string('+1 month'));
+
+        return DateTimeProvider::dateTimeBetween($tanggalLahir, 'now');
     }
 }

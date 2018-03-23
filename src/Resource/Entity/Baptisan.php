@@ -233,9 +233,6 @@ class Baptisan
         return $this;
     }
 
-    /**
-     * @return null:\DateTime
-     */
     public function getTanggalBaptis(): ?\DateTime
     {
         return $this->tanggalBaptis;
