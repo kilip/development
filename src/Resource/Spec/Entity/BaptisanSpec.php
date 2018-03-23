@@ -51,4 +51,47 @@ class BaptisanSpec extends ObjectBehavior
         $this->setJenisKelamin(Baptisan::JK_PRIA)->shouldReturn($this);
         $this->getJenisKelamin()->shouldReturn(Baptisan::JK_PRIA);
     }
+
+    public function its_tanggal_lahir_should_be_mutable(\DateTime $date)
+    {
+        $this->setTanggalLahir($date)->shouldReturn($this);
+        $this->getTanggalLahir()->shouldReturn($date);
+    }
+
+    public function its_tempat_lahir_should_be_mutable()
+    {
+        $this->setTempatLahir('some')->shouldReturn($this);
+        $this->getTempatLahir()->shouldReturn('some');
+    }
+
+    public function its_tanggal_baptis_should_be_mutable()
+    {
+        $date = new \DateTime();
+        $this->setTanggalBaptis($date)->shouldReturn($this);
+        $this->getTanggalBaptis()->shouldReturn($date);
+    }
+
+    public function its_tempat_baptis_should_be_mutable()
+    {
+        $this->setTempatBaptis('some')->shouldReturn($this);
+        $this->getTempatBaptis()->shouldReturn('some');
+    }
+
+    public function its_wali_baptis_1_should_be_mutable()
+    {
+        $this->setWaliBaptis1('some')->shouldReturn($this);
+        $this->getWaliBaptis1()->shouldReturn('some');
+    }
+
+    public function its_wali_baptis_2_should_be_mutable()
+    {
+        $this->setWaliBaptis2('some')->shouldReturn($this);
+        $this->getWaliBaptis2()->shouldReturn('some');
+    }
+
+    public function its_minister_should_be_mutable()
+    {
+        $this->setMinister('some')->shouldReturn($this);
+        $this->getMinister()->shouldReturn('some');
+    }
 }

@@ -9,6 +9,8 @@
 namespace Paroki\DataFixtures\Faker;
 
 use Faker\Provider\Base as FakerBase;
+use Paroki\Resource\Entity\Baptisan;
+use Faker\Provider\DateTime as DateTimeProvider;
 
 class NamaBaptisProvider
 {
@@ -16,7 +18,7 @@ class NamaBaptisProvider
     const GENDER_FEMALE = 'female';
 
     protected static $santa = array(
-        'Adelaide', 'Agatha', 'Agnes', 'Andreas', 'Angela', 'Anna', 'Antonietta', 'Anysia',
+        'Adelaide', 'Agatha', 'Agnes', 'Angela', 'Anna', 'Antonietta', 'Anysia',
         'Basilissa', 'Bernadette', 'Bertilla', 'Bibiana', 'Brigitta', 'Elizabeth', 'Emilia',
         'Eufrasia', 'Faustina', 'Felisitas', 'Fina', 'Flora', 'Foillan', 'Fransiska', 'Genoveva', 'Germana',
         'Gertrude', 'Gianna', 'Gildas', 'Imelda', 'Isidorus', 'Jane', 'Jeanne', 'Joan', 'Jovita',
@@ -28,8 +30,8 @@ class NamaBaptisProvider
 
     protected static $santo = array(
         'Agustinus', 'Aidan', 'Akhilleus', 'Albertus', 'Alfonsus', 'Aloysius', 'Ambrosius',
-        'Anselmus', 'Antonius', 'Arnoldus', 'Atanasius', 'Barnabas', 'Bartolomeus', 'Basilius',
-        'Bathildis', 'Benediktus', 'Berardus', 'Bernardinus', 'Bernardus', 'Bertrand',
+        'Andreas', 'Anselmus', 'Antonius', 'Arnoldus', 'Atanasius', 'Barnabas', 'Bartolomeus',
+        'Basilius','Bathildis', 'Benediktus', 'Berardus', 'Bernardinus', 'Bernardus', 'Bertrand',
         'Blasius', 'Bonaventura', 'Bonifasius', 'Boris', 'Bruno', 'Caesarius', 'Caius', 'Canute',
         'Charles', 'Damasus', 'Damianus', 'David', 'Didakus', 'Dionisius', 'Dominikus', 'Edmund',
         'Edward', 'Efrem', 'Eucherius', 'Eugene', 'Eugenius', 'Eusebius', 'Evaristus', 'Fabianus',
@@ -67,5 +69,16 @@ class NamaBaptisProvider
             return FakerBase::randomElement(static::$santa);
         }
         throw new \Exception('Unknown gender: '.$gender);
+    }
+
+    /**
+     * @param Baptisan $baptisan
+     * @return \DateTime
+     */
+    public static function tanggalBaptis(Baptisan $baptisan)
+    {
+        $tanggalLahir = clone $baptisan->getTanggalLahir();
+        date_add($tanggalLahir,date_interval_create_from_date_string('+1 month'));
+        return DateTimeProvider::dateTimeBetween($tanggalLahir,'now');
     }
 }

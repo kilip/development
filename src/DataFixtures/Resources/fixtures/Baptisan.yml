@@ -5,6 +5,10 @@ Paroki\Resource\Entity\Baptisan:
         jenisKelamin: 1
         ayah: <id_ID:namaBaptis('male')> <id_ID:lastName('male')>
         ibu: <id_ID:namaBaptis('female')> <id_ID:lastName('female)>
+        tempatLahir: <id_ID:city()>
+        tanggalLahir: <dateTimeBetween('-30 years','-5 years','Asia/Makassar')>
+        tempatBaptis: 'Gereja Kristus Raja Barong Tongkok'
+        tanggalBaptis: <tanggalBaptis(@self)>
 
     baptisan_{101..200}:
         namaBaptis: <id_ID:namaBaptis('female')>
@@ -12,3 +16,7 @@ Paroki\Resource\Entity\Baptisan:
         jenisKelamin: 2
         ayah: <id_ID:namaBaptis('male')> <id_ID:lastName('male')>
         ibu: <id_ID:namaBaptis('female')> <id_ID:lastName('female)>
+        tempatLahir: <id_ID:city()>
+        tanggalLahir: <dateTimeBetween('-30 years','-5 years','Asia/Makassar')>
+        tempatBaptis: 'Gereja Kristus Raja Barong Tongkok'
+        tanggalBaptis: <tanggalBaptis(@self)>

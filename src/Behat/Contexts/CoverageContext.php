@@ -34,6 +34,7 @@ class CoverageContext implements Context
         $filter = new Filter();
         $filter->addDirectoryToWhitelist(getcwd().'/src/');
         $filter->removeDirectoryFromWhitelist(getcwd().'/src/Behat');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/DataFixtures');
         $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Test');
         $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Tests');
         $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Spec');

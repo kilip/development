@@ -30,6 +30,7 @@ extensions:
             - src
         blacklist:
             - src/Behat
+            - src/DataFixtures
             - src/*/Spec
             - src/*/Test
             - src/*/Tests

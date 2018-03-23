@@ -52,10 +52,6 @@ class GeneratePrivateKeyCommand extends Command
             mkdir($dir, 0777, true);
         }
 
-        if (!is_dir($dir = dirname($this->privateKeyPath))) {
-            mkdir($dir, 0777, true);
-        }
-
         $this->generatePrivateKey($output);
         $this->generatePublicKey($output);
     }
