@@ -2,6 +2,7 @@ import {loading} from "./global";
 import * as constants from './constants';
 import fetch from '../utils/fetch';
 import { SubmissionError } from 'redux-form';
+import { addSuccess } from "../components/flash/actions";
 
 export function listRetrieved(retrieved){
     return {
@@ -118,9 +119,9 @@ export function update(item,values){
         })
             .then(response => response.json())
             .then(data => {
-
                 dispatch(loading(false));
                 dispatch(updateSuccess(data));
+                dispatch(addSuccess(`Perubahan <strong>${data['nama']}</strong> berhasil disimpan`,'baptisan'));
             })
             .catch(e => {
                 dispatch(loading(false));

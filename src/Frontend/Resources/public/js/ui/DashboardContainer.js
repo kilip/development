@@ -7,14 +7,14 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Dashboard from '../pages/Dashboard';
 import Loader from '../components/Loader';
-
+import Flash from '../components/flash/Flash';
 
 import UserRoutes from '../routes/user';
 import BaptisanRoutes from '../routes/baptisan';
 
 class DashboardContainer extends Component {
-
     render(){
+
         return (
             <div className="app">
                 <Header/>
@@ -23,6 +23,9 @@ class DashboardContainer extends Component {
                     <main className="main">
                         <Breadcrumb />
                         <Container fluid>
+                            <Flash
+                                namespace="global"
+                            />
                             <Loader>
                                 <Switch>
                                     <Route path="/dashboard" name="Dashboard" component={Dashboard}/>

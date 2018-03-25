@@ -47,7 +47,8 @@ describe('<Update/> Component', () => {
     const state={
         baptisan: {
             retrieved: mockItem
-        }
+        },
+        flash: {}
     };
 
     it('should rendered properly', () => {

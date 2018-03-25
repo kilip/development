@@ -16,7 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="adm_baptisan")
  * @ApiResource(
  *     attributes= {
- *         {"access_control"="has_role('ADMIN_PAROKI')"}
+ *         {"access_control"="has_role('ADMIN_PAROKI')"},
+ *         "order"={"nama"}
  *     },
  *     collectionOperations={
  *         "get"={"method"="GET","access_control"="has_role('ADMIN_PAROKI')"},

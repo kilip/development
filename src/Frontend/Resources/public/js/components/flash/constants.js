@@ -1,0 +1,7 @@
+export const FLASH_ADD_SUCCESS = 'FLASH_ADD_SUCCESS';
+export const FLASH_ADD_ERROR   = 'FLASH_ADD_ERROR';
+export const FLASH_ADD_INFO    = 'FLASH_ADD_INFO';
+
+export const FLASH_REMOVE_SUCCESS       = 'FLASH_REMOVE_SUCCESS';
+export const FLASH_REMOVE_ERROR         = 'FLASH_REMOVE_ERROR';
+export const FLASH_REMOVE_INFO          = 'FLASH_REMOVE_INFO';

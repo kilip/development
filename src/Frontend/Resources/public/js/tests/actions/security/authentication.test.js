@@ -1,8 +1,11 @@
 import * as actions from "../../../actions/security/authentication";
 import * as siapActions from '../../../actions/global';
+
 import expect from 'expect';
 import jwt from 'jsonwebtoken';
-import { mockStore } from "../../util";
+import { mockStore,expectAction } from "../../util";
+import * as flashConstants from '../../../components/flash/constants';
+import _ from 'lodash';
 
 describe('login actions', () => {
     const iat = Math.floor(Date.now() / 1000);
@@ -32,7 +35,8 @@ describe('login actions', () => {
             { type: actions.LOGIN_REQUEST, fetching: true },
             { type: siapActions.SIAP_LOADING, loading: true},
             { type: siapActions.SIAP_LOADING, loading: false},
-            { type: actions.LOGIN_SUCCESS, user: user}
+            { type: actions.LOGIN_SUCCESS, user: user},
+            expect.anything()
         ];
 
         return store.dispatch(actions.login(credentials))

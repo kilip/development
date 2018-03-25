@@ -43,9 +43,12 @@ class JWTCreatedListener
      */
     public function onJWTCreated(JWTCreatedEvent $event)
     {
+        $user = $this->tokenStorage->getToken()->getUser();
         $payload = $event->getData();
-        $payload['id'] = $this->tokenStorage->getToken()->getUser()->getId();
+        $payload['id'] = $user->getId();
+        $payload['fullName'] = $user->getFullName();
         $payload['roles'] = $this->normalizeRoles($this->tokenStorage->getToken()->getUser()->getRoles());
+
         $event->setData($payload);
     }
 

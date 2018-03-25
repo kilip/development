@@ -2,6 +2,7 @@ import {API_LOGIN_CHECK} from "../../config/global";
 import jwt from 'jsonwebtoken';
 import { SubmissionError } from 'redux-form';
 import { loading } from "../../actions/global";
+import { addSuccess } from "../../components/flash/actions";
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -67,7 +68,9 @@ export function login(credentials,options={}){
 
                     // Dispatch the success action
                     dispatch(loading(false));
-                    dispatch(receiveLogin(user))
+                    dispatch(receiveLogin(user));
+                    const flashMessage = `Selamat datang <strong>${user['fullName']}</strong> di SIAP`;
+                    dispatch(addSuccess(flashMessage));
                 }
             }))
             .catch(err => {

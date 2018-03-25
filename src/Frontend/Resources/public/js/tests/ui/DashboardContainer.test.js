@@ -32,7 +32,8 @@ describe('<DashboardContainer/>', () => {
         },
         app: {
             loading: false
-        }
+        },
+        flash: {}
     };
 
     it('should render properly', () => {

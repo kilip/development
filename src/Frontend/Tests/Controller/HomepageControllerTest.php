@@ -20,8 +20,9 @@ class HomepageControllerTest extends WebTestCase
     public function testHomepage()
     {
         $manifest = getcwd().'/public/build/manifest.json';
-        if(!is_file($manifest)){
+        if (!is_file($manifest)) {
             $this->markTestSkipped('no manifest.json file');
+
             return;
         }
         $client = static::createClient();

@@ -10,6 +10,7 @@ import {
 import { retrieve, update, remove } from "../../actions/baptisan";
 import { Redirect } from 'react-router-dom';
 import Form from './Form';
+import Flash from '../flash/Flash';
 
 class Update extends Component{
     componentDidMount(){
@@ -33,13 +34,14 @@ class Update extends Component{
                     <strong>Edit {item && item['nama']}</strong>
                 </CardHeader>
                 <CardBody>
-                    {this.props.created && <div className="alert alert-success" role="status">Data berhasil ditambahkan.</div>}
-                    {this.props.updated && <div className="alert alert-success" role="status">Data berhasil diperbaharui.</div>}
-                    {this.props.error && <div className="alert alert-danger" role="alert"><span className="fa fa-exclamation-triangle" aria-hidden="true"></span> {this.props.error}</div>}
+                    <Flash
+                        namespace="baptisan"
+                    />
                     <Form
                         onSubmit={values => this.props.update(item,values)}
                         initialValues={item}
                         context="update"
+                        success={this.props.flashSuccess}
                         id="formBaptisanUpdate"
                     />
                 </CardBody>
@@ -68,7 +70,7 @@ const mapStateToProps = (state) => {
     return {
         retrieved: state.baptisan.retrieved,
         updated: state.baptisan.updated,
-        removed: state.baptisan.removed,
+        removed: state.baptisan.removed
     };
 };
 

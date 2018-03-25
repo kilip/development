@@ -1,8 +1,9 @@
 import expect from 'expect';
 import * as actions from '../../actions/baptisan';
 import * as constants from '../../actions/constants';
-import { mockStore } from "../util";
+import { mockStore, expectAction } from "../util";
 import { SubmissionError } from 'redux-form';
+import * as flashConstants from '../../components/flash/constants';
 
 describe('baptisan actions', () => {
     const mockList = [
@@ -148,6 +149,7 @@ describe('baptisan actions', () => {
             { type: constants.LOADING, loading: true },
             { type: constants.LOADING, loading: false },
             { type: constants.BAPTISAN_UPDATED, updated: mockItem },
+            expect.anything()
         ];
 
         return store.dispatch(actions.update(mockItem))
